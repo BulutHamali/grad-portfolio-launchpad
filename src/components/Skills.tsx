@@ -79,7 +79,7 @@ const Skills = () => {
             <h3 className="text-2xl font-semibold mb-4 text-slate-800">Research Impact</h3>
             <div className="grid md:grid-cols-3 gap-6 text-center">
               <div>
-                <div className="text-3xl font-bold text-blue-600 mb-2">8+</div>
+                <div className="text-3xl font-bold text-blue-600 mb-2">5+</div>
                 <div className="text-slate-600">Scientific Publications</div>
               </div>
               <div>
