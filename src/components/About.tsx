@@ -1,4 +1,7 @@
 
+import { Button } from "@/components/ui/button";
+import { Github } from "lucide-react";
+
 const About = () => {
   return (
     <section id="about" className="py-20 bg-slate-50">
