@@ -17,7 +17,7 @@ const Hero = () => {
         <div className="animate-fade-in">
           <div className="mb-4">
             <span className="inline-block bg-gradient-to-r from-cyan-400 to-blue-400 text-slate-900 px-4 py-2 rounded-full text-sm font-semibold">
-              PhD Bioinformatics Scientist + Full-Stack Developer
+              PhD Scientist + Full-Stack Development
             </span>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
@@ -26,10 +26,22 @@ const Hero = () => {
           <p className="text-xl md:text-2xl mb-4 text-slate-300">
             Computational Biology Meets Modern Web Development
           </p>
-          <p className="text-lg mb-8 text-slate-400 max-w-3xl mx-auto">
+          <p className="text-lg mb-6 text-slate-400 max-w-3xl mx-auto">
             14+ years analyzing complex biological data, now building full-stack applications. 
             Combining deep scientific expertise with modern MERN stack development to solve real-world problems.
           </p>
+
+          {/* Nextflow Ambassador Badge */}
+          <div className="flex justify-center mb-8">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 flex items-center space-x-3 border border-white/20">
+              <img 
+                src="https://www.nextflow.io/img/nextflow-icon.png" 
+                alt="Nextflow Logo" 
+                className="w-6 h-6"
+              />
+              <span className="text-cyan-300 font-medium text-sm">Nextflow Ambassador</span>
+            </div>
+          </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <Button 
