@@ -1,30 +1,42 @@
 
-import { Code, Database, Globe, Server } from "lucide-react";
+import { Code, Database, Globe, Server, Brain, BarChart } from "lucide-react";
 
 const Skills = () => {
   const skillCategories = [
     {
-      title: "Frontend",
-      icon: <Globe className="w-8 h-8" />,
-      skills: ["React", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Bootstrap"],
-      color: "from-blue-500 to-cyan-500"
-    },
-    {
-      title: "Backend",
-      icon: <Server className="w-8 h-8" />,
-      skills: ["Node.js", "Express.js", "RESTful APIs", "Authentication", "Middleware"],
-      color: "from-green-500 to-emerald-500"
-    },
-    {
-      title: "Database",
-      icon: <Database className="w-8 h-8" />,
-      skills: ["MongoDB", "Mongoose", "Database Design", "CRUD Operations"],
+      title: "Bioinformatics & Data Science",
+      icon: <Brain className="w-8 h-8" />,
+      skills: ["Python", "R", "Bioconductor", "Seurat", "Scanpy", "DESeq2", "GSEA", "Machine Learning", "Statistical Analysis"],
       color: "from-purple-500 to-pink-500"
     },
     {
-      title: "Tools & Others",
+      title: "Frontend Development",
+      icon: <Globe className="w-8 h-8" />,
+      skills: ["React", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Responsive Design"],
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      title: "Backend & Databases",
+      icon: <Server className="w-8 h-8" />,
+      skills: ["Node.js", "Express.js", "MongoDB", "SQL", "RESTful APIs", "Authentication"],
+      color: "from-green-500 to-emerald-500"
+    },
+    {
+      title: "Cloud & HPC Computing",
+      icon: <Database className="w-8 h-8" />,
+      skills: ["AWS", "Azure", "Google Cloud", "SLURM", "Linux/Unix", "Docker"],
+      color: "from-indigo-500 to-purple-500"
+    },
+    {
+      title: "Genomics & Analysis",
+      icon: <BarChart className="w-8 h-8" />,
+      skills: ["scRNA-seq", "Spatial Transcriptomics", "GWAS", "NGS", "CRISPR Design", "Phylogenetics"],
+      color: "from-emerald-500 to-teal-500"
+    },
+    {
+      title: "Tools & Development",
       icon: <Code className="w-8 h-8" />,
-      skills: ["Git", "GitHub", "VS Code", "Postman", "npm", "Responsive Design"],
+      skills: ["Git/GitHub", "VS Code", "Benchling", "Galaxy", "GraphPad Prism", "Postman"],
       color: "from-orange-500 to-red-500"
     }
   ];
@@ -32,12 +44,15 @@ const Skills = () => {
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center mb-12 text-slate-800">Skills & Technologies</h2>
+        <h2 className="text-4xl font-bold text-center mb-4 text-slate-800">Skills & Technologies</h2>
+        <p className="text-center text-slate-600 mb-12 max-w-3xl mx-auto">
+          A unique combination of computational biology expertise and modern software development skills
+        </p>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, index) => (
             <div key={index} className="group">
-              <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-slate-100 hover:border-slate-200">
+              <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-slate-100 hover:border-slate-200 h-full">
                 <div className={`inline-flex p-3 rounded-lg bg-gradient-to-r ${category.color} text-white mb-4`}>
                   {category.icon}
                 </div>
@@ -57,6 +72,26 @@ const Skills = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl font-semibold mb-4 text-slate-800">Research Impact</h3>
+            <div className="grid md:grid-cols-3 gap-6 text-center">
+              <div>
+                <div className="text-3xl font-bold text-blue-600 mb-2">8+</div>
+                <div className="text-slate-600">Scientific Publications</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-blue-600 mb-2">14+</div>
+                <div className="text-slate-600">Years Research Experience</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-blue-600 mb-2">4</div>
+                <div className="text-slate-600">Universities & Research Institutions</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

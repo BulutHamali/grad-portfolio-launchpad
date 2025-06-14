@@ -3,41 +3,83 @@ const About = () => {
   return (
     <section id="about" className="py-20 bg-slate-50">
       <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-12 text-slate-800">About Me</h2>
           
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-12 items-start">
             <div className="animate-slide-in-left">
-              <div className="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl p-8 text-white shadow-xl">
-                <h3 className="text-2xl font-semibold mb-4">My Journey</h3>
-                <p className="text-blue-100 leading-relaxed">
-                  Currently completing the intensive Perscholas SWE MERN Stack bootcamp, 
-                  where I've gained hands-on experience building full-stack applications. 
-                  I'm passionate about clean code, user experience, and solving complex problems 
-                  through technology.
+              <div className="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl p-8 text-white shadow-xl mb-8">
+                <h3 className="text-2xl font-semibold mb-4">Scientific Background</h3>
+                <p className="text-blue-100 leading-relaxed mb-4">
+                  PhD-trained molecular biologist and bioinformatician with 14+ years of experience 
+                  analyzing complex biological data. Specialized in single-cell RNA sequencing, 
+                  spatial transcriptomics, and genomic data interpretation.
+                </p>
+                <div className="flex flex-wrap gap-2 mt-4">
+                  <span className="bg-blue-500 px-3 py-1 rounded-full text-sm">scRNA-seq Analysis</span>
+                  <span className="bg-blue-500 px-3 py-1 rounded-full text-sm">Spatial Transcriptomics</span>
+                  <span className="bg-blue-500 px-3 py-1 rounded-full text-sm">Machine Learning</span>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-emerald-600 to-teal-600 rounded-2xl p-8 text-white shadow-xl">
+                <h3 className="text-2xl font-semibold mb-4">Tech Transition</h3>
+                <p className="text-emerald-100 leading-relaxed">
+                  Currently completing Per Scholas Full-Stack Software Engineering program, 
+                  building modern web applications with MERN stack while applying my analytical 
+                  mindset to software development challenges.
                 </p>
               </div>
             </div>
 
             <div className="animate-fade-in">
-              <h3 className="text-2xl font-semibold mb-6 text-slate-800">What I Bring</h3>
+              <h3 className="text-2xl font-semibold mb-6 text-slate-800">What Makes Me Unique</h3>
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
-                  <p className="text-slate-600">Strong foundation in MERN stack development</p>
+                  <p className="text-slate-600">
+                    <strong>Research Experience:</strong> 14+ years in computational biology with publications 
+                    in top-tier journals and expertise in high-performance computing
+                  </p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
-                  <p className="text-slate-600">Experience with modern development tools and practices</p>
+                  <p className="text-slate-600">
+                    <strong>Data Expertise:</strong> Advanced skills in Python, R, and SQL for complex 
+                    data analysis, machine learning, and statistical modeling
+                  </p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
-                  <p className="text-slate-600">Collaborative mindset and eagerness to learn</p>
+                  <p className="text-slate-600">
+                    <strong>Problem Solving:</strong> Proven ability to design and execute research projects, 
+                    from hypothesis to publication
+                  </p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
-                  <p className="text-slate-600">Problem-solving approach to development challenges</p>
+                  <p className="text-slate-600">
+                    <strong>Modern Development:</strong> Hands-on experience building responsive, 
+                    full-stack applications with JavaScript, React, Node.js, and MongoDB
+                  </p>
                 </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
+                  <p className="text-slate-600">
+                    <strong>Cloud & HPC:</strong> Experience with AWS, Azure, Google Cloud, and 
+                    high-performance computing environments (SLURM)
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-8 p-6 bg-slate-100 rounded-xl">
+                <h4 className="font-semibold text-slate-800 mb-2">Education Highlights</h4>
+                <ul className="text-sm text-slate-600 space-y-1">
+                  <li>• PhD Biochemistry - Medical University of Vienna</li>
+                  <li>• MS Genetics & Developmental Biology - University of Vienna</li>
+                  <li>• BS Molecular Biology & Genetics - Halic University</li>
+                  <li>• Full-Stack Software Engineering - Per Scholas (2025)</li>
+                </ul>
               </div>
             </div>
           </div>

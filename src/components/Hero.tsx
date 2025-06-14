@@ -15,14 +15,20 @@ const Hero = () => {
       
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-            Full Stack Developer
+          <div className="mb-4">
+            <span className="inline-block bg-gradient-to-r from-cyan-400 to-blue-400 text-slate-900 px-4 py-2 rounded-full text-sm font-semibold">
+              PhD Bioinformatics Scientist + Full-Stack Developer
+            </span>
+          </div>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            Bulut Hamali, PhD
           </h1>
           <p className="text-xl md:text-2xl mb-4 text-slate-300">
-            MERN Stack Specialist
+            Computational Biology Meets Modern Web Development
           </p>
-          <p className="text-lg mb-8 text-slate-400 max-w-2xl mx-auto">
-            Perscholas SWE Bootcamp Graduate passionate about creating innovative web solutions with MongoDB, Express.js, React, and Node.js
+          <p className="text-lg mb-8 text-slate-400 max-w-3xl mx-auto">
+            14+ years analyzing complex biological data, now building full-stack applications. 
+            Combining deep scientific expertise with modern MERN stack development to solve real-world problems.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
@@ -44,13 +50,13 @@ const Hero = () => {
           </div>
 
           <div className="flex justify-center space-x-6 mb-12">
-            <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors">
+            <a href="https://github.com/buluthamali" className="text-slate-400 hover:text-blue-400 transition-colors">
               <Github size={24} />
             </a>
-            <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors">
+            <a href="https://linkedin.com/in/buluthamali" className="text-slate-400 hover:text-blue-400 transition-colors">
               <Linkedin size={24} />
             </a>
-            <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors">
+            <a href="mailto:buluthamali@gmail.com" className="text-slate-400 hover:text-blue-400 transition-colors">
               <Mail size={24} />
             </a>
           </div>
