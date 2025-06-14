@@ -34,11 +34,9 @@ const Hero = () => {
           {/* Nextflow Ambassador Badge */}
           <div className="flex justify-center mb-8">
             <div className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 flex items-center space-x-3 border border-white/20">
-              <img 
-                src="https://www.nextflow.io/img/nextflow-icon.png" 
-                alt="Nextflow Logo" 
-                className="w-6 h-6"
-              />
+              <div className="w-6 h-6 bg-emerald-500 rounded flex items-center justify-center">
+                <span className="text-white text-xs font-bold">nf</span>
+              </div>
               <span className="text-cyan-300 font-medium text-sm">Nextflow Ambassador</span>
             </div>
           </div>

@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
@@ -18,7 +17,7 @@ const Projects = () => {
       title: "Personal Blog Application",
       description: "Clean, minimal blog interface with mobile-friendly responsive design. Built with vanilla HTML, CSS, and JavaScript focusing on user experience and accessibility.",
       tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
-      image: "https://images.unsplash.com/photo-1486312338219-ce68e2c54346?w=600&h=400&fit=crop",
+      image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=400&fit=crop",
       github: "#",
       live: "#",
       category: "Web Development"
