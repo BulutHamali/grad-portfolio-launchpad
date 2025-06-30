@@ -1,5 +1,5 @@
 
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, Globe } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -16,22 +16,34 @@ const Footer = () => {
           
           <div className="flex justify-center space-x-6 mb-8">
             <a 
-              href="#" 
+              href="https://github.com/buluthamali" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-slate-400 hover:text-blue-400 transition-colors p-2 rounded-full hover:bg-slate-700"
             >
               <Github size={24} />
             </a>
             <a 
-              href="#" 
+              href="https://linkedin.com/in/buluthamali" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-slate-400 hover:text-blue-400 transition-colors p-2 rounded-full hover:bg-slate-700"
             >
               <Linkedin size={24} />
             </a>
             <a 
-              href="#" 
+              href="mailto:buluthamali@gmail.com" 
               className="text-slate-400 hover:text-blue-400 transition-colors p-2 rounded-full hover:bg-slate-700"
             >
               <Mail size={24} />
+            </a>
+            <a 
+              href="https://bioinformaticsuniverse.com" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-emerald-400 transition-colors p-2 rounded-full hover:bg-slate-700"
+            >
+              <Globe size={24} />
             </a>
           </div>
           

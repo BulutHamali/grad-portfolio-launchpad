@@ -1,6 +1,5 @@
-
 import { Button } from "@/components/ui/button";
-import { Github } from "lucide-react";
+import { Github, Globe } from "lucide-react";
 
 const About = () => {
   return (
@@ -90,15 +89,25 @@ const About = () => {
 
         <div className="text-center mt-12">
           <div className="bg-white rounded-xl p-8 shadow-lg max-w-2xl mx-auto">
-            <h3 className="text-xl font-semibold mb-4 text-slate-800">Research Publications</h3>
+            <h3 className="text-xl font-semibold mb-4 text-slate-800">Research & Knowledge Sharing</h3>
             <p className="text-slate-600 mb-4">
               5+ peer-reviewed publications in computational biology, including work on cancer research, 
               genomics, and bioinformatics published in top-tier journals.
             </p>
-            <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white">
-              <Github size={16} className="mr-2" />
-              View Research Portfolio
-            </Button>
+            <div className="flex justify-center gap-4">
+              <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white">
+                <Github size={16} className="mr-2" />
+                View Research Portfolio
+              </Button>
+              <Button 
+                variant="outline" 
+                className="border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white"
+                onClick={() => window.open("https://bioinformaticsuniverse.com", "_blank")}
+              >
+                <Globe size={16} className="mr-2" />
+                Visit My Blog
+              </Button>
+            </div>
           </div>
         </div>
       </div>
