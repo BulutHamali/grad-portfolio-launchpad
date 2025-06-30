@@ -95,7 +95,11 @@ const About = () => {
               genomics, and bioinformatics published in top-tier journals.
             </p>
             <div className="flex justify-center gap-4">
-              <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white">
+              <Button 
+                variant="outline" 
+                className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
+                onClick={() => window.open("https://scholar.google.com.sg/citations?user=aQ0Ml_wAAAAJ&hl=en", "_blank")}
+              >
                 <Github size={16} className="mr-2" />
                 View Research Portfolio
               </Button>
