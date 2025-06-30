@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
@@ -57,10 +58,20 @@ const Projects = () => {
       github: "#",
       live: "#",
       category: "Research"
+    },
+    {
+      title: "Mobile Apps - Coming Soon",
+      description: "Exciting mobile applications are currently in development. Stay tuned for innovative solutions that bridge the gap between scientific research and mobile technology.",
+      tech: ["React Native", "TypeScript", "Mobile Development", "Coming Soon"],
+      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=400&fit=crop",
+      github: "#",
+      live: "#",
+      category: "Mobile Apps",
+      isComingSoon: true
     }
   ];
 
-  const categories = ["All", "Web Development", "Bioinformatics", "Research"];
+  const categories = ["All", "Web Development", "Bioinformatics", "Research", "Mobile Apps"];
   const [selectedCategory, setSelectedCategory] = React.useState("All");
 
   const filteredProjects = selectedCategory === "All" 
@@ -108,11 +119,19 @@ const Projects = () => {
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                       project.category === 'Web Development' ? 'bg-blue-100 text-blue-800' :
                       project.category === 'Bioinformatics' ? 'bg-purple-100 text-purple-800' :
+                      project.category === 'Mobile Apps' ? 'bg-orange-100 text-orange-800' :
                       'bg-emerald-100 text-emerald-800'
                     }`}>
                       {project.category}
                     </span>
                   </div>
+                  {project.isComingSoon && (
+                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                      <span className="text-white text-lg font-semibold bg-orange-600 px-4 py-2 rounded-lg">
+                        Coming Soon
+                      </span>
+                    </div>
+                  )}
                 </div>
                 
                 <div className="p-6 flex-grow flex flex-col">
@@ -123,7 +142,11 @@ const Projects = () => {
                     {project.tech.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="bg-slate-100 text-slate-700 px-2 py-1 rounded-md text-xs font-medium"
+                        className={`px-2 py-1 rounded-md text-xs font-medium ${
+                          project.isComingSoon 
+                            ? 'bg-orange-100 text-orange-700' 
+                            : 'bg-slate-100 text-slate-700'
+                        }`}
                       >
                         {tech}
                       </span>
@@ -131,14 +154,23 @@ const Projects = () => {
                   </div>
                   
                   <div className="flex space-x-3 mt-auto">
-                    <Button size="sm" variant="outline" className="flex items-center space-x-2">
-                      <Github size={16} />
-                      <span>Code</span>
-                    </Button>
-                    {project.category === 'Web Development' && (
-                      <Button size="sm" className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700">
-                        <ExternalLink size={16} />
-                        <span>Live Demo</span>
+                    {!project.isComingSoon ? (
+                      <>
+                        <Button size="sm" variant="outline" className="flex items-center space-x-2">
+                          <Github size={16} />
+                          <span>Code</span>
+                        </Button>
+                        {project.category === 'Web Development' && (
+                          <Button size="sm" className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700">
+                            <ExternalLink size={16} />
+                            <span>Live Demo</span>
+                          </Button>
+                        )}
+                      </>
+                    ) : (
+                      <Button size="sm" disabled className="flex items-center space-x-2 bg-gray-400 cursor-not-allowed">
+                        <Github size={16} />
+                        <span>Coming Soon</span>
                       </Button>
                     )}
                   </div>
