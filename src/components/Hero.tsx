@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
 
@@ -15,6 +14,18 @@ const Hero = () => {
       
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="animate-fade-in">
+          {/* Profile Image */}
+          <div className="mb-8 flex justify-center">
+            <div className="relative">
+              <img 
+                src="/lovable-uploads/8c42eaae-f199-448f-a1f3-675e636cb3ed.png" 
+                alt="Bulut Hamali, PhD" 
+                className="w-48 h-48 rounded-full object-cover border-4 border-blue-400 shadow-2xl"
+              />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-t from-blue-600/20 to-transparent"></div>
+            </div>
+          </div>
+
           <div className="mb-4">
             <span className="inline-block bg-gradient-to-r from-cyan-400 to-blue-400 text-slate-900 px-4 py-2 rounded-full text-sm font-semibold">
               PhD Scientist + Full-Stack Development
