@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, Linkedin, Github } from "lucide-react";
 
 const Contact = () => {
   return (
@@ -22,15 +22,19 @@ const Contact = () => {
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-blue-400" />
-                <span className="text-slate-300">your.email@example.com</span>
+                <span className="text-slate-300">contact@buluthamali.com</span>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-blue-400" />
-                <span className="text-slate-300">+1 (555) 123-4567</span>
+                <Linkedin className="w-5 h-5 text-blue-400" />
+                <span className="text-slate-300">linkedin.com/in/buluthamali</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Github className="w-5 h-5 text-blue-400" />
+                <span className="text-slate-300">github.com/BulutHamali</span>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5 text-blue-400" />
-                <span className="text-slate-300">Your City, State</span>
+                <span className="text-slate-300">Cincinnati, OH, USA</span>
               </div>
             </div>
           </div>
