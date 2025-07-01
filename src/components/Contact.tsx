@@ -8,7 +8,12 @@ const Contact = () => {
   return (
     <section id="contact" className="py-24 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white relative overflow-hidden">
       {/* Background decorative elements */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.03"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+      <div 
+        className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        }}
+      ></div>
       
       <div className="container mx-auto px-6 relative z-10">
         <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
@@ -29,7 +34,7 @@ const Contact = () => {
                 <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center group-hover:shadow-lg group-hover:shadow-blue-500/25 transition-all">
                   <Mail className="w-6 h-6 text-white" />
                 </div>
-                <a href="mailto:contact@buluthamali.com" className="text-slate-300 hover:text-white transition-colors text-lg">
+                <a href="mailto:contact@buluthamali.com" className="text-slate-200 hover:text-white transition-colors text-lg">
                   contact@buluthamali.com
                 </a>
               </div>
@@ -38,7 +43,7 @@ const Contact = () => {
                 <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center group-hover:shadow-lg group-hover:shadow-blue-500/25 transition-all">
                   <Linkedin className="w-6 h-6 text-white" />
                 </div>
-                <a href="https://linkedin.com/in/buluthamali" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-white transition-colors text-lg">
+                <a href="https://linkedin.com/in/buluthamali" target="_blank" rel="noopener noreferrer" className="text-slate-200 hover:text-white transition-colors text-lg">
                   linkedin.com/in/buluthamali
                 </a>
               </div>
@@ -47,7 +52,7 @@ const Contact = () => {
                 <div className="w-12 h-12 bg-gradient-to-r from-gray-700 to-gray-900 rounded-full flex items-center justify-center group-hover:shadow-lg group-hover:shadow-gray-500/25 transition-all">
                   <Github className="w-6 h-6 text-white" />
                 </div>
-                <a href="https://github.com/BulutHamali" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-white transition-colors text-lg">
+                <a href="https://github.com/BulutHamali" target="_blank" rel="noopener noreferrer" className="text-slate-200 hover:text-white transition-colors text-lg">
                   github.com/BulutHamali
                 </a>
               </div>
@@ -56,7 +61,7 @@ const Contact = () => {
                 <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full flex items-center justify-center group-hover:shadow-lg group-hover:shadow-emerald-500/25 transition-all">
                   <MapPin className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-slate-300 text-lg">Cincinnati, OH, USA</span>
+                <span className="text-slate-200 text-lg">Cincinnati, OH, USA</span>
               </div>
             </div>
           </div>
