@@ -1,5 +1,6 @@
+
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, Briefcase } from "lucide-react";
 
 const Hero = () => {
   const scrollToSection = (sectionId: string) => {
@@ -52,7 +53,17 @@ const Hero = () => {
             </div>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-4">
+            <Button 
+              size="lg" 
+              className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8"
+              asChild
+            >
+              <a href="/hire-me">
+                <Briefcase className="mr-2 w-5 h-5" />
+                Hire Me for Your Project
+              </a>
+            </Button>
             <Button 
               size="lg" 
               className="bg-blue-600 hover:bg-blue-700 text-white"
@@ -70,7 +81,7 @@ const Hero = () => {
             </Button>
           </div>
 
-          <div className="flex justify-center space-x-6 mb-12">
+          <div className="flex justify-center space-x-6 mb-20">
             <a href="https://github.com/buluthamali" className="text-slate-400 hover:text-blue-400 transition-colors">
               <Github size={24} />
             </a>
