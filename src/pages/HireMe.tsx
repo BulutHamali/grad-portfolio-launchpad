@@ -243,7 +243,7 @@ const HireMe = () => {
                     className="bg-blue-600 hover:bg-blue-700 text-white w-full"
                     asChild
                   >
-                    <a href="#" target="_blank" rel="noopener noreferrer">
+                    <a href="https://calendly.com/buluthamali" target="_blank" rel="noopener noreferrer">
                       Book on Calendly <ExternalLink className="ml-2 w-4 h-4" />
                     </a>
                   </Button>
