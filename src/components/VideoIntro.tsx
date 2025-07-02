@@ -26,9 +26,6 @@ const VideoIntro = () => {
                 <p className="text-slate-600 dark:text-slate-400 font-medium">
                   Video will be embedded here
                 </p>
-                <p className="text-sm text-slate-500 dark:text-slate-500 mt-2">
-                  (Please provide YouTube or Loom link)
-                </p>
               </div>
             </div>
           </div>
