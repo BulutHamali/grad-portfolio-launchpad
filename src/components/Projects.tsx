@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
@@ -10,8 +9,8 @@ const Projects = () => {
       description: "Responsive web application built with Tailwind CSS and JavaScript that shortens URLs using the CleanURI API, featuring copy-to-clipboard functionality and mobile-first design.",
       tech: ["JavaScript", "Tailwind CSS", "API Integration", "Responsive Design"],
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
-      github: "#",
-      live: "#",
+      github: "https://github.com/BulutHamali/url-shortening-api",
+      live: "https://shortly-url-app.netlify.app/",
       category: "Web Development"
     },
     {
@@ -19,8 +18,8 @@ const Projects = () => {
       description: "Clean, minimal blog interface with mobile-friendly responsive design. Built with vanilla HTML, CSS, and JavaScript focusing on user experience and accessibility.",
       tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
       image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=400&fit=crop",
-      github: "#",
-      live: "#",
+      github: "https://github.com/BulutHamali/personal-blog-sba",
+      live: "https://personal-blog-app-buluthamali.netlify.app",
       category: "Web Development"
     },
     {
@@ -28,8 +27,8 @@ const Projects = () => {
       description: "Interactive task tracking application with full CRUD functionality - add, complete, delete, and organize tasks with persistent local storage.",
       tech: ["JavaScript", "Local Storage", "DOM Manipulation", "CSS3"],
       image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop",
-      github: "#",
-      live: "#",
+      github: "https://github.com/BulutHamali/task-management-app",
+      live: "https://task-management-app-buluthamali.netlify.app/",
       category: "Web Development"
     },
     {
@@ -156,14 +155,18 @@ const Projects = () => {
                   <div className="flex space-x-3 mt-auto">
                     {!project.isComingSoon ? (
                       <>
-                        <Button size="sm" variant="outline" className="flex items-center space-x-2">
-                          <Github size={16} />
-                          <span>Code</span>
+                        <Button size="sm" variant="outline" className="flex items-center space-x-2" asChild>
+                          <a href={project.github} target="_blank" rel="noopener noreferrer">
+                            <Github size={16} />
+                            <span>Code</span>
+                          </a>
                         </Button>
                         {project.category === 'Web Development' && (
-                          <Button size="sm" className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700">
-                            <ExternalLink size={16} />
-                            <span>Live Demo</span>
+                          <Button size="sm" className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700" asChild>
+                            <a href={project.live} target="_blank" rel="noopener noreferrer">
+                              <ExternalLink size={16} />
+                              <span>Live Demo</span>
+                            </a>
                           </Button>
                         )}
                       </>
