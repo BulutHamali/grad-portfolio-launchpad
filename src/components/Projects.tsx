@@ -52,6 +52,16 @@ const Projects = () => {
       isComingSoon: true
     },
     {
+      title: "Variant Analysis Pipeline",
+      description: "Sophisticated genomic variant analysis tools are currently in development. Stay tuned for innovative solutions that bridge the gap between variant calling and clinical interpretation.",
+      tech: ["Python", "Bioinformatics", "Genomic Variants", "Coming Soon"],
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
+      github: "#",
+      live: "#",
+      category: "Bioinformatics",
+      isComingSoon: true
+    },
+    {
       title: "Machine Learning for Protein Docking",
       description: "Advanced computational biology applications are currently in development. Stay tuned for innovative solutions that bridge the gap between machine learning and molecular research.",
       tech: ["Python", "Machine Learning", "Computational Biology", "Coming Soon"],
