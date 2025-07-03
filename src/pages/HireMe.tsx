@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -230,41 +229,24 @@ const HireMe = () => {
           
           <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
             <div>
-              <h3 className="text-2xl font-semibold mb-6">Quick Contact Options</h3>
+              <h3 className="text-2xl font-semibold mb-6">Schedule a Consultation</h3>
               
-              <div className="space-y-6">
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-                  <div className="flex items-center space-x-3 mb-3">
-                    <Calendar className="w-6 h-6 text-blue-400" />
-                    <span className="text-lg font-medium">Schedule a Call</span>
-                  </div>
-                  <p className="text-slate-300 mb-4">Book a 30-minute consultation to discuss your project needs</p>
-                  <Button 
-                    className="bg-blue-600 hover:bg-blue-700 text-white w-full"
-                    asChild
-                  >
-                    <a href="https://calendly.com/buluthamali" target="_blank" rel="noopener noreferrer">
-                      Book on Calendly <ExternalLink className="ml-2 w-4 h-4" />
-                    </a>
-                  </Button>
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8">
+                <div className="flex items-center space-x-3 mb-4">
+                  <Calendar className="w-8 h-8 text-blue-400" />
+                  <span className="text-xl font-medium">Book a Free 30-Minute Call</span>
                 </div>
-
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-                  <div className="flex items-center space-x-3 mb-3">
-                    <Mail className="w-6 h-6 text-blue-400" />
-                    <span className="text-lg font-medium">Direct Email</span>
-                  </div>
-                  <p className="text-slate-300 mb-4">Prefer email? Send me your project details directly</p>
-                  <Button 
-                    variant="outline"
-                    className="border-white/30 text-white hover:bg-white/10 w-full"
-                    asChild
-                  >
-                    <a href="mailto:contact@buluthamali.com">
-                      Send Email <Mail className="ml-2 w-4 h-4" />
-                    </a>
-                  </Button>
-                </div>
+                <p className="text-slate-300 mb-6 text-lg leading-relaxed">
+                  Let's discuss your project needs, timeline, and how I can help transform your biological data into actionable insights. No commitment required.
+                </p>
+                <Button 
+                  className="bg-blue-600 hover:bg-blue-700 text-white w-full text-lg py-3"
+                  asChild
+                >
+                  <a href="https://calendly.com/buluthamali" target="_blank" rel="noopener noreferrer">
+                    Book on Calendly <ExternalLink className="ml-2 w-5 h-5" />
+                  </a>
+                </Button>
               </div>
             </div>
             
