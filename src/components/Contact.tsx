@@ -47,8 +47,7 @@ const Contact = () => {
                   Book a free 30-minute call to discuss your project needs
                 </p>
                 <Button 
-                  variant="outline"
-                  className="border-white/30 text-white hover:bg-white/10 w-full"
+                  className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 w-full"
                   asChild
                 >
                   <a href="https://calendly.com/buluthamali" target="_blank" rel="noopener noreferrer">
@@ -91,15 +90,6 @@ const Contact = () => {
                 Send Message
               </Button>
             </form>
-            
-            <div className="mt-6 pt-6 border-t border-white/20">
-              <p className="text-slate-400 text-sm text-center">
-                Or email me directly at{" "}
-                <a href="mailto:buluthamali@gmail.com" className="text-blue-400 hover:text-blue-300">
-                  buluthamali@gmail.com
-                </a>
-              </p>
-            </div>
           </div>
         </div>
       </div>
