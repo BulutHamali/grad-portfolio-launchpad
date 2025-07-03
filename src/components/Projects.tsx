@@ -33,30 +33,33 @@ const Projects = () => {
     },
     {
       title: "Spatial Transcriptomics Analysis",
-      description: "Self-directed research project analyzing 10x Genomics Visium and Xenium datasets using VoltRon in R. Performed cell type deconvolution, H&E image alignment, and spatial molecular visualization.",
-      tech: ["R", "VoltRon", "Bioinformatics", "10x Genomics", "Data Visualization"],
+      description: "Advanced bioinformatics tools are currently in development. Stay tuned for innovative solutions that bridge the gap between spatial biology and computational analysis.",
+      tech: ["R", "Bioinformatics", "Data Analysis", "Coming Soon"],
       image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop",
       github: "#",
       live: "#",
-      category: "Bioinformatics"
+      category: "Bioinformatics",
+      isComingSoon: true
     },
     {
       title: "Single-Cell RNA Sequencing Pipeline",
-      description: "Comprehensive analysis of scRNA-seq data from HER2+ breast cancer models using Seurat and Scanpy. Includes quality control, normalization, clustering, and differential expression analysis.",
-      tech: ["Python", "R", "Seurat", "Scanpy", "HPC/SLURM", "Statistical Analysis"],
+      description: "Comprehensive genomics analysis platforms are currently in development. Stay tuned for innovative solutions that bridge the gap between single-cell research and computational biology.",
+      tech: ["Python", "R", "Genomics", "Coming Soon"],
       image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&h=400&fit=crop",
       github: "#",
       live: "#",
-      category: "Bioinformatics"
+      category: "Bioinformatics",
+      isComingSoon: true
     },
     {
       title: "Machine Learning for Protein Docking",
-      description: "Utilized XGBoost machine learning to analyze mutation impacts on ARGLU1-MED1 protein interactions, identifying key residue changes affecting binding stability in cancer research.",
-      tech: ["Python", "XGBoost", "Machine Learning", "Molecular Modeling", "Cancer Research"],
+      description: "Advanced computational biology applications are currently in development. Stay tuned for innovative solutions that bridge the gap between machine learning and molecular research.",
+      tech: ["Python", "Machine Learning", "Computational Biology", "Coming Soon"],
       image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=600&h=400&fit=crop",
       github: "#",
       live: "#",
-      category: "Research"
+      category: "Research",
+      isComingSoon: true
     },
     {
       title: "Mobile Apps - Coming Soon",
