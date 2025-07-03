@@ -60,26 +60,34 @@ const Contact = () => {
           
           <div>
             <h3 className="text-2xl font-semibold mb-6">Send a Quick Message</h3>
-            <form className="space-y-6">
+            <form action="https://formspree.io/f/xeokdkaq" method="POST" className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <Input 
+                  name="name"
                   placeholder="Your Name" 
                   className="bg-white/10 border-white/20 text-white placeholder:text-slate-400"
+                  required
                 />
                 <Input 
                   type="email" 
+                  name="email"
                   placeholder="Your Email" 
                   className="bg-white/10 border-white/20 text-white placeholder:text-slate-400"
+                  required
                 />
               </div>
               <Input 
+                name="subject"
                 placeholder="Subject" 
                 className="bg-white/10 border-white/20 text-white placeholder:text-slate-400"
+                required
               />
               <Textarea 
+                name="message"
                 placeholder="Your message..." 
                 rows={5}
                 className="bg-white/10 border-white/20 text-white placeholder:text-slate-400"
+                required
               />
               <Button 
                 type="submit" 
