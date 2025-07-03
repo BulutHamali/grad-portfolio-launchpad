@@ -55,7 +55,7 @@ const Projects = () => {
       title: "Variant Analysis Pipeline",
       description: "Sophisticated genomic variant analysis tools are currently in development. Stay tuned for innovative solutions that bridge the gap between variant calling and clinical interpretation.",
       tech: ["Python", "Bioinformatics", "Genomic Variants", "Coming Soon"],
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
+      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=600&h=400&fit=crop",
       github: "#",
       live: "#",
       category: "Bioinformatics",
