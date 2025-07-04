@@ -432,15 +432,15 @@ print("Dashboard running at http://localhost:8050")`}</code>
                                   </li>
                                   <li className="flex justify-between">
                                     <span>Processing time</span>
-                                    <span className="font-semibold">< 2 minutes</span>
+                                    <span className="font-semibold">&lt; 2 minutes</span>
                                   </li>
                                   <li className="flex justify-between">
                                     <span>Dashboard load time</span>
-                                    <span className="font-semibold">< 5 seconds</span>
+                                    <span className="font-semibold">&lt; 5 seconds</span>
                                   </li>
                                   <li className="flex justify-between">
                                     <span>Filter response time</span>
-                                    <span className="font-semibold">< 1 second</span>
+                                    <span className="font-semibold">&lt; 1 second</span>
                                   </li>
                                 </ul>
                               </div>
@@ -470,8 +470,8 @@ print("Dashboard running at http://localhost:8050")`}</code>
                                 <div>
                                   <h5 className="font-medium mb-1">Pathogenicity Insights:</h5>
                                   <ul className="space-y-1">
-                                    <li>• 8.3% of variants exceed CADD threshold (>15)</li>
-                                    <li>• Rare variants (AF<0.1%) show higher CADD scores</li>
+                                    <li>• 8.3% of variants exceed CADD threshold (&gt;15)</li>
+                                    <li>• Rare variants (AF&lt;0.1%) show higher CADD scores</li>
                                     <li>• ClinVar pathogenic variants cluster at high CADD</li>
                                   </ul>
                                 </div>
