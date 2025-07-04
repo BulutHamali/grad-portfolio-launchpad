@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { ArrowLeft, Download, Github, Share2, Heart, MessageSquare, Eye } from 'lucide-react';
+import { ArrowLeft, Download, Github, Share2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const SingleCellAnalysis = () => {
@@ -49,20 +49,6 @@ const SingleCellAnalysis = () => {
                 <p className="text-lg text-gray-600 mb-4">
                   Comprehensive scRNA-seq analysis identifying cell types and biomarkers in cancer tissue samples
                 </p>
-                <div className="flex items-center space-x-6 text-sm text-gray-500">
-                  <div className="flex items-center space-x-1">
-                    <Eye size={16} />
-                    <span>2.1K views</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <Heart size={16} />
-                    <span>89 upvotes</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <MessageSquare size={16} />
-                    <span>12 comments</span>
-                  </div>
-                </div>
               </div>
 
               {/* Notebook Content */}
@@ -228,9 +214,16 @@ DimPlot(seurat_obj, reduction = "umap", label = TRUE, pt.size = 0.5)`}</code>
                             <CardTitle className="text-blue-600">5. Results & Cell Type Identification</CardTitle>
                           </CardHeader>
                           <CardContent>
+                            <div className="bg-yellow-50 p-4 rounded-lg mb-6">
+                              <p className="text-yellow-800 text-sm">
+                                <strong>Note:</strong> The data shown below represents example results for demonstration purposes. 
+                                When you upload your actual notebook, these values will be replaced with your real analysis results.
+                              </p>
+                            </div>
+                            
                             <div className="grid md:grid-cols-2 gap-4 mb-6">
                               <div className="bg-blue-50 p-4 rounded-lg">
-                                <h4 className="font-semibold text-blue-800 mb-2">Cell Type Distribution</h4>
+                                <h4 className="font-semibold text-blue-800 mb-2">Cell Type Distribution (Example)</h4>
                                 <ul className="space-y-2 text-sm">
                                   <li className="flex justify-between">
                                     <span>T cells</span>
@@ -259,7 +252,7 @@ DimPlot(seurat_obj, reduction = "umap", label = TRUE, pt.size = 0.5)`}</code>
                                 </ul>
                               </div>
                               <div className="bg-green-50 p-4 rounded-lg">
-                                <h4 className="font-semibold text-green-800 mb-2">Key Findings</h4>
+                                <h4 className="font-semibold text-green-800 mb-2">Key Findings (Example)</h4>
                                 <ul className="space-y-1 text-sm text-green-700">
                                   <li>• 156 differentially expressed genes identified</li>
                                   <li>• Strong immune activation signatures detected</li>
