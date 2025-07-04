@@ -169,7 +169,7 @@ df_variants.head()`}</code>
                             <div className="bg-green-50 p-4 rounded-lg">
                               <p className="text-green-800"><strong>Processing Results:</strong><br/>
                               Loaded 25,847 variants across 23 chromosomes<br/>
-                              Variant types: {'SNV': 23,156, 'INDEL': 2,691}</p>
+                              Variant types: {`{'SNV': 23,156, 'INDEL': 2,691}`}</p>
                             </div>
                           </CardContent>
                         </Card>
@@ -470,8 +470,8 @@ print("Dashboard running at http://localhost:8050")`}</code>
                                 <div>
                                   <h5 className="font-medium mb-1">Pathogenicity Insights:</h5>
                                   <ul className="space-y-1">
-                                    <li>• 8.3% of variants exceed CADD threshold (&gt;15)</li>
-                                    <li>• Rare variants (AF&lt;0.1%) show higher CADD scores</li>
+                                    <li>• 8.3% of variants exceed CADD threshold ({`>`}15)</li>
+                                    <li>• Rare variants (AF{`<`}0.1%) show higher CADD scores</li>
                                     <li>• ClinVar pathogenic variants cluster at high CADD</li>
                                   </ul>
                                 </div>
