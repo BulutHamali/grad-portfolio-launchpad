@@ -1,331 +1,183 @@
+
 #!/usr/bin/env python3
-"""
-Genomic Variant Analysis Pipeline
-Complete modular system for variant analysis from data acquisition to reporting
-"""
 
 import sys
 import os
 from pathlib import Path
 
-# Import the individual modules directly (without genomics package structure)
+# Add the genomics directory to Python path
+sys.path.append(str(Path(__file__).parent / "genomics"))
+
 from data_downloader import GenomicDataDownloader
 from vcf_loader import VCFLoader
 from variant_analyzer import VariantAnalyzer
-
-class GenomicVariantPipeline:
-    """Main orchestrator for genomic variant analysis pipeline"""
-    
-    def __init__(self, working_dir="genomic_analysis"):
-        self.working_dir = Path(working_dir)
-        self.working_dir.mkdir(exist_ok=True)
-        
-        # Initialize components
-        self.downloader = GenomicDataDownloader(str(self.working_dir / "data"))
-        self.loader = VCFLoader()
-        self.analyzer = VariantAnalyzer()
-        
-        # Data storage
-        self.variants_df = None
-        self.analysis_results = {}
-    
-    def run_analysis(self, data_source="clinvar", max_variants=25000):
-        """Run complete analysis pipeline"""
-        print(f"Starting genomic variant analysis pipeline...")
-        print(f"Data source: {data_source}")
-        print(f"Max variants: {max_variants:,}")
-        print("=" * 50)
-        
-        # Step 1: Data Acquisition
-        print("\n1. DATA ACQUISITION")
-        print("-" * 20)
-        vcf_file = self._acquire_data(data_source)
-        if not vcf_file:
-            print("❌ Data acquisition failed")
-            return None
-        
-        # Step 2: Data Loading
-        print("\n2. DATA LOADING")
-        print("-" * 15)
-        self.variants_df = self._load_data(vcf_file, data_source, max_variants)
-        if self.variants_df is None:
-            print("❌ Data loading failed")
-            return None
-        
-        # Step 3: Variant Annotation
-        print("\n3. VARIANT ANNOTATION")
-        print("-" * 21)
-        self.variants_df = self.analyzer.annotate_variants(self.variants_df)
-        print(f"✅ Annotated {len(self.variants_df):,} variants")
-        
-        # Step 4: Analysis & Statistics
-        print("\n4. ANALYSIS & STATISTICS")
-        print("-" * 24)
-        self.analysis_results = self.analyzer.generate_summary_statistics(self.variants_df)
-        print("✅ Generated summary statistics")
-        
-        # Step 5: Generate Reports
-        print("\n5. REPORT GENERATION")
-        print("-" * 20)
-        self._generate_reports()
-        
-        print("\n" + "=" * 50)
-        print("🎉 ANALYSIS COMPLETE!")
-        print("=" * 50)
-        
-        return self.variants_df
-    
-    def _acquire_data(self, data_source):
-        """Acquire data based on source specification - checks for existing files first"""
-        data_dir = self.working_dir / "data"
-        data_dir.mkdir(exist_ok=True)
-        
-        # First check if it's a direct file path
-        if os.path.exists(data_source):
-            print(f"Using local file: {data_source}")
-            return data_source
-        
-        # Check for manually downloaded files in data directory
-        if data_source.lower() == "clinvar":
-            # Common ClinVar file patterns
-            clinvar_patterns = [
-                "clinvar*.vcf*",
-                "ClinVar*.vcf*", 
-                "clinvar_*.vcf*",
-                "variant_summary.txt"
-            ]
-            existing_file = self._find_existing_file(data_dir, clinvar_patterns)
-            if existing_file:
-                print(f"📁 Found existing ClinVar file: {existing_file}")
-                return str(existing_file)
-            else:
-                print("🔄 No existing ClinVar file found, downloading...")
-                return self.downloader.download_clinvar_data()
-                
-        elif data_source.lower() == "1000genomes":
-            # Common 1000 Genomes file patterns
-            genomes_patterns = [
-                "*chr22*.vcf*",
-                "*1000genomes*.vcf*",
-                "*1000GP*.vcf*"
-            ]
-            existing_file = self._find_existing_file(data_dir, genomes_patterns)
-            if existing_file:
-                print(f"📁 Found existing 1000 Genomes file: {existing_file}")
-                return str(existing_file)
-            else:
-                print("🔄 No existing 1000 Genomes file found, downloading...")
-                return self.downloader.download_1000genomes_chr22()
-                
-        elif data_source.lower() == "gnomad":
-            # Common gnomAD file patterns
-            gnomad_patterns = [
-                "*gnomad*.vcf*",
-                "*gnomAD*.vcf*",
-                "*exome*.vcf*"
-            ]
-            existing_file = self._find_existing_file(data_dir, gnomad_patterns)
-            if existing_file:
-                print(f"📁 Found existing gnomAD file: {existing_file}")
-                return str(existing_file)
-            else:
-                print("🔄 No existing gnomAD file found, downloading...")
-                return self.downloader.download_gnomad_exomes()
-        else:
-            print(f"❌ Unknown data source: {data_source}")
-            return None
-    
-    def _find_existing_file(self, data_dir, patterns):
-        """Find existing files matching common patterns"""
-        import glob
-        
-        for pattern in patterns:
-            search_path = data_dir / pattern
-            matches = glob.glob(str(search_path))
-            if matches:
-                # Return the first match (most recent by default)
-                return Path(matches[0])
-        return None
-    
-    def list_available_files(self):
-        """List all VCF files available in the data directory"""
-        data_dir = self.working_dir / "data"
-        if not data_dir.exists():
-            print("📁 Data directory doesn't exist yet")
-            return []
-        
-        vcf_files = []
-        for pattern in ["*.vcf", "*.vcf.gz"]:
-            vcf_files.extend(data_dir.glob(pattern))
-        
-        if vcf_files:
-            print(f"📁 Found {len(vcf_files)} VCF files in data directory:")
-            for i, file in enumerate(vcf_files, 1):
-                size_mb = file.stat().st_size / (1024 * 1024)
-                print(f"   {i}. {file.name} ({size_mb:.1f} MB)")
-        else:
-            print("📁 No VCF files found in data directory")
-        
-        return vcf_files
-
-    def _load_data(self, vcf_file, data_source, max_variants):
-        """Load data from VCF file using VCFLoader"""
-        print(f"⏳ Loading variants from: {vcf_file}")
-        try:
-            variants_df = self.loader.load_vcf_data(vcf_file, max_variants)
-            print(f"✅ Loaded {len(variants_df):,} variants from {data_source}")
-            return variants_df
-        except Exception as e:
-            print(f"❌ Error loading data: {e}")
-            return None
-
-    def _generate_reports(self):
-        """Generate analysis reports (text and summary plots)"""
-        print("⏳ Generating reports...")
-        
-        # 1. Text Report
-        report_path = self.working_dir / "analysis_report.txt"
-        with open(report_path, "w") as f:
-            f.write("GENOMIC VARIANT ANALYSIS REPORT\n")
-            f.write("=" * 30 + "\n\n")
-            
-            f.write("Summary Statistics:\n")
-            for key, value in self.analysis_results.items():
-                f.write(f"  - {key}: {value}\n")
-            f.write("\n")
-            
-            f.write("High Priority Variants (Top 10):\n")
-            high_priority = self.get_high_priority_variants()
-            for index, row in high_priority.head(10).iterrows():
-                f.write(f"  - {row['CHROM']}:{row['POS']} {row['REF']}>{row['ALT']} - {row['pathogenicity']} (CADD: {row['CADD_PHRED']})\n")
-        
-        print(f"📝 Text report generated: {report_path}")
-        
-        # 2. Summary Plots (example - you can expand on this)
-        plot_path = self.working_dir / "variant_summary.png"
-        try:
-            import matplotlib.pyplot as plt
-            
-            # Example: Pathogenicity distribution
-            pathogenicity_counts = self.variants_df['pathogenicity'].value_counts()
-            pathogenicity_counts.plot(kind='bar', title='Pathogenicity Distribution')
-            plt.savefig(plot_path)
-            print(f"📊 Summary plot generated: {plot_path}")
-            plt.close()
-            
-        except ImportError:
-            print("⚠️ Matplotlib not installed, skipping summary plot generation")
-        except Exception as e:
-            print(f"❌ Error generating summary plot: {e}")
-        
-        print("✅ Reports generated")
-
-    def display_summary(self):
-        """Display summary of analysis results"""
-        print("\n📊 ANALYSIS SUMMARY")
-        print("-" * 20)
-        for key, value in self.analysis_results.items():
-            print(f"  - {key}: {value}")
-
-    def get_high_priority_variants(self, pathogenicity_threshold="likely pathogenic", cadd_threshold=20):
-        """Filter variants based on pathogenicity and CADD score"""
-        # Prioritize variants with high impact
-        high_priority = self.variants_df[
-            (self.variants_df['pathogenicity'].isin([pathogenicity_threshold, 'pathogenic'])) &
-            (self.variants_df['CADD_PHRED'] > cadd_threshold)
-        ].copy()  # Avoid SettingWithCopyWarning
-        
-        # Sort by CADD score for better ranking
-        high_priority.sort_values(by='CADD_PHRED', ascending=False, inplace=True)
-        
-        return high_priority
-
-    def export_results(self, format="csv"):
-        """Export analysis results to a file"""
-        file_path = self.working_dir / f"variant_analysis_results.{format}"
-        
-        try:
-            if format == "csv":
-                self.variants_df.to_csv(file_path, index=False)
-            elif format == "json":
-                self.variants_df.to_json(file_path, orient="records")
-            elif format == "excel":
-                self.variants_df.to_excel(file_path, index=False)
-            else:
-                print(f"❌ Unsupported format: {format}")
-                return
-            
-            print(f"✅ Results exported to: {file_path}")
-        except Exception as e:
-            print(f"❌ Error exporting results: {e}")
+from gatk4_pipeline import GATK4Pipeline
 
 def main():
-    """Main execution function"""
     print("🧬 Genomic Variant Analysis Pipeline")
-    print("=" * 40)
+    print("=" * 50)
     
-    # Initialize pipeline
-    pipeline = GenomicVariantPipeline()
+    print("\nSelect analysis type:")
+    print("1. VCF Analysis (load existing VCF files)")
+    print("2. GATK4 Variant Calling (complete pipeline from FASTQ)")
+    print("3. Exit")
     
-    # Show available files
-    available_files = pipeline.list_available_files()
+    choice = input("\nEnter your choice (1-3): ").strip()
     
-    # Interactive mode
-    print("\nAvailable data sources:")
-    print("1. ClinVar (clinical variants)")
-    print("2. 1000 Genomes Chr22 (population variants)")
-    print("3. gnomAD Exomes (population database)")
-    print("4. Custom VCF file")
-    if available_files:
-        print("5. Use existing file from data directory")
-    
-    try:
-        choice = input(f"\nSelect data source (1-{5 if available_files else 4}): ").strip()
-        
-        data_source_map = {
-            "1": "clinvar",
-            "2": "1000genomes", 
-            "3": "gnomad",
-            "4": None
-        }
-        
-        if choice == "4":
-            vcf_path = input("Enter VCF file path: ").strip()
-            data_source = vcf_path
-        elif choice == "5" and available_files:
-            print("\nAvailable files:")
-            for i, file in enumerate(available_files, 1):
-                print(f"   {i}. {file.name}")
-            file_choice = int(input("Select file number: ")) - 1
-            data_source = str(available_files[file_choice])
-        else:
-            data_source = data_source_map.get(choice, "clinvar")
-        
-        # Run analysis
-        results = pipeline.run_analysis(data_source)
-        
-        if results is not None:
-            # Display summary
-            pipeline.display_summary()
-            
-            # Show high priority variants
-            high_priority = pipeline.get_high_priority_variants()
-            if len(high_priority) > 0:
-                print(f"\n🔴 Found {len(high_priority)} high priority variants")
-                print("Top 5 high priority variants:")
-                print(high_priority[['CHROM', 'POS', 'REF', 'ALT', 'pathogenicity', 'CADD_PHRED']].head())
-            
-            # Export option
-            export_choice = input("\nExport results? (y/n): ").strip().lower()
-            if export_choice == 'y':
-                format_choice = input("Format (csv/json/excel): ").strip().lower()
-                pipeline.export_results(format_choice)
-        
-    except KeyboardInterrupt:
-        print("\n\nAnalysis interrupted by user.")
-    except Exception as e:
-        print(f"\n❌ Error during analysis: {e}")
+    if choice == "1":
+        run_vcf_analysis()
+    elif choice == "2":
+        run_gatk4_pipeline()
+    elif choice == "3":
+        print("Goodbye!")
+        return
+    else:
+        print("Invalid choice. Please run the script again.")
 
+def run_vcf_analysis():
+    """Run the existing VCF analysis pipeline"""
+    print("\n" + "="*50)
+    print("VCF ANALYSIS PIPELINE")
+    print("="*50)
+    
+    # Initialize components
+    downloader = GenomicDataDownloader()
+    loader = VCFLoader()
+    analyzer = VariantAnalyzer()
+    
+    print("\nSelect data source:")
+    print("1. ClinVar (Clinical variants)")
+    print("2. 1000 Genomes Chr22 (Population variants)")
+    print("3. gnomAD Exomes Chr1 (Population frequency data)")
+    
+    choice = input("Enter your choice (1-3): ").strip()
+    
+    # Download data based on choice
+    if choice == "1":
+        print("\n1. DOWNLOADING CLINVAR DATA")
+        print("-" * 30)
+        filepath = downloader.download_clinvar_data()
+    elif choice == "2":
+        print("\n1. DOWNLOADING 1000 GENOMES DATA")
+        print("-" * 35)
+        filepath = downloader.download_1000genomes_chr22()
+    elif choice == "3":
+        print("\n1. DOWNLOADING GNOMAD DATA")
+        print("-" * 28)
+        filepath = downloader.download_gnomad_exomes()
+    else:
+        print("Invalid choice!")
+        return
+    
+    if not filepath:
+        print("❌ Data download failed!")
+        return
+    
+    # Load and analyze data
+    print(f"\n2. LOADING VCF DATA")
+    print("-" * 20)
+    df = loader.load_vcf_data(filepath)
+    
+    if df is None or df.empty:
+        print("❌ Failed to load VCF data!")
+        return
+    
+    print(f"\n3. ANALYZING VARIANTS")
+    print("-" * 22)
+    analyzer.analyze_variants(df)
+    
+    print(f"\n4. GENERATING VISUALIZATIONS")
+    print("-" * 30)
+    analyzer.create_visualizations(df)
+    
+    print("\n✅ Analysis completed successfully!")
+    print("Check the 'genomic_analysis' directory for results and plots.")
+
+def run_gatk4_pipeline():
+    """Run the GATK4 variant calling pipeline"""
+    print("\n" + "="*50)
+    print("GATK4 VARIANT CALLING PIPELINE")
+    print("="*50)
+    
+    pipeline = GATK4Pipeline()
+    
+    # Display pipeline information
+    info = pipeline.get_pipeline_info()
+    print(f"\nDescription: {info['description']}")
+    print(f"Workflow: {info['workflow']}")
+    
+    print("\nPipeline Steps:")
+    for i, step in enumerate(info['steps'], 1):
+        print(f"  {i}. {step}")
+    
+    print(f"\nInput: {info['input']}")
+    print(f"Output: {info['output']}")
+    print(f"Reference: {info['reference']}")
+    
+    print("\n⚠️  Prerequisites:")
+    print("- GATK4, BWA, SAMtools, FastQC must be installed")
+    print("- ~15GB disk space required for reference files and data")
+    print("- Several hours processing time for complete pipeline")
+    
+    # Ask user if they want to proceed
+    proceed = input("\nDo you want to run the GATK4 pipeline? (y/n): ").lower().strip()
+    
+    if proceed in ['y', 'yes']:
+        success = pipeline.run_pipeline()
+        if success:
+            print("\n🎉 GATK4 pipeline completed successfully!")
+            print("VCF files are available in genomic_analysis/results/")
+            
+            # Ask if user wants to analyze the results
+            analyze = input("\nDo you want to analyze the generated VCF files? (y/n): ").lower().strip()
+            if analyze in ['y', 'yes']:
+                analyze_gatk4_results()
+        else:
+            print("\n❌ GATK4 pipeline failed!")
+    else:
+        print("Pipeline execution cancelled.")
+
+def analyze_gatk4_results():
+    """Analyze the results from GATK4 pipeline"""
+    print("\n" + "="*50)
+    print("ANALYZING GATK4 RESULTS")
+    print("="*50)
+    
+    results_dir = Path("genomic_analysis/results")
+    if not results_dir.exists():
+        print("❌ Results directory not found!")
+        return
+    
+    # Look for VCF files
+    vcf_files = list(results_dir.glob("*.vcf"))
+    if not vcf_files:
+        print("❌ No VCF files found in results directory!")
+        return
+    
+    # Initialize analyzer
+    loader = VCFLoader()
+    analyzer = VariantAnalyzer()
+    
+    # Analyze raw variants
+    raw_variants_file = results_dir / "raw_variants.vcf"
+    if raw_variants_file.exists():
+        print(f"\nAnalyzing: {raw_variants_file.name}")
+        df = loader.load_vcf_data(str(raw_variants_file))
+        
+        if df is not None and not df.empty:
+            print(f"\n📊 VARIANT ANALYSIS")
+            print("-" * 20)
+            analyzer.analyze_variants(df)
+            
+            print(f"\n📈 CREATING VISUALIZATIONS")
+            print("-" * 26)
+            analyzer.create_visualizations(df, output_prefix="gatk4_")
+            
+            print("\n✅ GATK4 results analysis completed!")
+        else:
+            print("❌ Failed to load VCF data!")
+    else:
+        print("❌ raw_variants.vcf not found!")
 
 if __name__ == "__main__":
     main()
