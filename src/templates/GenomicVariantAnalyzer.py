@@ -1,5 +1,5 @@
 
-#!pip install cyvcf2 scikit-allel plotly pandas numpy matplotlib seaborn -q --no-cache-dir
+#!pip install cyvcf2 scikit-allel plotly pandas numpy matplotlib seaborn requests -q --no-cache-dir
 
 import pandas as pd
 import numpy as np
@@ -8,6 +8,9 @@ import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import requests
+import gzip
+import os
 try:
     import cyvcf2
 except ImportError:
@@ -26,6 +29,210 @@ class GenomicVariantAnalyzer:
         self.vcf_path = vcf_path
         self.variants_df = None
         self.summary_stats = {}
+        
+    def download_clinvar_data(self):
+        """Download ClinVar VCF data (clinical variants)"""
+        print("Downloading ClinVar dataset...")
+        clinvar_url = "https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar.vcf.gz"
+        local_filename = "clinvar.vcf.gz"
+        
+        try:
+            # Download with progress tracking
+            response = requests.get(clinvar_url, stream=True)
+            response.raise_for_status()
+            
+            total_size = int(response.headers.get('content-length', 0))
+            downloaded = 0
+            
+            with open(local_filename, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        f.write(chunk)
+                        downloaded += len(chunk)
+                        if total_size > 0:
+                            percent = (downloaded / total_size) * 100
+                            print(f"\rDownloading: {percent:.1f}%", end="", flush=True)
+            
+            print(f"\nDownloaded ClinVar data: {local_filename}")
+            return self.load_clinvar_vcf(local_filename)
+            
+        except Exception as e:
+            print(f"Error downloading ClinVar data: {e}")
+            print("Using sample data instead...")
+            return self.load_sample_data()
+    
+    def download_1000genomes_chr22(self):
+        """Download 1000 Genomes chromosome 22 data (smaller subset)"""
+        print("Downloading 1000 Genomes Chromosome 22 dataset...")
+        chr22_url = "http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz"
+        local_filename = "1000genomes_chr22.vcf.gz"
+        
+        try:
+            response = requests.get(chr22_url, stream=True)
+            response.raise_for_status()
+            
+            total_size = int(response.headers.get('content-length', 0))
+            downloaded = 0
+            
+            with open(local_filename, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        f.write(chunk)
+                        downloaded += len(chunk)
+                        if total_size > 0:
+                            percent = (downloaded / total_size) * 100
+                            print(f"\rDownloading: {percent:.1f}%", end="", flush=True)
+            
+            print(f"\nDownloaded 1000 Genomes Chr22 data: {local_filename}")
+            return self.load_1000genomes_vcf(local_filename)
+            
+        except Exception as e:
+            print(f"Error downloading 1000 Genomes data: {e}")
+            print("Using sample data instead...")
+            return self.load_sample_data()
+    
+    def load_clinvar_vcf(self, vcf_path):
+        """Load and process ClinVar VCF data"""
+        if cyvcf2 is None:
+            print("cyvcf2 not available. Using sample data instead...")
+            return self.load_sample_data()
+            
+        try:
+            print(f"Processing ClinVar VCF: {vcf_path}")
+            vcf = cyvcf2.VCF(vcf_path)
+            variants = []
+            
+            # Process first 25000 variants to match dashboard expectations
+            for i, variant in enumerate(vcf):
+                if i >= 25000:
+                    break
+                    
+                if i % 1000 == 0:
+                    print(f"Processed {i} variants...")
+                
+                # Extract ClinVar-specific information
+                clnsig = variant.INFO.get('CLNSIG', ['Unknown'])[0] if 'CLNSIG' in variant.INFO else 'Unknown'
+                clndn = variant.INFO.get('CLNDN', ['Unknown'])[0] if 'CLNDN' in variant.INFO else 'Unknown'
+                af = variant.INFO.get('AF', [0])[0] if 'AF' in variant.INFO else np.random.beta(0.1, 10)
+                
+                # Map ClinVar significance to our categories
+                pathogenicity = self.map_clinvar_significance(clnsig)
+                
+                # Assign patient ID (simulate 50 patients)
+                patient_id = f'Patient_{(i // 500) + 1:02d}'
+                
+                var_data = {
+                    'patient_id': patient_id,
+                    'CHROM': variant.CHROM,
+                    'POS': variant.POS,
+                    'REF': variant.REF,
+                    'ALT': str(variant.ALT[0]) if variant.ALT else 'N',
+                    'QUAL': variant.QUAL if variant.QUAL else np.random.exponential(35),
+                    'AF': af,
+                    'DP': np.random.poisson(52),  # Simulate read depth
+                    'CADD_PHRED': np.random.gamma(1.5, 8),  # Simulate CADD score
+                    'SIFT_score': np.random.beta(2, 3),
+                    'PolyPhen_score': np.random.beta(1.5, 3),
+                    'pathogenicity': pathogenicity,
+                    'clinvar_significance': clnsig,
+                    'disease': clndn,
+                    'gene': 'Unknown'  # Would need additional annotation
+                }
+                variants.append(var_data)
+
+            self.variants_df = pd.DataFrame(variants)
+            
+            # Add missing columns
+            self.variants_df['variant_type'] = self.classify_variant_types()
+            self.variants_df['clinical_significance'] = self.assign_clinical_significance()
+            
+            print(f"Loaded {len(self.variants_df):,} real ClinVar variants")
+            return self.variants_df
+
+        except Exception as e:
+            print(f"Error loading ClinVar VCF: {e}")
+            return self.load_sample_data()
+    
+    def load_1000genomes_vcf(self, vcf_path):
+        """Load and process 1000 Genomes VCF data"""
+        if cyvcf2 is None:
+            print("cyvcf2 not available. Using sample data instead...")
+            return self.load_sample_data()
+            
+        try:
+            print(f"Processing 1000 Genomes VCF: {vcf_path}")
+            vcf = cyvcf2.VCF(vcf_path)
+            variants = []
+            
+            # Get sample names (first 50 for our analysis)
+            sample_names = vcf.samples[:50] if len(vcf.samples) >= 50 else vcf.samples
+            
+            for i, variant in enumerate(vcf):
+                if i >= 25000:
+                    break
+                    
+                if i % 1000 == 0:
+                    print(f"Processed {i} variants...")
+                
+                # Extract variant information
+                af = variant.INFO.get('AF', [0])[0] if 'AF' in variant.INFO else 0
+                an = variant.INFO.get('AN', 0)
+                ac = variant.INFO.get('AC', [0])[0] if 'AC' in variant.INFO else 0
+                
+                # Calculate allele frequency if not available
+                if af == 0 and an > 0:
+                    af = ac / an
+                
+                # Assign to random patient (simulate clinical samples)
+                patient_id = f'Patient_{np.random.randint(1, 51):02d}'
+                
+                var_data = {
+                    'patient_id': patient_id,
+                    'CHROM': variant.CHROM,
+                    'POS': variant.POS,
+                    'REF': variant.REF,
+                    'ALT': str(variant.ALT[0]) if variant.ALT else 'N',
+                    'QUAL': variant.QUAL if variant.QUAL else np.random.exponential(35),
+                    'AF': af,
+                    'DP': np.random.poisson(52),
+                    'CADD_PHRED': np.random.gamma(1.5, 8),
+                    'SIFT_score': np.random.beta(2, 3),
+                    'PolyPhen_score': np.random.beta(1.5, 3),
+                    'gene': 'Unknown'
+                }
+                variants.append(var_data)
+
+            self.variants_df = pd.DataFrame(variants)
+            
+            # Add analysis columns
+            self.variants_df['variant_type'] = self.classify_variant_types()
+            self.variants_df['pathogenicity'] = self.predict_pathogenicity()
+            self.variants_df['clinical_significance'] = self.assign_clinical_significance()
+            
+            print(f"Loaded {len(self.variants_df):,} real 1000 Genomes variants")
+            return self.variants_df
+
+        except Exception as e:
+            print(f"Error loading 1000 Genomes VCF: {e}")
+            return self.load_sample_data()
+    
+    def map_clinvar_significance(self, clnsig):
+        """Map ClinVar clinical significance to our pathogenicity categories"""
+        if isinstance(clnsig, (list, tuple)):
+            clnsig = clnsig[0] if clnsig else 'Unknown'
+        
+        clnsig = str(clnsig).lower()
+        
+        if 'pathogenic' in clnsig and 'likely' not in clnsig:
+            return 'Pathogenic'
+        elif 'likely_pathogenic' in clnsig or 'likely pathogenic' in clnsig:
+            return 'Likely Pathogenic'
+        elif 'benign' in clnsig and 'likely' not in clnsig:
+            return 'Benign'
+        elif 'likely_benign' in clnsig or 'likely benign' in clnsig:
+            return 'Likely Benign'
+        else:
+            return 'Uncertain Significance'
         
     def import_data_colab(self):
         """Import VCF file in Google Colab environment"""
@@ -48,11 +255,13 @@ class GenomicVariantAnalyzer:
     
     def import_data_local(self, file_path):
         """Import VCF file from local path"""
-        if file_path and file_path.endswith('.vcf') or file_path.endswith('.vcf.gz'):
+        if file_path and (file_path.endswith('.vcf') or file_path.endswith('.vcf.gz')):
             return self.load_vcf_data(file_path)
         else:
             print("Invalid file path or format. Using sample data...")
             return self.load_sample_data()
+    
+    # ... keep existing code (load_sample_data, load_vcf_data, classify_variant_types, predict_pathogenicity, assign_clinical_significance, generate_summary_stats, display_summary methods)
     
     def load_sample_data(self):
         """Load sample variant data for demonstration (50 patients, ~500 variants each)"""
@@ -291,15 +500,23 @@ if __name__ == "__main__":
     # Initialize analyzer
     analyzer = GenomicVariantAnalyzer()
     
-    # Option 1: Load sample data (for demonstration)
-    print("Loading sample genomic variant data...")
-    data = analyzer.load_sample_data()
+    print("Choose data source:")
+    print("1. ClinVar dataset (clinical variants)")
+    print("2. 1000 Genomes Chr22 (population variants)")
+    print("3. Upload your own VCF (Colab)")
+    print("4. Sample data (demonstration)")
     
-    # Option 2: Import from Google Colab (uncomment to use)
-    # data = analyzer.import_data_colab()
+    choice = input("Enter choice (1-4): ").strip()
     
-    # Option 3: Load from local VCF file (uncomment and provide path)
-    # data = analyzer.import_data_local("/path/to/your/file.vcf")
+    if choice == "1":
+        data = analyzer.download_clinvar_data()
+    elif choice == "2":
+        data = analyzer.download_1000genomes_chr22()
+    elif choice == "3":
+        data = analyzer.import_data_colab()
+    else:
+        print("Using sample data for demonstration...")
+        data = analyzer.load_sample_data()
     
     # Display summary
     analyzer.display_summary()
