@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github, Code2, BarChart3, Database, ArrowRight } from "lucide-react";
@@ -16,7 +15,7 @@ const Projects = () => {
       category: "Web Development"
     },
     {
-      title: "Personal Blog Application",
+      title: "Personal Blog Application", 
       description: "Clean, minimal blog interface with mobile-friendly responsive design. Built with vanilla HTML, CSS, and JavaScript focusing on user experience and accessibility.",
       tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
       image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=400&fit=crop",
@@ -70,11 +69,23 @@ const Projects = () => {
       projectPath: "/projects/genomic-variants"
     },
     {
+      title: "MLAnalyzer: Drug Classification Workflow",
+      summary: "Complete machine learning pipeline for drug classification using patient characteristics with 99.5% accuracy.",
+      background: "Developed a comprehensive ML workflow analyzing synthetic patient records to predict optimal drug treatment based on age, sex, blood pressure, cholesterol, and Na/K ratio.",
+      goal: "Create an accurate multiclass classification model to assist healthcare providers in drug selection, achieving high accuracy across 5 different drug classes.",
+      image: "/lovable-uploads/2583b9e4-4dd0-467b-80db-7e822e9ca6da.png",
+      results: "Achieved 99.5% test accuracy using Random Forest. Comprehensive comparison of 5 ML algorithms with cross-validation, hyperparameter tuning, and detailed performance analysis.",
+      tech: ["Python", "Scikit-learn", "XGBoost", "Pandas", "Matplotlib", "Seaborn"],
+      category: "Research",
+      isDetailed: true,
+      projectPath: "/projects/protein-prediction"
+    },
+    {
       title: "Machine Learning for Protein Structure Prediction",
       summary: "Deep learning model to predict protein secondary structure from amino acid sequences with high accuracy.",
       background: "Implemented a neural network approach to predict protein secondary structures (alpha-helix, beta-sheet, coil) from primary sequences, addressing the critical gap in structural bioinformatics.",
       goal: "Develop an accurate prediction model achieving >85% accuracy for secondary structure prediction to aid in protein function annotation and drug design.",
-      image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=600&h=400&fit=crop",
+      image: "/lovable-uploads/2583b9e4-4dd0-467b-80db-7e822e9ca6da.png",
       results: "Achieved 87.3% accuracy on test set across 1,200 protein sequences. Model successfully predicted secondary structures with precision scores: α-helix (0.89), β-sheet (0.85), coil (0.87).",
       tech: ["Python", "TensorFlow", "Keras", "BioPython", "LSTM", "Deep Learning"],
       category: "Research",
@@ -108,7 +119,6 @@ const Projects = () => {
           A showcase of both software engineering projects and computational biology research
         </p>
         
-        {/* Category Filter */}
         <div className="flex justify-center mb-12">
           <div className="bg-white rounded-lg p-2 shadow-md">
             {categories.map((category) => (
