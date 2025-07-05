@@ -1,6 +1,6 @@
 
-# Complete Machine Learning Pipeline - Drug Classification Dataset
-# This template demonstrates drug prescription prediction using patient data
+# Complete Machine Learning Pipeline Template for Google Colab
+# This template demonstrates classification with medical focus
 
 # Install required packages
 !pip install pandas numpy matplotlib seaborn scikit-learn plotly xgboost
@@ -111,10 +111,25 @@ class MLAnalyzer:
         
         return data
         
-    def load_dataset(self, dataset_name='drug'):
+    def load_dataset(self, dataset_name='iris'):
         """Load various datasets for analysis"""
         
-        if dataset_name == 'drug':
+        if dataset_name == 'iris':
+            data = load_iris()
+            self.X = pd.DataFrame(data.data, columns=data.feature_names)
+            self.y = pd.Series(data.target, name='target')
+            self.target_names = data.target_names
+            self.dataset_info = {
+                'name': 'Iris Flower Classification',
+                'type': 'Classification',
+                'classes': 3,
+                'features': 4,
+                'samples': len(self.X)
+            }
+            # Create combined dataframe
+            self.data = pd.concat([self.X, self.y], axis=1)
+            
+        elif dataset_name == 'drug':
             # Create drug classification dataset
             self.data = self.create_drug_dataset()
             
@@ -146,21 +161,6 @@ class MLAnalyzer:
                 'samples': len(self.X)
             }
             
-        elif dataset_name == 'iris':
-            data = load_iris()
-            self.X = pd.DataFrame(data.data, columns=data.feature_names)
-            self.y = pd.Series(data.target, name='target')
-            self.target_names = data.target_names
-            self.dataset_info = {
-                'name': 'Iris Flower Classification',
-                'type': 'Classification',
-                'classes': 3,
-                'features': 4,
-                'samples': len(self.X)
-            }
-            # Create combined dataframe for iris
-            self.data = pd.concat([self.X, self.y], axis=1)
-            
         elif dataset_name == 'breast_cancer':
             data = load_breast_cancer()
             self.X = pd.DataFrame(data.data, columns=data.feature_names)
@@ -173,7 +173,7 @@ class MLAnalyzer:
                 'features': 30,
                 'samples': len(self.X)
             }
-            # Create combined dataframe for breast cancer
+            # Create combined dataframe
             self.data = pd.concat([self.X, self.y], axis=1)
         
         print(f"✅ Loaded {self.dataset_info['name']} dataset")
@@ -199,16 +199,8 @@ class MLAnalyzer:
         print(f"\n📊 Statistical Summary:")
         display(self.data.describe())
         
-        # Categorical variable distributions
-        if 'Sex' in self.data.columns:
-            print(f"\n📊 Categorical Variables Distribution:")
-            for col in ['Sex', 'BP', 'Cholesterol']:
-                if col in self.data.columns:
-                    print(f"\n{col}:")
-                    print(self.data[col].value_counts())
-        
         # Target distribution
-        print(f"\n🎯 Drug Distribution:")
+        print(f"\n🎯 Target Distribution:")
         if 'Drug' in self.data.columns:
             drug_counts = self.data['Drug'].value_counts()
             for drug, count in drug_counts.items():
@@ -219,96 +211,73 @@ class MLAnalyzer:
                 class_name = self.target_names[i] if hasattr(self, 'target_names') else f"Class {i}"
                 print(f"   {class_name}: {count} ({count/len(self.y)*100:.1f}%)")
         
-        # Create visualizations
-        self._create_exploration_plots()
+        # Correlation analysis
+        corr_matrix = pd.concat([self.X, self.y], axis=1).corr()
         
-    def _create_exploration_plots(self):
+        # Visualizations
+        self._create_exploration_plots(corr_matrix)
+        
+    def _create_exploration_plots(self, corr_matrix):
         """Create comprehensive exploration plots"""
         
+        # 1. Correlation heatmap
+        plt.figure(figsize=(12, 8))
+        mask = np.triu(np.ones_like(corr_matrix, dtype=bool))
+        sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0, 
+                   square=True, fmt='.2f', cbar_kws={"shrink": .8}, mask=mask)
+        plt.title('Feature Correlation Matrix')
+        plt.tight_layout()
+        plt.show()
+        
+        # 2. Target distribution
+        fig, axes = plt.subplots(1, 2, figsize=(15, 5))
+        
+        # Pie chart
         if 'Drug' in self.data.columns:
-            # Drug-specific visualizations
-            
-            # 1. Target distribution
-            fig, axes = plt.subplots(2, 2, figsize=(15, 12))
-            
-            # Drug distribution pie chart
-            drug_counts = self.data['Drug'].value_counts()
-            axes[0,0].pie(drug_counts.values, labels=drug_counts.index, autopct='%1.1f%%', startangle=90)
-            axes[0,0].set_title('Drug Prescription Distribution')
-            
-            # Age distribution by drug
-            for drug in self.data['Drug'].unique():
-                drug_data = self.data[self.data['Drug'] == drug]['Age']
-                axes[0,1].hist(drug_data, alpha=0.7, label=drug, bins=15)
-            axes[0,1].set_xlabel('Age')
-            axes[0,1].set_ylabel('Frequency')
-            axes[0,1].set_title('Age Distribution by Drug')
-            axes[0,1].legend()
-            
-            # Na_to_K ratio by drug
-            sns.boxplot(data=self.data, x='Drug', y='Na_to_K', ax=axes[1,0])
-            axes[1,0].set_title('Sodium to Potassium Ratio by Drug')
-            axes[1,0].tick_params(axis='x', rotation=45)
-            
-            # Categorical variables stacked bar
-            drug_bp = pd.crosstab(self.data['Drug'], self.data['BP'])
-            drug_bp.plot(kind='bar', stacked=True, ax=axes[1,1])
-            axes[1,1].set_title('Blood Pressure Distribution by Drug')
-            axes[1,1].set_xlabel('Drug')
-            axes[1,1].tick_params(axis='x', rotation=45)
-            axes[1,1].legend(title='Blood Pressure')
-            
-            plt.tight_layout()
-            plt.show()
-            
-            # 2. Feature correlation (for encoded data)
-            plt.figure(figsize=(10, 8))
-            corr_data = pd.concat([self.X, self.y], axis=1)
-            corr_matrix = corr_data.corr()
-            
-            mask = np.triu(np.ones_like(corr_matrix, dtype=bool))
-            sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0, 
-                       square=True, fmt='.2f', cbar_kws={"shrink": .8}, mask=mask)
-            plt.title('Feature Correlation Matrix (Encoded Data)')
-            plt.tight_layout()
-            plt.show()
-            
-            # 3. Pairwise relationships
-            fig, axes = plt.subplots(1, 2, figsize=(15, 6))
-            
-            # Age vs Na_to_K colored by Drug
-            for drug in self.data['Drug'].unique():
-                drug_data = self.data[self.data['Drug'] == drug]
-                axes[0].scatter(drug_data['Age'], drug_data['Na_to_K'], label=drug, alpha=0.7)
-            axes[0].set_xlabel('Age')
-            axes[0].set_ylabel('Na to K Ratio')
-            axes[0].set_title('Age vs Na/K Ratio by Drug')
-            axes[0].legend()
-            axes[0].grid(True, alpha=0.3)
-            
-            # Categorical variable combinations
-            drug_combinations = pd.crosstab([self.data['BP'], self.data['Cholesterol']], self.data['Drug'])
-            drug_combinations.plot(kind='bar', ax=axes[1])
-            axes[1].set_title('Drug Distribution by BP and Cholesterol')
-            axes[1].set_xlabel('(Blood Pressure, Cholesterol)')
-            axes[1].tick_params(axis='x', rotation=45)
-            axes[1].legend(title='Drug', bbox_to_anchor=(1.05, 1), loc='upper left')
-            
-            plt.tight_layout()
-            plt.show()
-            
+            target_counts = self.data['Drug'].value_counts()
+            axes[0].pie(target_counts.values, labels=target_counts.index, 
+                       autopct='%1.1f%%', startangle=90)
+            axes[0].set_title('Drug Distribution')
         else:
-            # Generic visualizations for other datasets
-            # ... keep existing code (correlation heatmap and feature distributions)
-            corr_matrix = pd.concat([self.X, self.y], axis=1).corr()
-            
-            plt.figure(figsize=(12, 8))
-            mask = np.triu(np.ones_like(corr_matrix, dtype=bool))
-            sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0, 
-                       square=True, fmt='.2f', cbar_kws={"shrink": .8}, mask=mask)
-            plt.title('Feature Correlation Matrix')
-            plt.tight_layout()
-            plt.show()
+            target_counts = self.y.value_counts()
+            axes[0].pie(target_counts.values, labels=[self.target_names[i] for i in target_counts.index], 
+                       autopct='%1.1f%%', startangle=90)
+            axes[0].set_title('Target Class Distribution')
+        
+        # Bar chart
+        axes[1].bar(range(len(target_counts)), target_counts.values, 
+                   color=sns.color_palette("husl", len(target_counts)))
+        axes[1].set_xlabel('Class')
+        axes[1].set_ylabel('Count')
+        axes[1].set_title('Target Class Counts')
+        axes[1].set_xticks(range(len(target_counts)))
+        if 'Drug' in self.data.columns:
+            axes[1].set_xticklabels(target_counts.index)
+        else:
+            axes[1].set_xticklabels([self.target_names[i] for i in target_counts.index])
+        
+        plt.tight_layout()
+        plt.show()
+        
+        # 3. Feature distributions by class (for first 4 features)
+        n_features = min(4, len(self.X.columns))
+        fig, axes = plt.subplots(2, 2, figsize=(15, 10))
+        axes = axes.ravel()
+        
+        for i in range(n_features):
+            feature = self.X.columns[i]
+            for class_idx in self.y.unique():
+                class_data = self.X[self.y == class_idx][feature]
+                class_name = self.target_names[class_idx] if hasattr(self, 'target_names') else f"Class {class_idx}"
+                axes[i].hist(class_data, alpha=0.7, 
+                           label=class_name, bins=20)
+            axes[i].set_xlabel(feature)
+            axes[i].set_ylabel('Frequency')
+            axes[i].set_title(f'Distribution of {feature}')
+            axes[i].legend()
+        
+        plt.tight_layout()
+        plt.show()
         
     def prepare_data(self, test_size=0.2, scale_features=True):
         """Prepare data for machine learning"""
@@ -417,10 +386,13 @@ class MLAnalyzer:
         # 2. Confusion matrices
         self._plot_confusion_matrices()
         
-        # 3. Feature importance
+        # 3. ROC curves (for binary/multiclass)
+        self._plot_roc_curves()
+        
+        # 4. Feature importance
         self._plot_feature_importance()
         
-        # 4. PCA visualization
+        # 5. PCA visualization
         self._plot_pca_analysis()
         
     def _plot_model_comparison(self):
@@ -494,6 +466,30 @@ class MLAnalyzer:
         
         plt.tight_layout()
         plt.show()
+        
+    def _plot_roc_curves(self):
+        """Plot ROC curves"""
+        
+        if len(self.target_names) == 2:  # Binary classification
+            plt.figure(figsize=(10, 8))
+            
+            for name, model in self.models.items():
+                if self.results[name]['probabilities'] is not None:
+                    y_prob = self.results[name]['probabilities'][:, 1]
+                    fpr, tpr, _ = roc_curve(self.y_test, y_prob)
+                    auc_score = auc(fpr, tpr)
+                    
+                    plt.plot(fpr, tpr, label=f'{name} (AUC = {auc_score:.3f})')
+            
+            plt.plot([0, 1], [0, 1], 'k--', label='Random')
+            plt.xlabel('False Positive Rate')
+            plt.ylabel('True Positive Rate')
+            plt.title('ROC Curves Comparison')
+            plt.legend()
+            plt.grid(True)
+            plt.show()
+        else:
+            print("ROC curves skipped (multiclass classification)")
             
     def _plot_feature_importance(self):
         """Plot feature importance for tree-based models"""
@@ -553,11 +549,11 @@ class MLAnalyzer:
                              c=self.y_train, cmap='viridis', alpha=0.7)
         ax2.set_xlabel(f'PC1 ({pca_2d.explained_variance_ratio_[0]:.2%} variance)')
         ax2.set_ylabel(f'PC2 ({pca_2d.explained_variance_ratio_[1]:.2%} variance)')
-        ax2.set_title('PCA 2D Visualization - Drug Classification')
+        ax2.set_title('PCA 2D Visualization')
         
         # Add colorbar
         cbar = plt.colorbar(scatter, ax=ax2)
-        cbar.set_label('Drug Class')
+        cbar.set_label('Target Class')
         
         plt.tight_layout()
         plt.show()
@@ -609,7 +605,7 @@ class MLAnalyzer:
         """Generate comprehensive ML analysis report"""
         
         print("\n" + "="*80)
-        print("🤖 DRUG CLASSIFICATION ANALYSIS REPORT")
+        print("🤖 MACHINE LEARNING ANALYSIS REPORT")
         print("="*80)
         
         # Dataset info
@@ -618,15 +614,6 @@ class MLAnalyzer:
         print(f"   Samples: {self.dataset_info['samples']:,}")
         print(f"   Features: {self.dataset_info['features']}")
         print(f"   Classes: {self.dataset_info['classes']} {list(self.target_names)}")
-        
-        # Data characteristics
-        if 'Drug' in self.data.columns:
-            print(f"\n🏥 MEDICAL DATA CHARACTERISTICS:")
-            print(f"   • Patient Age Range: {self.data['Age'].min()}-{self.data['Age'].max()} years")
-            print(f"   • Average Age: {self.data['Age'].mean():.1f} years")
-            print(f"   • Gender Distribution: {dict(self.data['Sex'].value_counts())}")
-            print(f"   • Blood Pressure Distribution: {dict(self.data['BP'].value_counts())}")
-            print(f"   • Cholesterol Distribution: {dict(self.data['Cholesterol'].value_counts())}")
         
         # Model performance
         print(f"\n🏆 MODEL PERFORMANCE RANKING:")
@@ -651,27 +638,27 @@ class MLAnalyzer:
         print(classification_report(self.y_test, y_pred_best, 
                                   target_names=self.target_names))
         
-        print(f"\n✅ Drug Classification Analysis Complete!")
-        print(f"💡 Medical AI Recommendations:")
+        print(f"\n✅ Analysis Complete!")
+        print(f"💡 Recommendations:")
         print(f"   • Best performing model: {best_model_name}")
-        print(f"   • Model can assist in drug prescription decisions")
-        print(f"   • Consider clinical validation before medical use")
-        print(f"   • Important features help understand prescription patterns")
-        print(f"   • Requires physician oversight for final decisions")
+        print(f"   • Consider hyperparameter tuning for further improvement")
+        print(f"   • Try ensemble methods for better performance")
+        print(f"   • Collect more data if accuracy is insufficient")
 
-# MAIN DRUG CLASSIFICATION PIPELINE
-print("💊 DRUG CLASSIFICATION MACHINE LEARNING PIPELINE")
+# MAIN MACHINE LEARNING PIPELINE
+print("🤖 COMPLETE MACHINE LEARNING ANALYSIS PIPELINE")
 print("="*60)
 
 # Initialize analyzer
 analyzer = MLAnalyzer()
 
-# Load dataset
-print("\n1️⃣ LOADING DRUG CLASSIFICATION DATASET...")
-data = analyzer.load_dataset('drug')
+# Load dataset (try different datasets: 'iris', 'drug', 'breast_cancer')
+print("\n1️⃣ LOADING DATASET...")
+dataset_choice = 'drug'  # Change this to try different datasets
+data = analyzer.load_dataset(dataset_choice)
 
 # Explore the data
-print("\n2️⃣ EXPLORING MEDICAL DATA...")
+print("\n2️⃣ EXPLORING DATA...")
 analyzer.explore_data()
 
 # Prepare data for ML
@@ -691,20 +678,14 @@ print("\n6️⃣ HYPERPARAMETER TUNING...")
 best_tuned_model = analyzer.hyperparameter_tuning('Random Forest')
 
 # Generate comprehensive report
-print("\n7️⃣ GENERATING MEDICAL AI REPORT...")
+print("\n7️⃣ GENERATING REPORT...")
 analyzer.generate_report()
 
-print("\n🎉 DRUG CLASSIFICATION ANALYSIS COMPLETE!")
-print("\nMedical AI Insights:")
-print("• This model demonstrates AI applications in healthcare")
-print("• Shows how patient characteristics influence drug selection")
-print("• Useful for understanding prescription patterns")
-print("• Can assist healthcare professionals in decision making")
-print("• Requires clinical validation and physician oversight")
-
+print("\n🎉 MACHINE LEARNING ANALYSIS COMPLETE!")
 print("\nNext Steps:")
-print("• Validate model with real medical data")
-print("• Add more patient features (lab results, medical history)")
-print("• Consider drug interactions and contraindications")
-print("• Implement explainable AI for medical transparency")
-print("• Test with different patient populations")
+print("• Try different datasets by changing 'dataset_choice' variable")
+print("• Available datasets: 'iris', 'drug', 'breast_cancer'")
+print("• Experiment with different models and hyperparameters")
+print("• Add feature engineering techniques")
+print("• Try ensemble methods for better performance")
+print("• Deploy the best model for predictions")
