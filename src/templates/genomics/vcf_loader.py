@@ -1,181 +1,173 @@
 
 import pandas as pd
 import numpy as np
-try:
-    import cyvcf2
-except ImportError:
-    print("cyvcf2 not available - using sample data only")
-    cyvcf2 = None
+import gzip
+import re
 
 class VCFLoader:
     """Handles loading and processing of VCF files"""
     
-    def load_clinvar_vcf(self, vcf_path):
-        """Load and process ClinVar VCF data"""
-        if cyvcf2 is None:
-            print("cyvcf2 not available. Using sample data instead...")
-            return None
-            
-        try:
-            print(f"Processing ClinVar VCF: {vcf_path}")
-            vcf = cyvcf2.VCF(vcf_path)
-            variants = []
-            
-            # Process first 25000 variants to match dashboard expectations
-            for i, variant in enumerate(vcf):
-                if i >= 25000:
-                    break
-                    
-                if i % 1000 == 0:
-                    print(f"Processed {i} variants...")
-                
-                # Extract ClinVar-specific information
-                clnsig = variant.INFO.get('CLNSIG', ['Unknown'])[0] if 'CLNSIG' in variant.INFO else 'Unknown'
-                clndn = variant.INFO.get('CLNDN', ['Unknown'])[0] if 'CLNDN' in variant.INFO else 'Unknown'
-                af = variant.INFO.get('AF', [0])[0] if 'AF' in variant.INFO else np.random.beta(0.1, 10)
-                
-                # Map ClinVar significance to our categories
-                pathogenicity = self.map_clinvar_significance(clnsig)
-                
-                # Assign patient ID (simulate 50 patients)
-                patient_id = f'Patient_{(i // 500) + 1:02d}'
-                
-                var_data = {
-                    'patient_id': patient_id,
-                    'CHROM': variant.CHROM,
-                    'POS': variant.POS,
-                    'REF': variant.REF,
-                    'ALT': str(variant.ALT[0]) if variant.ALT else 'N',
-                    'QUAL': variant.QUAL if variant.QUAL else np.random.exponential(35),
-                    'AF': af,
-                    'DP': np.random.poisson(52),  # Simulate read depth
-                    'CADD_PHRED': np.random.gamma(1.5, 8),  # Simulate CADD score
-                    'SIFT_score': np.random.beta(2, 3),
-                    'PolyPhen_score': np.random.beta(1.5, 3),
-                    'pathogenicity': pathogenicity,
-                    'clinvar_significance': clnsig,
-                    'disease': clndn,
-                    'gene': 'Unknown'  # Would need additional annotation
-                }
-                variants.append(var_data)
-
-            return pd.DataFrame(variants)
-
-        except Exception as e:
-            print(f"Error loading ClinVar VCF: {e}")
-            return None
+    def __init__(self):
+        self.supported_formats = ['.vcf', '.vcf.gz', '.bcf']
     
-    def load_1000genomes_vcf(self, vcf_path):
-        """Load and process 1000 Genomes VCF data"""
-        if cyvcf2 is None:
-            print("cyvcf2 not available. Using sample data instead...")
-            return None
-            
-        try:
-            print(f"Processing 1000 Genomes VCF: {vcf_path}")
-            vcf = cyvcf2.VCF(vcf_path)
-            variants = []
-            
-            # Get sample names (first 50 for our analysis)
-            sample_names = vcf.samples[:50] if len(vcf.samples) >= 50 else vcf.samples
-            
-            for i, variant in enumerate(vcf):
-                if i >= 25000:
-                    break
-                    
-                if i % 1000 == 0:
-                    print(f"Processed {i} variants...")
-                
-                # Extract variant information
-                af = variant.INFO.get('AF', [0])[0] if 'AF' in variant.INFO else 0
-                an = variant.INFO.get('AN', 0)
-                ac = variant.INFO.get('AC', [0])[0] if 'AC' in variant.INFO else 0
-                
-                # Calculate allele frequency if not available
-                if af == 0 and an > 0:
-                    af = ac / an
-                
-                # Assign to random patient (simulate clinical samples)
-                patient_id = f'Patient_{np.random.randint(1, 51):02d}'
-                
-                var_data = {
-                    'patient_id': patient_id,
-                    'CHROM': variant.CHROM,
-                    'POS': variant.POS,
-                    'REF': variant.REF,
-                    'ALT': str(variant.ALT[0]) if variant.ALT else 'N',
-                    'QUAL': variant.QUAL if variant.QUAL else np.random.exponential(35),
-                    'AF': af,
-                    'DP': np.random.poisson(52),
-                    'CADD_PHRED': np.random.gamma(1.5, 8),
-                    'SIFT_score': np.random.beta(2, 3),
-                    'PolyPhen_score': np.random.beta(1.5, 3),
-                    'gene': 'Unknown'
-                }
-                variants.append(var_data)
-
-            return pd.DataFrame(variants)
-
-        except Exception as e:
-            print(f"Error loading 1000 Genomes VCF: {e}")
-            return None
-    
-    def load_vcf_data(self, vcf_path):
-        """Load real VCF data using cyvcf2"""
-        if cyvcf2 is None:
-            print("cyvcf2 not available. Using sample data instead...")
-            return None
-            
-        try:
-            print(f"Loading VCF file: {vcf_path}")
-            vcf = cyvcf2.VCF(vcf_path)
-            variants = []
-            patient_counter = 1
-
-            for i, variant in enumerate(vcf):
-                if i > 25000:  # Limit for demo to match dashboard claims
-                    break
-                
-                # Extract sample information if available
-                patient_id = f"Patient_{patient_counter:02d}" if len(vcf.samples) == 0 else vcf.samples[0]
-                if i % 500 == 0 and i > 0:  # Simulate ~500 variants per patient
-                    patient_counter += 1
-
-                var_data = {
-                    'patient_id': patient_id,
-                    'CHROM': variant.CHROM,
-                    'POS': variant.POS,
-                    'REF': variant.REF,
-                    'ALT': str(variant.ALT[0]) if variant.ALT else 'N',
-                    'QUAL': variant.QUAL if variant.QUAL else 0,
-                    'AF': variant.INFO.get('AF', [0])[0] if 'AF' in variant.INFO else 0,
-                    'DP': variant.INFO.get('DP', 0),
-                    'CADD_PHRED': variant.INFO.get('CADD_PHRED', np.random.gamma(1.5, 8)),
-                    'SIFT_score': variant.INFO.get('SIFT_score', np.random.beta(2, 3)),
-                    'PolyPhen_score': variant.INFO.get('PolyPhen_score', np.random.beta(1.5, 3))
-                }
-                variants.append(var_data)
-
-            return pd.DataFrame(variants)
-
-        except Exception as e:
-            print(f"Error loading VCF: {e}")
-            return None
-    
-    def map_clinvar_significance(self, clnsig):
-        """Map ClinVar clinical significance to our pathogenicity categories"""
-        if isinstance(clnsig, (list, tuple)):
-            clnsig = clnsig[0] if clnsig else 'Unknown'
+    def load_vcf_file(self, filepath, max_variants=25000):
+        """Load VCF file and convert to pandas DataFrame"""
+        print(f"Loading VCF file: {filepath}")
         
-        clnsig = str(clnsig).lower()
+        try:
+            # Determine if file is compressed
+            is_compressed = filepath.endswith('.gz')
+            open_func = gzip.open if is_compressed else open
+            mode = 'rt' if is_compressed else 'r'
+            
+            variants = []
+            header_info = {}
+            
+            with open_func(filepath, mode) as f:
+                # Parse header
+                for line in f:
+                    if line.startswith('##'):
+                        self._parse_header_line(line, header_info)
+                        continue
+                    elif line.startswith('#CHROM'):
+                        # Column headers
+                        columns = line.strip().split('\t')
+                        sample_names = columns[9:] if len(columns) > 9 else []
+                        break
+                
+                # Parse variants
+                variant_count = 0
+                for line in f:
+                    if variant_count >= max_variants:
+                        break
+                    
+                    variant_data = self._parse_variant_line(line.strip(), sample_names)
+                    if variant_data:
+                        variants.append(variant_data)
+                        variant_count += 1
+                    
+                    if variant_count % 1000 == 0:
+                        print(f"Processed {variant_count} variants...")
+            
+            df = pd.DataFrame(variants)
+            print(f"Successfully loaded {len(df)} variants")
+            return df
+            
+        except Exception as e:
+            print(f"Error loading VCF file: {e}")
+            return None
+    
+    def _parse_header_line(self, line, header_info):
+        """Parse VCF header lines for metadata"""
+        if line.startswith('##INFO='):
+            # Extract INFO field definitions
+            match = re.search(r'ID=([^,]+)', line)
+            if match:
+                info_id = match.group(1)
+                header_info[f'INFO_{info_id}'] = line
+    
+    def _parse_variant_line(self, line, sample_names):
+        """Parse a single variant line"""
+        fields = line.split('\t')
+        if len(fields) < 8:
+            return None
         
-        if 'pathogenic' in clnsig and 'likely' not in clnsig:
-            return 'Pathogenic'
-        elif 'likely_pathogenic' in clnsig or 'likely pathogenic' in clnsig:
-            return 'Likely Pathogenic'
-        elif 'benign' in clnsig and 'likely' not in clnsig:
-            return 'Benign'
-        elif 'likely_benign' in clnsig or 'likely benign' in clnsig:
-            return 'Likely Benign'
-        else:
-            return 'Uncertain Significance'
+        # Basic variant information
+        variant_data = {
+            'CHROM': fields[0],
+            'POS': int(fields[1]),
+            'ID': fields[2] if fields[2] != '.' else None,
+            'REF': fields[3],
+            'ALT': fields[4],
+            'QUAL': float(fields[5]) if fields[5] != '.' else 0.0,
+            'FILTER': fields[6],
+            'INFO': fields[7]
+        }
+        
+        # Parse INFO field
+        info_dict = self._parse_info_field(fields[7])
+        variant_data.update(info_dict)
+        
+        # Add sample information if available
+        if len(fields) > 9 and sample_names:
+            variant_data['samples'] = dict(zip(sample_names, fields[9:]))
+        
+        return variant_data
+    
+    def _parse_info_field(self, info_string):
+        """Parse the INFO field into individual components"""
+        info_dict = {}
+        
+        for item in info_string.split(';'):
+            if '=' in item:
+                key, value = item.split('=', 1)
+                # Try to convert to appropriate type
+                if ',' in value:
+                    # Multiple values
+                    values = value.split(',')
+                    try:
+                        info_dict[key] = [float(v) for v in values]
+                    except ValueError:
+                        info_dict[key] = values
+                else:
+                    # Single value
+                    try:
+                        info_dict[key] = float(value)
+                    except ValueError:
+                        info_dict[key] = value
+            else:
+                # Flag (boolean)
+                info_dict[item] = True
+        
+        return info_dict
+    
+    def load_clinvar_vcf(self, filepath):
+        """Specialized loader for ClinVar data"""
+        df = self.load_vcf_file(filepath)
+        if df is None:
+            return None
+        
+        # Add ClinVar-specific processing
+        df = self._process_clinvar_annotations(df)
+        return df
+    
+    def load_1000genomes_vcf(self, filepath):
+        """Specialized loader for 1000 Genomes data"""
+        df = self.load_vcf_file(filepath)
+        if df is None:
+            return None
+        
+        # Add 1000 Genomes-specific processing
+        df = self._process_1000genomes_annotations(df)
+        return df
+    
+    def _process_clinvar_annotations(self, df):
+        """Process ClinVar-specific annotations"""
+        # Extract clinical significance
+        if 'CLNSIG' in df.columns:
+            df['clinical_significance_raw'] = df['CLNSIG']
+        
+        # Extract disease names
+        if 'CLNDN' in df.columns:
+            df['disease_name'] = df['CLNDN']
+        
+        # Extract gene symbols
+        if 'GENEINFO' in df.columns:
+            df['gene_info'] = df['GENEINFO']
+        
+        return df
+    
+    def _process_1000genomes_annotations(self, df):
+        """Process 1000 Genomes-specific annotations"""
+        # Extract allele frequencies
+        if 'AF' in df.columns:
+            df['allele_frequency'] = df['AF']
+        
+        # Extract allele counts
+        if 'AC' in df.columns:
+            df['allele_count'] = df['AC']
+        
+        if 'AN' in df.columns:
+            df['total_alleles'] = df['AN']
+        
+        return df
