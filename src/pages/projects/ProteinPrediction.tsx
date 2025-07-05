@@ -16,19 +16,70 @@ const ProteinPrediction = () => {
             Back to Portfolio
           </Link>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            MLAnalyzer: Drug Classification Workflow
+            Machine Learning Projects
           </h1>
           <p className="text-xl text-gray-600">
-            Complete machine learning pipeline for drug classification using patient characteristics
+            Advanced machine learning applications in drug discovery and protein analysis
           </p>
         </div>
 
-        {/* Project Overview */}
+        {/* ML for Protein Structure Prediction Project */}
         <Card className="mb-8">
           <CardHeader>
-            <CardTitle>Project Overview</CardTitle>
+            <CardTitle>ML for Protein Structure Prediction</CardTitle>
             <CardDescription>
-              Comprehensive machine learning analysis workflow for predicting optimal drug prescriptions
+              Deep learning approach for predicting protein secondary structures and folding patterns
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="font-semibold mb-2">Project Overview</h3>
+                <ul className="text-sm text-gray-600 space-y-1">
+                  <li>• Neural network models for protein structure prediction</li>
+                  <li>• Secondary structure classification (alpha-helix, beta-sheet, coil)</li>
+                  <li>• Feature extraction from amino acid sequences</li>
+                  <li>• Advanced deep learning architectures</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Technologies Used</h3>
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="secondary">Python</Badge>
+                  <Badge variant="secondary">TensorFlow</Badge>
+                  <Badge variant="secondary">Keras</Badge>
+                  <Badge variant="secondary">BioPython</Badge>
+                  <Badge variant="secondary">NumPy</Badge>
+                  <Badge variant="secondary">Pandas</Badge>
+                </div>
+              </div>
+            </div>
+            <div className="mt-6">
+              <h3 className="font-semibold mb-2">Key Achievements</h3>
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-500">
+                  <p className="text-sm font-semibold text-blue-800">Model Accuracy</p>
+                  <p className="text-lg font-bold text-blue-700">85.2%</p>
+                </div>
+                <div className="bg-green-50 p-3 rounded-lg border-l-4 border-green-500">
+                  <p className="text-sm font-semibold text-green-800">Dataset Size</p>
+                  <p className="text-lg font-bold text-green-700">10,000+ proteins</p>
+                </div>
+                <div className="bg-purple-50 p-3 rounded-lg border-l-4 border-purple-500">
+                  <p className="text-sm font-semibold text-purple-800">Features</p>
+                  <p className="text-lg font-bold text-purple-700">500+ extracted</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* MLAnalyzer: Drug Classification Workflow Project */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle>MLAnalyzer: Drug Classification Workflow</CardTitle>
+            <CardDescription>
+              Complete machine learning pipeline for drug classification using patient characteristics
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -60,7 +111,7 @@ const ProteinPrediction = () => {
         {/* Key Results */}
         <Card className="mb-8">
           <CardHeader>
-            <CardTitle>Model Performance Results</CardTitle>
+            <CardTitle>Drug Classification Results</CardTitle>
             <CardDescription>
               Comprehensive comparison of 5 different machine learning algorithms
             </CardDescription>
@@ -206,7 +257,7 @@ const ProteinPrediction = () => {
               className="inline-flex items-center"
             >
               <Github className="mr-2 h-4 w-4" />
-              View on GitHub
+              View Drug Classification Project
             </a>
           </Button>
           <Button variant="outline" asChild>
@@ -218,6 +269,17 @@ const ProteinPrediction = () => {
             >
               <ExternalLink className="mr-2 h-4 w-4" />
               View Jupyter Notebook
+            </a>
+          </Button>
+          <Button variant="outline" asChild>
+            <a 
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center"
+            >
+              <Github className="mr-2 h-4 w-4" />
+              View Protein Prediction Project
             </a>
           </Button>
         </div>
