@@ -55,16 +55,14 @@ const Projects = () => {
       isComingSoon: true
     },
     {
-      title: "Genomic Variant Analysis Dashboard",
-      summary: "Interactive web dashboard for analyzing and visualizing genomic variants from whole-exome sequencing data.",
-      background: "Developed a comprehensive analysis pipeline for processing VCF files from clinical exome sequencing, focusing on rare disease variant interpretation and pathogenicity assessment.",
-      goal: "Create an intuitive interface for clinicians to explore variant data, assess pathogenicity scores, and generate automated reports for rare disease diagnosis.",
+      title: "Genomic Variant Analysis Tool",
+      description: "Advanced computational pipeline for analyzing and visualizing genomic variants from whole-exome sequencing data. This comprehensive tool will provide intuitive interfaces for variant interpretation, pathogenicity assessment, and automated report generation for clinical genomics applications.",
+      tech: ["Python", "Bioinformatics", "Data Analysis", "Coming Soon"],
       image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop",
-      results: "Processed 25,000+ variants across 50 patient samples. Dashboard enables real-time filtering by chromosome, frequency, and pathogenicity scores. Reduced variant interpretation time by 60%.",
-      tech: ["Python", "Dash", "plotly", "pandas", "cyvcf2", "HTML/CSS"],
+      github: "#",
+      live: "#",
       category: "Bioinformatics",
-      isDetailed: true,
-      projectPath: "/projects/genomic-variants"
+      isComingSoon: true
     },
     {
       title: "MLAnalyzer: Drug Classification Workflow",
