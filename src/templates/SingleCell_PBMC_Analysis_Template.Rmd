@@ -1,0 +1,400 @@
+
+---
+title: "Single-Cell RNA-seq Analysis of 10X PBMC Data"
+author: "Your Name"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: show
+    theme: flatly
+    highlight: tango
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.width = 10,
+  fig.height = 6,
+  dpi = 300
+)
+```
+
+# Introduction
+
+This notebook demonstrates a comprehensive single-cell RNA-seq analysis pipeline using 10X Genomics PBMC data. We'll identify cell types, perform quality control, clustering, and differential expression analysis using the Seurat package in R.
+
+## Objectives
+
+- Load and preprocess 10X PBMC single-cell data
+- Perform quality control and filtering
+- Identify cell clusters and annotate cell types
+- Conduct differential expression analysis
+- Generate publication-ready visualizations
+
+# Setup and Installation
+
+```{r install-packages, eval=FALSE}
+# Install required packages (run this once)
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+# Install Bioconductor packages
+BiocManager::install(c("SingleCellExperiment", "scater", "scran"))
+
+# Install CRAN packages
+install.packages(c("Seurat", "dplyr", "ggplot2", "patchwork", "RColorBrewer", 
+                   "pheatmap", "viridis", "Matrix", "readr", "stringr"))
+```
+
+```{r load-libraries}
+# Load required libraries
+library(Seurat)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+library(Matrix)
+library(RColorBrewer)
+library(pheatmap)
+library(viridis)
+
+# Set working directory for Google Colab
+if (Sys.getenv("COLAB_RELEASE_TAG") != "") {
+  setwd("/content")
+}
+```
+
+# Data Download and Loading
+
+```{r download-data, eval=FALSE}
+# Download 10X PBMC data (3k PBMCs from a healthy donor)
+system("wget https://cf.10xgenomics.com/samples/cell/pbmc3k/pbmc3k_filtered_gene_bc_matrices.tar.gz")
+system("tar -xzf pbmc3k_filtered_gene_bc_matrices.tar.gz")
+```
+
+```{r load-data}
+# Load the PBMC dataset
+pbmc.data <- Read10X(data.dir = "filtered_gene_bc_matrices/hg19/")
+
+# Initialize the Seurat object
+pbmc <- CreateSeuratObject(
+  counts = pbmc.data, 
+  project = "pbmc3k", 
+  min.cells = 3, 
+  min.features = 200
+)
+
+# Display basic information
+cat("Number of cells:", ncol(pbmc), "\n")
+cat("Number of genes:", nrow(pbmc), "\n")
+```
+
+# Quality Control Analysis
+
+Quality control is crucial for identifying and filtering out low-quality cells that could affect downstream analysis.
+
+```{r qc-metrics}
+# Calculate mitochondrial gene percentage
+pbmc[["percent.mt"]] <- PercentageFeatureSet(pbmc, pattern = "^MT-")
+
+# Calculate ribosomal gene percentage
+pbmc[["percent.rb"]] <- PercentageFeatureSet(pbmc, pattern = "^RP[SL]")
+
+# Display QC statistics
+cat("QC Metrics Summary:\n")
+cat("Features per cell - Min:", min(pbmc$nFeature_RNA), "Max:", max(pbmc$nFeature_RNA), "Median:", median(pbmc$nFeature_RNA), "\n")
+cat("UMIs per cell - Min:", min(pbmc$nCount_RNA), "Max:", max(pbmc$nCount_RNA), "Median:", median(pbmc$nCount_RNA), "\n")
+cat("Mitochondrial % - Min:", round(min(pbmc$percent.mt), 2), "Max:", round(max(pbmc$percent.mt), 2), "Median:", round(median(pbmc$percent.mt), 2), "\n")
+```
+
+## QC Visualizations
+
+```{r qc-plots, fig.width=12, fig.height=8}
+# Violin plots for QC metrics
+p1 <- VlnPlot(pbmc, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3, pt.size = 0.1)
+
+# Feature-feature relationships
+p2 <- FeatureScatter(pbmc, feature1 = "nCount_RNA", feature2 = "percent.mt") +
+  geom_hline(yintercept = 5, color = "red", linetype = "dashed")
+p3 <- FeatureScatter(pbmc, feature1 = "nCount_RNA", feature2 = "nFeature_RNA") +
+  geom_hline(yintercept = c(200, 2500), color = "red", linetype = "dashed")
+
+# Display plots
+print(p1)
+print(p2 + p3)
+```
+
+# Cell Filtering
+
+We filter cells based on the following criteria:
+- **Feature count**: 200-2500 genes per cell
+- **Mitochondrial content**: <5% mitochondrial genes
+
+```{r cell-filtering}
+# Apply filtering criteria
+pbmc_filtered <- subset(pbmc, subset = nFeature_RNA > 200 & nFeature_RNA < 2500 & percent.mt < 5)
+
+cat("Cells before filtering:", ncol(pbmc), "\n")
+cat("Cells after filtering:", ncol(pbmc_filtered), "\n")
+cat("Cells removed:", ncol(pbmc) - ncol(pbmc_filtered), "(", round((ncol(pbmc) - ncol(pbmc_filtered))/ncol(pbmc)*100, 2), "%)\n")
+
+# Update pbmc object
+pbmc <- pbmc_filtered
+```
+
+# Data Normalization
+
+```{r normalization}
+# Normalize the data using LogNormalize method
+pbmc <- NormalizeData(pbmc, normalization.method = "LogNormalize", scale.factor = 10000)
+cat("Data normalized using LogNormalize method\n")
+```
+
+# Highly Variable Features
+
+Identifying highly variable genes helps focus on the most informative features for downstream analysis.
+
+```{r variable-features, fig.width=12, fig.height=6}
+# Find highly variable features
+pbmc <- FindVariableFeatures(pbmc, selection.method = "vst", nfeatures = 2000)
+
+# Identify the top 10 most highly variable genes
+top10 <- head(VariableFeatures(pbmc), 10)
+cat("Top 10 highly variable genes:\n")
+print(top10)
+
+# Plot variable features with and without labels
+p1 <- VariableFeaturePlot(pbmc)
+p2 <- LabelPoints(plot = p1, points = top10, repel = TRUE)
+print(p1 + p2)
+```
+
+# Data Scaling and PCA
+
+```{r scaling-pca}
+# Scale the data
+all.genes <- rownames(pbmc)
+pbmc <- ScaleData(pbmc, features = all.genes)
+
+# Perform linear dimensional reduction (PCA)
+pbmc <- RunPCA(pbmc, features = VariableFeatures(object = pbmc))
+
+# Examine PCA results
+print(pbmc[["pca"]], dims = 1:5, nfeatures = 5)
+```
+
+## PCA Visualizations
+
+```{r pca-plots, fig.width=12, fig.height=8}
+# PCA loadings and scatter plot
+p1 <- VizDimLoadings(pbmc, dims = 1:2, reduction = "pca")
+p2 <- DimPlot(pbmc, reduction = "pca")
+
+print(p1 / p2)
+
+# PCA heatmap
+DimHeatmap(pbmc, dims = 1, cells = 500, balanced = TRUE)
+```
+
+# Determining Optimal Dimensionality
+
+```{r dimensionality, fig.width=12, fig.height=6}
+# JackStraw analysis
+pbmc <- JackStraw(pbmc, num.replicate = 100)
+pbmc <- ScoreJackStraw(pbmc, dims = 1:20)
+
+p1 <- JackStrawPlot(pbmc, dims = 1:15)
+p2 <- ElbowPlot(pbmc)
+
+print(p1 + p2)
+```
+
+# Cell Clustering
+
+```{r clustering}
+# Find neighbors and clusters
+pbmc <- FindNeighbors(pbmc, dims = 1:10)
+pbmc <- FindClusters(pbmc, resolution = 0.5)
+
+cat("Number of clusters identified:", length(levels(Idents(pbmc))), "\n")
+cat("Cluster sizes:\n")
+print(table(Idents(pbmc)))
+```
+
+# UMAP Visualization
+
+```{r umap, fig.width=10, fig.height=8}
+# Run UMAP
+pbmc <- RunUMAP(pbmc, dims = 1:10)
+
+# Plot UMAP with cluster labels
+DimPlot(pbmc, reduction = "umap", label = TRUE, pt.size = 0.8) +
+  ggtitle("UMAP Clustering of PBMC Cells")
+```
+
+# Biomarker Discovery
+
+## Find All Cluster Markers
+
+```{r find-markers}
+# Find markers for every cluster
+pbmc.markers <- FindAllMarkers(pbmc, only.pos = TRUE, min.pct = 0.25, logfc.threshold = 0.25)
+
+# Display top 2 markers per cluster
+top2_markers <- pbmc.markers %>%
+    group_by(cluster) %>%
+    slice_max(n = 2, order_by = avg_log2FC)
+
+print(top2_markers)
+```
+
+## Cluster-Specific Analysis
+
+```{r cluster-specific}
+# Find markers for a specific cluster (cluster 2)
+cluster2.markers <- FindMarkers(pbmc, ident.1 = 2, min.pct = 0.25)
+cat("Top 5 markers for cluster 2:\n")
+print(head(cluster2.markers, n = 5))
+```
+
+## Marker Gene Visualization
+
+```{r marker-visualization, fig.width=12, fig.height=10}
+# Violin plots for key markers
+p1 <- VlnPlot(pbmc, features = c("MS4A1", "CD79A", "CD3E", "CD14"), ncol = 2)
+
+# Feature plots on UMAP
+key_features <- c("MS4A1", "GNLY", "CD3E", "CD14", "FCER1A", "FCGR3A", "LYZ", "PPBP", "CD8A")
+p2 <- FeaturePlot(pbmc, features = key_features, ncol = 3)
+
+print(p1)
+print(p2)
+```
+
+## Heatmap of Top Markers
+
+```{r marker-heatmap, fig.width=12, fig.height=10}
+# Create heatmap of top 5 markers per cluster
+top5_markers <- pbmc.markers %>%
+    group_by(cluster) %>%
+    top_n(n = 5, wt = avg_log2FC)
+
+DoHeatmap(pbmc, features = top5_markers$gene, size = 3) + 
+  NoLegend() +
+  ggtitle("Top 5 Markers per Cluster")
+```
+
+# Cell Type Annotation
+
+Based on canonical marker expression, we can annotate cell types:
+
+```{r cell-annotation}
+# Define cell type identities based on markers
+new.cluster.ids <- c("Naive CD4 T", "CD14+ Mono", "Memory CD4 T", "B", "CD8 T", 
+                     "FCGR3A+ Mono", "NK", "DC", "Platelet")
+names(new.cluster.ids) <- levels(pbmc)
+pbmc <- RenameIdents(pbmc, new.cluster.ids)
+
+# Plot with cell type labels
+DimPlot(pbmc, reduction = "umap", label = TRUE, pt.size = 0.8, label.size = 4) + 
+  NoLegend() +
+  ggtitle("PBMC Cell Types")
+```
+
+# Cell Type Distribution Analysis
+
+```{r cell-distribution, fig.width=10, fig.height=6}
+# Calculate cell type proportions
+cell_counts <- table(Idents(pbmc))
+cell_proportions <- prop.table(cell_counts) * 100
+
+cat("Cell Type Distribution:\n")
+print(round(cell_proportions, 2))
+
+# Create visualization
+cell_type_df <- data.frame(
+  CellType = names(cell_proportions),
+  Percentage = as.numeric(cell_proportions),
+  Count = as.numeric(cell_counts)
+)
+
+ggplot(cell_type_df, aes(x = reorder(CellType, -Percentage), y = Percentage)) +
+  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
+  geom_text(aes(label = paste0(round(Percentage, 1), "%")), 
+            vjust = -0.5, size = 3) +
+  theme_minimal() +
+  labs(title = "Cell Type Distribution in PBMC Sample",
+       x = "Cell Type",
+       y = "Percentage (%)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+# Differential Expression Analysis
+
+## B Cells vs All Other Cells
+
+```{r de-analysis-b-cells}
+# Compare B cells vs all other cells
+b_cell_markers <- FindMarkers(pbmc, ident.1 = "B", min.pct = 0.25, logfc.threshold = 0.25)
+cat("Top 10 B cell markers:\n")
+print(head(b_cell_markers, n = 10))
+```
+
+## Monocyte Subtypes Comparison
+
+```{r de-analysis-monos}
+# Compare CD14+ vs FCGR3A+ Monocytes
+mono_markers <- FindMarkers(pbmc, ident.1 = "CD14+ Mono", ident.2 = "FCGR3A+ Mono", min.pct = 0.25)
+cat("Top 10 markers distinguishing monocyte subtypes:\n")
+print(head(mono_markers, n = 10))
+```
+
+# Summary and Results
+
+```{r summary}
+# Analysis summary
+cat("\n=== ANALYSIS SUMMARY ===\n")
+cat("Total cells analyzed:", ncol(pbmc), "\n")
+cat("Total genes:", nrow(pbmc), "\n")
+cat("Number of cell types:", length(unique(Idents(pbmc))), "\n")
+cat("Cell types identified:", paste(unique(Idents(pbmc)), collapse = ", "), "\n")
+cat("\nCell type distribution:\n")
+print(cell_type_df)
+```
+
+## Save Results
+
+```{r save-results, eval=FALSE}
+# Save the final Seurat object
+saveRDS(pbmc, file = "pbmc_final_analysis.rds")
+
+# Export cell metadata
+cell_metadata <- data.frame(
+  Barcode = colnames(pbmc),
+  CellType = Idents(pbmc),
+  nFeature_RNA = pbmc$nFeature_RNA,
+  nCount_RNA = pbmc$nCount_RNA,
+  percent_mt = pbmc$percent.mt
+)
+write.csv(cell_metadata, "cell_metadata.csv", row.names = FALSE)
+
+# Export marker genes
+write.csv(pbmc.markers, "cluster_markers.csv", row.names = TRUE)
+
+cat("Analysis complete! Files saved to working directory.\n")
+```
+
+# Session Information
+
+```{r session-info}
+sessionInfo()
+```
+
+---
+
+**Analysis Complete!** This notebook provides a comprehensive single-cell RNA-seq analysis pipeline. The results show distinct cell populations in human PBMCs with clear separation of major immune cell types including T cells, B cells, monocytes, NK cells, and dendritic cells.
