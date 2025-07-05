@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 """
 Genomic Variant Analysis Pipeline
@@ -8,9 +7,6 @@ Complete modular system for variant analysis from data acquisition to reporting
 import sys
 import os
 from pathlib import Path
-
-# For Google Colab compatibility - add current directory to path
-sys.path.append('.')
 
 # Import the individual modules directly (without genomics package structure)
 from data_downloader import GenomicDataDownloader
@@ -172,7 +168,96 @@ class GenomicVariantPipeline:
         
         return vcf_files
 
-    # ... keep existing code (_load_data, _generate_reports, display_summary, get_high_priority_variants, export_results methods)
+    def _load_data(self, vcf_file, data_source, max_variants):
+        """Load data from VCF file using VCFLoader"""
+        print(f"⏳ Loading variants from: {vcf_file}")
+        try:
+            variants_df = self.loader.load_vcf_data(vcf_file, max_variants)
+            print(f"✅ Loaded {len(variants_df):,} variants from {data_source}")
+            return variants_df
+        except Exception as e:
+            print(f"❌ Error loading data: {e}")
+            return None
+
+    def _generate_reports(self):
+        """Generate analysis reports (text and summary plots)"""
+        print("⏳ Generating reports...")
+        
+        # 1. Text Report
+        report_path = self.working_dir / "analysis_report.txt"
+        with open(report_path, "w") as f:
+            f.write("GENOMIC VARIANT ANALYSIS REPORT\n")
+            f.write("=" * 30 + "\n\n")
+            
+            f.write("Summary Statistics:\n")
+            for key, value in self.analysis_results.items():
+                f.write(f"  - {key}: {value}\n")
+            f.write("\n")
+            
+            f.write("High Priority Variants (Top 10):\n")
+            high_priority = self.get_high_priority_variants()
+            for index, row in high_priority.head(10).iterrows():
+                f.write(f"  - {row['CHROM']}:{row['POS']} {row['REF']}>{row['ALT']} - {row['pathogenicity']} (CADD: {row['CADD_PHRED']})\n")
+        
+        print(f"📝 Text report generated: {report_path}")
+        
+        # 2. Summary Plots (example - you can expand on this)
+        plot_path = self.working_dir / "variant_summary.png"
+        try:
+            import matplotlib.pyplot as plt
+            
+            # Example: Pathogenicity distribution
+            pathogenicity_counts = self.variants_df['pathogenicity'].value_counts()
+            pathogenicity_counts.plot(kind='bar', title='Pathogenicity Distribution')
+            plt.savefig(plot_path)
+            print(f"📊 Summary plot generated: {plot_path}")
+            plt.close()
+            
+        except ImportError:
+            print("⚠️ Matplotlib not installed, skipping summary plot generation")
+        except Exception as e:
+            print(f"❌ Error generating summary plot: {e}")
+        
+        print("✅ Reports generated")
+
+    def display_summary(self):
+        """Display summary of analysis results"""
+        print("\n📊 ANALYSIS SUMMARY")
+        print("-" * 20)
+        for key, value in self.analysis_results.items():
+            print(f"  - {key}: {value}")
+
+    def get_high_priority_variants(self, pathogenicity_threshold="likely pathogenic", cadd_threshold=20):
+        """Filter variants based on pathogenicity and CADD score"""
+        # Prioritize variants with high impact
+        high_priority = self.variants_df[
+            (self.variants_df['pathogenicity'].isin([pathogenicity_threshold, 'pathogenic'])) &
+            (self.variants_df['CADD_PHRED'] > cadd_threshold)
+        ].copy()  # Avoid SettingWithCopyWarning
+        
+        # Sort by CADD score for better ranking
+        high_priority.sort_values(by='CADD_PHRED', ascending=False, inplace=True)
+        
+        return high_priority
+
+    def export_results(self, format="csv"):
+        """Export analysis results to a file"""
+        file_path = self.working_dir / f"variant_analysis_results.{format}"
+        
+        try:
+            if format == "csv":
+                self.variants_df.to_csv(file_path, index=False)
+            elif format == "json":
+                self.variants_df.to_json(file_path, orient="records")
+            elif format == "excel":
+                self.variants_df.to_excel(file_path, index=False)
+            else:
+                print(f"❌ Unsupported format: {format}")
+                return
+            
+            print(f"✅ Results exported to: {file_path}")
+        except Exception as e:
+            print(f"❌ Error exporting results: {e}")
 
 def main():
     """Main execution function"""
