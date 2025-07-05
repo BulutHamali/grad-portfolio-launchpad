@@ -46,15 +46,13 @@ const Projects = () => {
     },
     {
       title: "Spatial Transcriptomics Data Visualization",
-      summary: "Interactive spatial analysis of gene expression patterns in tissue architecture using 10X Visium technology.",
-      background: "Processed spatial transcriptomics data from mouse brain sections to map gene expression patterns across anatomical regions and understand spatial organization of cellular functions.",
-      goal: "Create comprehensive spatial gene expression maps and identify region-specific biomarkers through integrative analysis of histology and transcriptomics data.",
+      description: "Advanced spatial analysis tool for mapping gene expression patterns across tissue architecture. This innovative project will integrate cutting-edge visualization techniques with spatial biology data to provide unprecedented insights into cellular organization and function.",
+      tech: ["Python", "Spatial Analysis", "Data Visualization", "Coming Soon"],
       image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&h=400&fit=crop",
-      results: "Mapped 15,000+ spatial spots revealing 12 distinct tissue regions. Identified 89 spatially variable genes including key neuronal markers (Slc17a7, Gad2) with 95% spatial correlation accuracy.",
-      tech: ["Python", "scanpy", "matplotlib", "10X Visium", "Spatial Analysis"],
+      github: "#",
+      live: "#",
       category: "Bioinformatics",
-      isDetailed: true,
-      projectPath: "/projects/spatial-transcriptomics"
+      isComingSoon: true
     },
     {
       title: "Genomic Variant Analysis Dashboard",
