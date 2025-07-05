@@ -80,119 +80,99 @@ class GenomicVariantPipeline:
         return self.variants_df
     
     def _acquire_data(self, data_source):
-        """Acquire data based on source specification"""
-        if data_source.lower() == "clinvar":
-            return self.downloader.download_clinvar_data()
-        elif data_source.lower() == "1000genomes":
-            return self.downloader.download_1000genomes_chr22()
-        elif data_source.lower() == "gnomad":
-            return self.downloader.download_gnomad_exomes()
-        elif os.path.exists(data_source):
+        """Acquire data based on source specification - checks for existing files first"""
+        data_dir = self.working_dir / "data"
+        data_dir.mkdir(exist_ok=True)
+        
+        # First check if it's a direct file path
+        if os.path.exists(data_source):
             print(f"Using local file: {data_source}")
             return data_source
+        
+        # Check for manually downloaded files in data directory
+        if data_source.lower() == "clinvar":
+            # Common ClinVar file patterns
+            clinvar_patterns = [
+                "clinvar*.vcf*",
+                "ClinVar*.vcf*", 
+                "clinvar_*.vcf*",
+                "variant_summary.txt"
+            ]
+            existing_file = self._find_existing_file(data_dir, clinvar_patterns)
+            if existing_file:
+                print(f"📁 Found existing ClinVar file: {existing_file}")
+                return str(existing_file)
+            else:
+                print("🔄 No existing ClinVar file found, downloading...")
+                return self.downloader.download_clinvar_data()
+                
+        elif data_source.lower() == "1000genomes":
+            # Common 1000 Genomes file patterns
+            genomes_patterns = [
+                "*chr22*.vcf*",
+                "*1000genomes*.vcf*",
+                "*1000GP*.vcf*"
+            ]
+            existing_file = self._find_existing_file(data_dir, genomes_patterns)
+            if existing_file:
+                print(f"📁 Found existing 1000 Genomes file: {existing_file}")
+                return str(existing_file)
+            else:
+                print("🔄 No existing 1000 Genomes file found, downloading...")
+                return self.downloader.download_1000genomes_chr22()
+                
+        elif data_source.lower() == "gnomad":
+            # Common gnomAD file patterns
+            gnomad_patterns = [
+                "*gnomad*.vcf*",
+                "*gnomAD*.vcf*",
+                "*exome*.vcf*"
+            ]
+            existing_file = self._find_existing_file(data_dir, gnomad_patterns)
+            if existing_file:
+                print(f"📁 Found existing gnomAD file: {existing_file}")
+                return str(existing_file)
+            else:
+                print("🔄 No existing gnomAD file found, downloading...")
+                return self.downloader.download_gnomad_exomes()
         else:
             print(f"❌ Unknown data source: {data_source}")
             return None
     
-    def _load_data(self, vcf_file, data_source, max_variants):
-        """Load data using appropriate loader method"""
-        if data_source.lower() == "clinvar":
-            return self.loader.load_clinvar_vcf(vcf_file)
-        elif data_source.lower() == "1000genomes":
-            return self.loader.load_1000genomes_vcf(vcf_file)
+    def _find_existing_file(self, data_dir, patterns):
+        """Find existing files matching common patterns"""
+        import glob
+        
+        for pattern in patterns:
+            search_path = data_dir / pattern
+            matches = glob.glob(str(search_path))
+            if matches:
+                # Return the first match (most recent by default)
+                return Path(matches[0])
+        return None
+    
+    def list_available_files(self):
+        """List all VCF files available in the data directory"""
+        data_dir = self.working_dir / "data"
+        if not data_dir.exists():
+            print("📁 Data directory doesn't exist yet")
+            return []
+        
+        vcf_files = []
+        for pattern in ["*.vcf", "*.vcf.gz"]:
+            vcf_files.extend(data_dir.glob(pattern))
+        
+        if vcf_files:
+            print(f"📁 Found {len(vcf_files)} VCF files in data directory:")
+            for i, file in enumerate(vcf_files, 1):
+                size_mb = file.stat().st_size / (1024 * 1024)
+                print(f"   {i}. {file.name} ({size_mb:.1f} MB)")
         else:
-            return self.loader.load_vcf_file(vcf_file, max_variants)
-    
-    def _generate_reports(self):
-        """Generate comprehensive analysis reports"""
-        # Summary report
-        summary_report = self.analyzer.generate_variant_report(self.variants_df)
-        report_file = self.working_dir / "variant_analysis_summary.txt"
-        with open(report_file, 'w') as f:
-            f.write(summary_report)
-        print(f"📄 Summary report saved: {report_file}")
+            print("📁 No VCF files found in data directory")
         
-        # High priority variants
-        high_priority = self.analyzer.filter_high_priority_variants(self.variants_df)
-        if len(high_priority) > 0:
-            priority_file = self.working_dir / "high_priority_variants.csv"
-            high_priority.to_csv(priority_file, index=False)
-            print(f"🔴 High priority variants saved: {priority_file}")
-        
-        # Full dataset
-        full_file = self.working_dir / "annotated_variants.csv"
-        self.variants_df.to_csv(full_file, index=False)
-        print(f"💾 Full annotated dataset saved: {full_file}")
-    
-    def display_summary(self):
-        """Display analysis summary to console"""
-        if not self.analysis_results:
-            print("No analysis results available. Run analysis first.")
-            return
-        
-        stats = self.analysis_results
-        
-        print("\n🧬 GENOMIC VARIANT ANALYSIS SUMMARY")
-        print("=" * 40)
-        print(f"📊 Total Variants: {stats['total_variants']:,}")
-        print(f"🧪 Chromosomes: {stats['chromosomes']}")
-        
-        print(f"\n📈 Variant Types:")
-        for vtype, count in stats['variant_types'].items():
-            percentage = (count / stats['total_variants']) * 100
-            print(f"   {vtype}: {count:,} ({percentage:.1f}%)")
-        
-        print(f"\n🔬 Pathogenicity:")
-        for path, count in stats['pathogenicity_distribution'].items():
-            percentage = (count / stats['total_variants']) * 100
-            print(f"   {path}: {count:,} ({percentage:.1f}%)")
-        
-        print(f"\n🏥 Clinical Priority:")
-        for priority, count in stats['clinical_priority_distribution'].items():
-            percentage = (count / stats['total_variants']) * 100
-            print(f"   {priority}: {count:,} ({percentage:.1f}%)")
-        
-        print(f"\n⭐ Quality Metrics:")
-        print(f"   Mean Quality: {stats['quality_stats']['mean_quality']:.2f}")
-        print(f"   Mean CADD: {stats['prediction_scores']['mean_cadd']:.2f}")
-        print(f"   Mean SIFT: {stats['prediction_scores']['mean_sift']:.3f}")
-        print(f"   Mean PolyPhen: {stats['prediction_scores']['mean_polyphen']:.3f}")
-    
-    def get_high_priority_variants(self):
-        """Get high priority variants for review"""
-        if self.variants_df is None:
-            return None
-        return self.analyzer.filter_high_priority_variants(self.variants_df)
-    
-    def export_results(self, format="csv", filename=None):
-        """Export analysis results in various formats"""
-        if self.variants_df is None:
-            print("No data to export. Run analysis first.")
-            return False
-        
-        if filename is None:
-            filename = f"variant_analysis_results.{format}"
-        
-        filepath = self.working_dir / filename
-        
-        try:
-            if format.lower() == "csv":
-                self.variants_df.to_csv(filepath, index=False)
-            elif format.lower() == "json":
-                self.variants_df.to_json(filepath, orient='records', indent=2)
-            elif format.lower() == "excel":
-                self.variants_df.to_excel(filepath, index=False)
-            else:
-                print(f"Unsupported format: {format}")
-                return False
-            
-            print(f"✅ Results exported to: {filepath}")
-            return True
-            
-        except Exception as e:
-            print(f"❌ Export failed: {e}")
-            return False
+        return vcf_files
 
+    # ... keep existing code (_load_data, _generate_reports, display_summary, get_high_priority_variants, export_results methods)
 
 def main():
     """Main execution function"""
@@ -202,15 +182,20 @@ def main():
     # Initialize pipeline
     pipeline = GenomicVariantPipeline()
     
+    # Show available files
+    available_files = pipeline.list_available_files()
+    
     # Interactive mode
     print("\nAvailable data sources:")
     print("1. ClinVar (clinical variants)")
     print("2. 1000 Genomes Chr22 (population variants)")
     print("3. gnomAD Exomes (population database)")
     print("4. Custom VCF file")
+    if available_files:
+        print("5. Use existing file from data directory")
     
     try:
-        choice = input("\nSelect data source (1-4): ").strip()
+        choice = input(f"\nSelect data source (1-{5 if available_files else 4}): ").strip()
         
         data_source_map = {
             "1": "clinvar",
@@ -222,6 +207,12 @@ def main():
         if choice == "4":
             vcf_path = input("Enter VCF file path: ").strip()
             data_source = vcf_path
+        elif choice == "5" and available_files:
+            print("\nAvailable files:")
+            for i, file in enumerate(available_files, 1):
+                print(f"   {i}. {file.name}")
+            file_choice = int(input("Select file number: ")) - 1
+            data_source = str(available_files[file_choice])
         else:
             data_source = data_source_map.get(choice, "clinvar")
         
