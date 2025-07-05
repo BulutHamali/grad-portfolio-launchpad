@@ -19,15 +19,19 @@ class VCFLoader:
         print(f"Loading VCF file: {filepath}")
         
         try:
-            # Determine if file is compressed
+            # Determine if file is compressed and handle accordingly
             is_compressed = filepath.endswith('.gz')
-            open_func = gzip.open if is_compressed else open
-            mode = 'rt' if is_compressed else 'r'
             
             variants = []
             header_info = {}
             
-            with open_func(filepath, mode) as f:
+            # Open file with appropriate method
+            if is_compressed:
+                file_handle = gzip.open(filepath, 'rt', encoding='utf-8')
+            else:
+                file_handle = open(filepath, 'r', encoding='utf-8')
+            
+            with file_handle as f:
                 # Parse header
                 for line in f:
                     if line.startswith('##'):
@@ -60,8 +64,6 @@ class VCFLoader:
         except Exception as e:
             print(f"Error loading VCF file: {e}")
             return None
-    
-    # ... keep existing code (_parse_header_line, _parse_variant_line, _parse_info_field, load_clinvar_vcf, load_1000genomes_vcf, _process_clinvar_annotations, _process_1000genomes_annotations methods)
     
     def _parse_header_line(self, line, header_info):
         """Parse VCF header lines for metadata"""
