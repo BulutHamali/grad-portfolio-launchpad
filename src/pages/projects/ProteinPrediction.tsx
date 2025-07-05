@@ -456,7 +456,7 @@ Avg/Total        0.996     0.995     0.995`}</pre>
         """Create performance plots and charts"""
         
     def generate_report(self):
-        """Comprehensive analysis report"""</pre>
+        """Comprehensive analysis report"""`}</pre>
                             </div>
                           </div>
                           
