@@ -363,7 +363,7 @@ pbmc <- RenameIdents(pbmc, new.cluster.ids)`}</code>
                             <h4 className="font-semibold mb-2">Data Preprocessing</h4>
                             <ul className="text-sm text-gray-600 space-y-1 ml-4">
                               <li>• Quality filtering: 200-2,500 features per cell</li>
-                              <li>• Mitochondrial gene threshold: <5%</li>
+                              <li>• Mitochondrial gene threshold: less than 5%</li>
                               <li>• Log-normalization with scale factor 10,000</li>
                               <li>• Identification of 2,000 highly variable features</li>
                             </ul>
