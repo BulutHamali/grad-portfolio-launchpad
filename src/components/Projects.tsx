@@ -81,18 +81,6 @@ const Projects = () => {
       projectPath: "/projects/protein-prediction"
     },
     {
-      title: "Machine Learning for Protein Structure Prediction",
-      summary: "Deep learning model to predict protein secondary structure from amino acid sequences with high accuracy.",
-      background: "Implemented a neural network approach to predict protein secondary structures (alpha-helix, beta-sheet, coil) from primary sequences, addressing the critical gap in structural bioinformatics.",
-      goal: "Develop an accurate prediction model achieving >85% accuracy for secondary structure prediction to aid in protein function annotation and drug design.",
-      image: "/lovable-uploads/2583b9e4-4dd0-467b-80db-7e822e9ca6da.png",
-      results: "Achieved 87.3% accuracy on test set across 1,200 protein sequences. Model successfully predicted secondary structures with precision scores: α-helix (0.89), β-sheet (0.85), coil (0.87).",
-      tech: ["Python", "TensorFlow", "Keras", "BioPython", "LSTM", "Deep Learning"],
-      category: "Research",
-      isDetailed: true,
-      projectPath: "/projects/protein-prediction"
-    },
-    {
       title: "Mobile Apps - Coming Soon",
       description: "Exciting mobile applications are currently in development. Stay tuned for innovative solutions that bridge the gap between scientific research and mobile technology.",
       tech: ["React Native", "TypeScript", "Mobile Development", "Coming Soon"],
