@@ -38,7 +38,7 @@ const Projects = () => {
       background: "Analyzed 2,700 peripheral blood mononuclear cells from 10X Genomics PBMC 3k dataset to identify distinct cell populations and their gene expression profiles, focusing on immune cell characterization.",
       goal: "Characterize cellular heterogeneity in peripheral blood and identify cell type-specific markers through comprehensive single-cell transcriptomic analysis.",
       image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop",
-      results: "Identified 8 distinct cell clusters including T cells (35%), macrophages (22%), B cells (18%), and NK cells (12%). Discovered 156 differentially expressed genes with significant immune cell signatures.",
+      results: "Identified 8 distinct cell clusters including T cells (35%), monocytes (22%), B cells (18%), and NK cells (12%). Discovered 156 differentially expressed genes with significant immune cell signatures.",
       tech: ["R", "Seurat", "Bioconductor", "scRNA-seq", "UMAP", "PCA"],
       category: "Bioinformatics",
       isDetailed: true,
