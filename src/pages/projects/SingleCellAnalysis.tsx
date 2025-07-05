@@ -139,7 +139,7 @@ VlnPlot(pbmc, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3
                                 <ul className="space-y-1 text-sm text-blue-700">
                                   <li>• 2,638 high-quality cells</li>
                                   <li>• Features: 200-2,500 per cell</li>
-                                  <li>• Mitochondrial genes: <5%</li>
+                                  <li>• Mitochondrial genes: less than 5%</li>
                                 </ul>
                               </div>
                             </div>
