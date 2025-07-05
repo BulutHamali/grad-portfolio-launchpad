@@ -73,7 +73,7 @@ const Projects = () => {
       summary: "Complete machine learning pipeline for drug classification using patient characteristics with 99.5% accuracy.",
       background: "Developed a comprehensive ML workflow analyzing synthetic patient records to predict optimal drug treatment based on age, sex, blood pressure, cholesterol, and Na/K ratio.",
       goal: "Create an accurate multiclass classification model to assist healthcare providers in drug selection, achieving high accuracy across 5 different drug classes.",
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop",
+      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop",
       results: "Achieved 99.5% test accuracy using Random Forest. Comprehensive comparison of 5 ML algorithms with cross-validation, hyperparameter tuning, and detailed performance analysis.",
       tech: ["Python", "Scikit-learn", "XGBoost", "Pandas", "Matplotlib", "Seaborn"],
       category: "Research",
