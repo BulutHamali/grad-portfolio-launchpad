@@ -9,8 +9,9 @@ import sys
 import os
 from pathlib import Path
 
-# Add the genomics module to path
-sys.path.append(str(Path(__file__).parent))
+# For Google Colab compatibility - add current directory to path
+sys.path.append('.')
+sys.path.append('./genomics')
 
 from genomics.data_downloader import GenomicDataDownloader
 from genomics.vcf_loader import VCFLoader
@@ -77,6 +78,8 @@ class GenomicVariantPipeline:
         print("=" * 50)
         
         return self.variants_df
+    
+    # ... keep existing code (all other methods remain the same)
     
     def _acquire_data(self, data_source):
         """Acquire data based on source specification"""
