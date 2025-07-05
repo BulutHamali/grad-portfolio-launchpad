@@ -11,11 +11,11 @@ from pathlib import Path
 
 # For Google Colab compatibility - add current directory to path
 sys.path.append('.')
-sys.path.append('./genomics')
 
-from genomics.data_downloader import GenomicDataDownloader
-from genomics.vcf_loader import VCFLoader
-from genomics.variant_analyzer import VariantAnalyzer
+# Import the individual modules directly (without genomics package structure)
+from data_downloader import GenomicDataDownloader
+from vcf_loader import VCFLoader
+from variant_analyzer import VariantAnalyzer
 
 class GenomicVariantPipeline:
     """Main orchestrator for genomic variant analysis pipeline"""
@@ -78,8 +78,6 @@ class GenomicVariantPipeline:
         print("=" * 50)
         
         return self.variants_df
-    
-    # ... keep existing code (all other methods remain the same)
     
     def _acquire_data(self, data_source):
         """Acquire data based on source specification"""
