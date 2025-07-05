@@ -23,6 +23,88 @@ const ProteinPrediction = () => {
           </p>
         </div>
 
+        {/* MLAnalyzer: Drug Classification Workflow Project */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle>MLAnalyzer: Drug Classification Workflow</CardTitle>
+            <CardDescription>
+              Complete machine learning pipeline for drug classification using patient characteristics
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="font-semibold mb-2">Dataset</h3>
+                <ul className="text-sm text-gray-600 space-y-1">
+                  <li>• 1,000 synthetic patient records</li>
+                  <li>• 5 features: Age, Sex, BP, Cholesterol, Na/K ratio</li>
+                  <li>• 5 drug classes (drugA, drugB, drugC, drugX, drugY)</li>
+                  <li>• Multiclass classification problem</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Key Technologies</h3>
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="secondary">Python</Badge>
+                  <Badge variant="secondary">Scikit-learn</Badge>
+                  <Badge variant="secondary">XGBoost</Badge>
+                  <Badge variant="secondary">Pandas</Badge>
+                  <Badge variant="secondary">Matplotlib</Badge>
+                  <Badge variant="secondary">Seaborn</Badge>
+                </div>
+              </div>
+            </div>
+
+            {/* Key Results */}
+            <div className="mt-6">
+              <h3 className="font-semibold mb-2">Model Performance Results</h3>
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                  <h4 className="font-semibold text-green-800">Best Model</h4>
+                  <p className="text-2xl font-bold text-green-700">Random Forest</p>
+                  <p className="text-sm text-green-600">99.5% Test Accuracy</p>
+                </div>
+                <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                  <h4 className="font-semibold text-blue-800">Cross-Validation</h4>
+                  <p className="text-2xl font-bold text-blue-700">99.5%</p>
+                  <p className="text-sm text-blue-600">±0.5% std deviation</p>
+                </div>
+                <div className="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                  <h4 className="font-semibold text-purple-800">Hyperparameter Tuning</h4>
+                  <p className="text-2xl font-bold text-purple-700">99.7%</p>
+                  <p className="text-sm text-purple-600">Optimized Random Forest</p>
+                </div>
+              </div>
+              
+              <div className="mt-6">
+                <h4 className="font-semibold mb-3">Model Comparison Rankings</h4>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                    <span>1. Random Forest</span>
+                    <span className="font-mono">99.5% accuracy</span>
+                  </div>
+                  <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                    <span>2. XGBoost</span>
+                    <span className="font-mono">99.5% accuracy</span>
+                  </div>
+                  <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                    <span>3. SVM</span>
+                    <span className="font-mono">98.0% accuracy</span>
+                  </div>
+                  <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                    <span>4. K-Nearest Neighbors</span>
+                    <span className="font-mono">95.0% accuracy</span>
+                  </div>
+                  <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                    <span>5. Logistic Regression</span>
+                    <span className="font-mono">74.0% accuracy</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* ML for Protein Structure Prediction Project */}
         <Card className="mb-8">
           <CardHeader>
@@ -68,97 +150,6 @@ const ProteinPrediction = () => {
                 <div className="bg-purple-50 p-3 rounded-lg border-l-4 border-purple-500">
                   <p className="text-sm font-semibold text-purple-800">Features</p>
                   <p className="text-lg font-bold text-purple-700">500+ extracted</p>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* MLAnalyzer: Drug Classification Workflow Project */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle>MLAnalyzer: Drug Classification Workflow</CardTitle>
-            <CardDescription>
-              Complete machine learning pipeline for drug classification using patient characteristics
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h3 className="font-semibold mb-2">Dataset</h3>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• 1,000 synthetic patient records</li>
-                  <li>• 5 features: Age, Sex, BP, Cholesterol, Na/K ratio</li>
-                  <li>• 5 drug classes (drugA, drugB, drugC, drugX, drugY)</li>
-                  <li>• Multiclass classification problem</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-semibold mb-2">Key Technologies</h3>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary">Python</Badge>
-                  <Badge variant="secondary">Scikit-learn</Badge>
-                  <Badge variant="secondary">XGBoost</Badge>
-                  <Badge variant="secondary">Pandas</Badge>
-                  <Badge variant="secondary">Matplotlib</Badge>
-                  <Badge variant="secondary">Seaborn</Badge>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Key Results */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle>Drug Classification Results</CardTitle>
-            <CardDescription>
-              Comprehensive comparison of 5 different machine learning algorithms
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
-                  <h4 className="font-semibold text-green-800">Best Model</h4>
-                  <p className="text-2xl font-bold text-green-700">Random Forest</p>
-                  <p className="text-sm text-green-600">99.5% Test Accuracy</p>
-                </div>
-                <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
-                  <h4 className="font-semibold text-blue-800">Cross-Validation</h4>
-                  <p className="text-2xl font-bold text-blue-700">99.5%</p>
-                  <p className="text-sm text-blue-600">±0.5% std deviation</p>
-                </div>
-                <div className="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
-                  <h4 className="font-semibold text-purple-800">Hyperparameter Tuning</h4>
-                  <p className="text-2xl font-bold text-purple-700">99.7%</p>
-                  <p className="text-sm text-purple-600">Optimized Random Forest</p>
-                </div>
-              </div>
-              
-              <div className="mt-6">
-                <h4 className="font-semibold mb-3">Model Comparison Rankings</h4>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                    <span>1. Random Forest</span>
-                    <span className="font-mono">99.5% accuracy</span>
-                  </div>
-                  <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                    <span>2. XGBoost</span>
-                    <span className="font-mono">99.5% accuracy</span>
-                  </div>
-                  <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                    <span>3. SVM</span>
-                    <span className="font-mono">98.0% accuracy</span>
-                  </div>
-                  <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                    <span>4. K-Nearest Neighbors</span>
-                    <span className="font-mono">95.0% accuracy</span>
-                  </div>
-                  <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                    <span>5. Logistic Regression</span>
-                    <span className="font-mono">74.0% accuracy</span>
-                  </div>
                 </div>
               </div>
             </div>
