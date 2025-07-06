@@ -44,7 +44,7 @@ const Contact = () => {
                   <span className="text-lg font-medium">Schedule a Consultation</span>
                 </div>
                 <p className="text-slate-300 mb-4">
-                  Book a free 30-minute call to discuss your project needs
+                  Book a 30-minute call to discuss your project needs
                 </p>
                 <Button 
                   className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 w-full"

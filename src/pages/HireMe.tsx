@@ -234,7 +234,7 @@ const HireMe = () => {
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8">
                 <div className="flex items-center space-x-3 mb-4">
                   <Calendar className="w-8 h-8 text-blue-400" />
-                  <span className="text-xl font-medium">Book a Free 30-Minute Call</span>
+                  <span className="text-xl font-medium">Book a 30-Minute Call</span>
                 </div>
                 <p className="text-slate-300 mb-6 text-lg leading-relaxed">
                   Let's discuss your project needs, timeline, and how I can help transform your biological data into actionable insights. No commitment required.
