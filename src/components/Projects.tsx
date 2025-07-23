@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github, Code2, BarChart3, Database, ArrowRight } from "lucide-react";
@@ -9,7 +10,7 @@ const Projects = () => {
       title: "Recipe Discovery App",
       description: "Full-stack TypeScript application with modern React features for discovering and managing recipes. Built with responsive design, API integration, and user-friendly interface for culinary enthusiasts.",
       tech: ["TypeScript", "React", "API Integration", "Responsive Design"],
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop",
+      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=600&h=400&fit=crop",
       github: "https://github.com/BulutHamali/recipe-discovery-app-ts",
       live: "https://fantastic-platypus-d118c5.netlify.app/",
       category: "Web Development"
