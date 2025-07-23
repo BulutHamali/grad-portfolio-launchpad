@@ -6,6 +6,24 @@ import { Link } from "react-router-dom";
 const Projects = () => {
   const projects = [
     {
+      title: "Recipe Discovery App",
+      description: "Full-stack TypeScript application with modern React features for discovering and managing recipes. Built with responsive design, API integration, and user-friendly interface for culinary enthusiasts.",
+      tech: ["TypeScript", "React", "API Integration", "Responsive Design"],
+      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop",
+      github: "https://github.com/BulutHamali/recipe-discovery-app-ts",
+      live: "https://fantastic-platypus-d118c5.netlify.app/",
+      category: "Web Development"
+    },
+    {
+      title: "IP Address Tracker",
+      description: "Interactive web application that tracks and displays IP address information with geolocation mapping. Features real-time IP lookup, geographic visualization, and detailed network information display.",
+      tech: ["TypeScript", "React", "Geolocation API", "Interactive Maps"],
+      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=400&fit=crop",
+      github: "https://github.com/BulutHamali/ip-tracker-app-ts",
+      live: "https://radiant-phoenix-c1ae72.netlify.app/",
+      category: "Web Development"
+    },
+    {
       title: "Shortly URL Shortener App",
       description: "Responsive web application built with Tailwind CSS and JavaScript that shortens URLs using the CleanURI API, featuring copy-to-clipboard functionality and mobile-first design.",
       tech: ["JavaScript", "Tailwind CSS", "API Integration", "Responsive Design"],

@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 
 const VideoIntro = () => {
@@ -14,19 +15,19 @@ const VideoIntro = () => {
             👋 Meet Bulut – From Science to Software
           </h2>
           
-          {/* Video Container - Placeholder for now */}
-          <div className="mb-8 rounded-lg overflow-hidden shadow-2xl bg-slate-200 dark:bg-slate-800">
-            <div className="aspect-video flex items-center justify-center bg-gradient-to-br from-blue-100 to-slate-100 dark:from-blue-900 dark:to-slate-900">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </div>
-                <p className="text-slate-600 dark:text-slate-400 font-medium">
-                  Video will be embedded here
-                </p>
-              </div>
+          {/* YouTube Video */}
+          <div className="mb-8 rounded-lg overflow-hidden shadow-2xl">
+            <div className="aspect-video">
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/koLT32fh5G8"
+                title="Meet Bulut - From Science to Software"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className="w-full h-full"
+              />
             </div>
           </div>
 
