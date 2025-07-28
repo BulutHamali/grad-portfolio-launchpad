@@ -95,6 +95,17 @@ const Projects = () => {
       projectPath: "/projects/protein-prediction"
     },
     {
+      title: "SDTM-ADAM Clinical Data Pipeline",
+      summary: "Automated pipeline for transforming clinical trial data into FDA-compliant SDTM and ADaM datasets.",
+      background: "Developed a comprehensive data processing pipeline for clinical trials that automates the conversion of raw clinical data into standardized SDTM (Study Data Tabulation Model) and ADaM (Analysis Data Model) formats required by regulatory authorities.",
+      goal: "Streamline clinical data processing and ensure regulatory compliance by automating SDTM/ADaM dataset creation with comprehensive validation and quality checks.",
+      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop",
+      results: "Successfully automated clinical data standardization process, reducing manual processing time by 80% while ensuring 100% regulatory compliance with FDA CDISC standards.",
+      tech: ["Python", "Pandas", "Clinical Data", "CDISC", "SDTM", "ADaM", "Regulatory Affairs"],
+      category: "Research",
+      github: "https://github.com/BulutHamali/sdtm-adam-pipeline"
+    },
+    {
       title: "Mobile Apps - Coming Soon",
       description: "Exciting mobile applications are currently in development. Stay tuned for innovative solutions that bridge the gap between scientific research and mobile technology.",
       tech: ["React Native", "TypeScript", "Mobile Development", "Coming Soon"],
