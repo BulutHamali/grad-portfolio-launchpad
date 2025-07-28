@@ -103,6 +103,7 @@ const Projects = () => {
       results: "Successfully created ADSL (subject-level) and ADAE (adverse events) datasets with treatment-emergent flags, age groups, and automated pipeline. Generated regulatory-style summary tables and visualizations showing AE distribution and demographics by treatment arm.",
       tech: ["R", "CDISC Standards", "SDTM", "ADaM", "Clinical Programming", "Regulatory Affairs", "Data Visualization"],
       category: "Research",
+      isDetailed: true,
       github: "https://github.com/BulutHamali/sdtm-adam-pipeline"
     },
     {
