@@ -95,13 +95,13 @@ const Projects = () => {
       projectPath: "/projects/protein-prediction"
     },
     {
-      title: "SDTM-ADAM Clinical Data Pipeline",
-      summary: "Automated pipeline for transforming clinical trial data into FDA-compliant SDTM and ADaM datasets.",
-      background: "Developed a comprehensive data processing pipeline for clinical trials that automates the conversion of raw clinical data into standardized SDTM (Study Data Tabulation Model) and ADaM (Analysis Data Model) formats required by regulatory authorities.",
-      goal: "Streamline clinical data processing and ensure regulatory compliance by automating SDTM/ADaM dataset creation with comprehensive validation and quality checks.",
+      title: "SDTM & ADaM Clinical Data Portfolio",
+      summary: "Comprehensive clinical data pipeline using CDISC SDTM and ADaM standards required by FDA and EMA for regulatory submissions.",
+      background: "Developed a complete clinical programming workflow using CDISC Pilot Study data to demonstrate industry-standard clinical data processing. Created analysis-ready datasets (ADaM) and generated tables, listings, and figures (TLFs) following regulatory guidelines used in actual pharmaceutical submissions.",
+      goal: "Showcase clinical programming skills by transforming raw SDTM datasets into ADaM analysis datasets and producing recruiter-friendly regulatory outputs including adverse event summaries and demographic breakdowns.",
       image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop",
-      results: "Successfully automated clinical data standardization process, reducing manual processing time by 80% while ensuring 100% regulatory compliance with FDA CDISC standards.",
-      tech: ["Python", "Pandas", "Clinical Data", "CDISC", "SDTM", "ADaM", "Regulatory Affairs"],
+      results: "Successfully created ADSL (subject-level) and ADAE (adverse events) datasets with treatment-emergent flags, age groups, and automated pipeline. Generated regulatory-style summary tables and visualizations showing AE distribution and demographics by treatment arm.",
+      tech: ["R", "CDISC Standards", "SDTM", "ADaM", "Clinical Programming", "Regulatory Affairs", "Data Visualization"],
       category: "Research",
       github: "https://github.com/BulutHamali/sdtm-adam-pipeline"
     },
