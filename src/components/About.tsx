@@ -94,7 +94,7 @@ const About = () => {
               5+ peer-reviewed publications in computational biology, including work on cancer research, 
               genomics, and bioinformatics published in top-tier journals.
             </p>
-            <div className="flex justify-center gap-4 flex-wrap">
+            <div className="flex justify-center gap-4">
               <Button 
                 variant="outline" 
                 className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
@@ -110,14 +110,6 @@ const About = () => {
               >
                 <Globe size={16} className="mr-2" />
                 Visit My Blog
-              </Button>
-              <Button 
-                variant="outline" 
-                className="border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"
-                onClick={() => window.open("https://github.com/BulutHamali/sdtm-adam-pipeline", "_blank")}
-              >
-                <Github size={16} className="mr-2" />
-                View Project
               </Button>
             </div>
           </div>
