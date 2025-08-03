@@ -15,19 +15,22 @@ const VideoIntro = () => {
             👋 Meet Bulut – From Science to Software
           </h2>
           
-          {/* YouTube Video */}
-          <div className="mb-8 rounded-lg overflow-hidden shadow-2xl">
-            <div className="aspect-video">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/koLT32fh5G8"
-                title="Meet Bulut - From Science to Software"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                className="w-full h-full"
-              />
+          {/* Video Placeholder */}
+          <div className="mb-8 rounded-lg overflow-hidden shadow-2xl bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700">
+            <div className="aspect-video flex items-center justify-center">
+              <div className="text-center p-8">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M8 5v10l7-5-7-5z"/>
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2">
+                  Coming Soon
+                </h3>
+                <p className="text-slate-600 dark:text-slate-400">
+                  An introduction of Bulut Hamali will be embedded here soon
+                </p>
+              </div>
             </div>
           </div>
 
