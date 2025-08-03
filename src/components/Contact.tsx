@@ -69,14 +69,14 @@ const Contact = () => {
                   <span className="text-lg font-medium">Schedule a Consultation</span>
                 </div>
                 <p className="text-slate-300 mb-4">
-                  Book a 30-minute call to discuss your project needs - $35
+                  I'd love to chat about your project! Let's schedule a friendly 30-minute consultation for $35
                 </p>
                 {!showEmailInput ? (
                   <Button 
                     onClick={handleBookingClick}
                     className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 w-full"
                   >
-                    Book on Calendly <Calendar className="ml-2 w-4 h-4" />
+                    Let's Chat on Calendly <Calendar className="ml-2 w-4 h-4" />
                   </Button>
                 ) : (
                   <div className="space-y-3">
@@ -94,7 +94,7 @@ const Contact = () => {
                         disabled={isLoading}
                         className="bg-blue-600 hover:bg-blue-700 text-white flex-1"
                       >
-                        {isLoading ? "Processing..." : "Pay $35 & Book"}
+                        {isLoading ? "Processing..." : "Reserve Your Spot ($35)"}
                       </Button>
                       <Button 
                         onClick={() => setShowEmailInput(false)}

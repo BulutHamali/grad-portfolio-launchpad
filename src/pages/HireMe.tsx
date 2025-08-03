@@ -281,14 +281,14 @@ const HireMe = () => {
                   <span className="text-xl font-medium">Book a 30-Minute Call</span>
                 </div>
                 <p className="text-slate-300 mb-6 text-lg leading-relaxed">
-                  Let's discuss your project needs, timeline, and how I can help transform your biological data into actionable insights - $35
+                  I'd love to learn about your project and explore how we can work together! Let's have a friendly 30-minute conversation to discuss your goals and see how I can help bring your vision to life. Investment: $35
                 </p>
                 {!showEmailInput ? (
                   <Button 
                     onClick={handleBookingClick}
                     className="bg-blue-600 hover:bg-blue-700 text-white w-full text-lg py-3"
                   >
-                    Book on Calendly <Calendar className="ml-2 w-5 h-5" />
+                    Let's Chat on Calendly <Calendar className="ml-2 w-5 h-5" />
                   </Button>
                 ) : (
                   <div className="space-y-3">
@@ -306,7 +306,7 @@ const HireMe = () => {
                         disabled={isLoading}
                         className="bg-blue-600 hover:bg-blue-700 text-white flex-1 text-lg py-3"
                       >
-                        {isLoading ? "Processing..." : "Pay $35 & Book"}
+                        {isLoading ? "Processing..." : "Reserve Your Consultation ($35)"}
                       </Button>
                       <Button 
                         onClick={() => setShowEmailInput(false)}
