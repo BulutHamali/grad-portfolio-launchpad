@@ -1,9 +1,53 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowRight, Github, ExternalLink, Calendar, Mail, Code, BarChart3, Database, Microscope } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { 
+  ArrowRight, 
+  Calendar, 
+  ExternalLink, 
+  Github, 
+  MessageCircle, 
+  Database, 
+  BarChart3, 
+  FileText, 
+  Globe, 
+  Users,
+  GraduationCap,
+  Building2,
+  Stethoscope,
+  Bot,
+  Mail,
+  Code,
+  Microscope
+} from "lucide-react";
+import { useStripePayment } from "@/hooks/useStripePayment";
+import { toast } from "sonner";
 
 const HireMe = () => {
+  const [showEmailInput, setShowEmailInput] = useState(false);
+  const [email, setEmail] = useState("");
+  const { processPayment, isLoading } = useStripePayment();
+
+  const handleBookingClick = () => {
+    setShowEmailInput(true);
+  };
+
+  const handlePaymentAndBooking = async () => {
+    if (!email) {
+      toast.error("Please enter your email address");
+      return;
+    }
+
+    const paymentSuccess = await processPayment(email);
+    if (paymentSuccess) {
+      // Reset form
+      setShowEmailInput(false);
+      setEmail("");
+    }
+  };
   const scrollToContact = () => {
     const element = document.getElementById('contact-form');
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -237,16 +281,43 @@ const HireMe = () => {
                   <span className="text-xl font-medium">Book a 30-Minute Call</span>
                 </div>
                 <p className="text-slate-300 mb-6 text-lg leading-relaxed">
-                  Let's discuss your project needs, timeline, and how I can help transform your biological data into actionable insights. No commitment required.
+                  Let's discuss your project needs, timeline, and how I can help transform your biological data into actionable insights - $35
                 </p>
-                <Button 
-                  className="bg-blue-600 hover:bg-blue-700 text-white w-full text-lg py-3"
-                  asChild
-                >
-                  <a href="https://calendly.com/buluthamali" target="_blank" rel="noopener noreferrer">
-                    Book on Calendly <ExternalLink className="ml-2 w-5 h-5" />
-                  </a>
-                </Button>
+                {!showEmailInput ? (
+                  <Button 
+                    onClick={handleBookingClick}
+                    className="bg-blue-600 hover:bg-blue-700 text-white w-full text-lg py-3"
+                  >
+                    Book on Calendly <Calendar className="ml-2 w-5 h-5" />
+                  </Button>
+                ) : (
+                  <div className="space-y-3">
+                    <Input 
+                      type="email"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="bg-white/10 border-white/20 text-white placeholder:text-slate-400"
+                      required
+                    />
+                    <div className="flex space-x-2">
+                      <Button 
+                        onClick={handlePaymentAndBooking}
+                        disabled={isLoading}
+                        className="bg-blue-600 hover:bg-blue-700 text-white flex-1 text-lg py-3"
+                      >
+                        {isLoading ? "Processing..." : "Pay $35 & Book"}
+                      </Button>
+                      <Button 
+                        onClick={() => setShowEmailInput(false)}
+                        variant="outline"
+                        className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                      >
+                        Cancel
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
             
