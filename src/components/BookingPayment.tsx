@@ -22,27 +22,38 @@ export const BookingPayment = () => {
 
     setIsLoading(true);
     try {
-      console.log("Calling create-payment function...");
+      console.log("=== FRONTEND: Starting payment process ===");
+      console.log("Email:", email);
+      
       const { data, error } = await supabase.functions.invoke('create-payment', {
         body: { email }
       });
 
+      console.log("=== FRONTEND: Edge function response ===");
+      console.log("Data:", data);
+      console.log("Error:", error);
+
       if (error) {
         console.error("Edge function error:", error);
-        throw error;
+        toast.error(`Payment failed: ${error.message}`);
+        return;
       }
 
-      console.log("Payment session created:", data);
-      
-      if (data?.url) {
-        // Open Stripe checkout in a new tab
-        window.open(data.url, '_blank');
-      } else {
-        throw new Error("No payment URL received");
+      if (!data?.url) {
+        console.error("No payment URL received");
+        toast.error("No payment URL received from server");
+        return;
       }
+      
+      console.log("=== FRONTEND: Redirecting to Stripe ===");
+      console.log("Stripe URL:", data.url);
+      
+      // Open Stripe checkout in a new tab
+      window.open(data.url, '_blank');
+      toast.success("Redirecting to Stripe checkout...");
     } catch (error) {
-      console.error("Payment error:", error);
-      toast.error("Failed to create payment session. Please try again.");
+      console.error("=== FRONTEND: Payment error ===", error);
+      toast.error(`Failed to create payment: ${error.message}`);
     } finally {
       setIsLoading(false);
     }
