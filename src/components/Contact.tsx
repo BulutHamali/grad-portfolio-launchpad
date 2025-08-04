@@ -94,7 +94,7 @@ const Contact = () => {
                         disabled={isLoading}
                         className="bg-blue-600 hover:bg-blue-700 text-white flex-1"
                       >
-                        {isLoading ? "Processing..." : "Reserve Your Spot ($35)"}
+                        {isLoading ? "Processing..." : "Reserve Your Spot"}
                       </Button>
                       <Button 
                         onClick={() => setShowEmailInput(false)}

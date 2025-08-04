@@ -306,7 +306,7 @@ const HireMe = () => {
                         disabled={isLoading}
                         className="bg-blue-600 hover:bg-blue-700 text-white flex-1 text-lg py-3"
                       >
-                        {isLoading ? "Processing..." : "Reserve Your Consultation ($35)"}
+                        {isLoading ? "Processing..." : "Reserve Your Consultation"}
                       </Button>
                       <Button 
                         onClick={() => setShowEmailInput(false)}
