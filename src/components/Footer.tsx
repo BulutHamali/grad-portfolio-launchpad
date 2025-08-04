@@ -32,8 +32,12 @@ const Footer = () => {
               <Linkedin size={24} />
             </a>
             <a 
-              href="mailto:hamalibulut1@gmail.com" 
+              href="#contact" 
               className="text-slate-400 hover:text-blue-400 transition-colors p-2 rounded-full hover:bg-slate-700"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               <Mail size={24} />
             </a>
