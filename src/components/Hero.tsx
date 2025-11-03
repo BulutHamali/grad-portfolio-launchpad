@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Github, Linkedin, Mail, Briefcase } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, Briefcase, Users } from "lucide-react";
 
 const Hero = () => {
   const scrollToSection = (sectionId: string) => {
@@ -43,14 +43,23 @@ const Hero = () => {
             Combining deep scientific expertise with modern MERN stack development to solve real-world problems.
           </p>
 
-          {/* Nextflow Ambassador Badge */}
-          <div className="flex justify-center mb-8">
+          {/* Professional Badges */}
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
             <div className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 flex items-center space-x-3 border border-white/20">
               <div className="w-6 h-6 bg-emerald-500 rounded flex items-center justify-center">
                 <span className="text-white text-xs font-bold">nf</span>
               </div>
               <span className="text-cyan-300 font-medium text-sm">Nextflow Ambassador</span>
             </div>
+            <a 
+              href="https://linkedin.com/in/buluthamali" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 flex items-center space-x-3 border border-white/20 hover:bg-white/20 transition-colors"
+            >
+              <Linkedin className="w-5 h-5 text-blue-400" />
+              <span className="text-cyan-300 font-medium text-sm">4,500+ LinkedIn Followers</span>
+            </a>
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-4">
