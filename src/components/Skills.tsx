@@ -1,5 +1,5 @@
 
-import { Code, Database, Globe, Server, Brain, BarChart } from "lucide-react";
+import { Code, Database, Globe, Server, Brain, BarChart, Linkedin } from "lucide-react";
 
 const Skills = () => {
   const skillCategories = [
@@ -75,9 +75,9 @@ const Skills = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-semibold mb-4 text-slate-800">Research Impact</h3>
-            <div className="grid md:grid-cols-3 gap-6 text-center">
+          <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-8 max-w-5xl mx-auto">
+            <h3 className="text-2xl font-semibold mb-4 text-slate-800">Research Impact & Professional Network</h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
               <div>
                 <div className="text-3xl font-bold text-blue-600 mb-2">5+</div>
                 <div className="text-slate-600">Scientific Publications</div>
@@ -89,6 +89,20 @@ const Skills = () => {
               <div>
                 <div className="text-3xl font-bold text-blue-600 mb-2">4</div>
                 <div className="text-slate-600">Universities & Research Institutions</div>
+              </div>
+              <div>
+                <a 
+                  href="https://linkedin.com/in/buluthamali" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block hover:transform hover:scale-105 transition-transform"
+                >
+                  <div className="flex items-center justify-center gap-2 text-3xl font-bold text-blue-600 mb-2">
+                    <Linkedin className="w-6 h-6" />
+                    <span>1,800+</span>
+                  </div>
+                  <div className="text-slate-600">LinkedIn Followers</div>
+                </a>
               </div>
             </div>
           </div>
