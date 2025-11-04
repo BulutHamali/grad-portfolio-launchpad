@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,10 +5,18 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ArrowLeft, Download, Github, Share2, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { SEO } from '@/components/SEO';
 
 const SingleCellAnalysis = () => {
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Single-Cell RNA-seq Analysis | PBMC Dataset Project - Bulut Hamali"
+        description="Comprehensive single-cell RNA sequencing analysis of 10X PBMC data using Seurat. Cell type identification, clustering, quality control, and differential expression analysis."
+        canonical="https://buluthamali.com/projects/single-cell-analysis"
+        ogType="article"
+        keywords="single-cell RNA-seq, scRNA-seq, Seurat, PBMC analysis, cell clustering, bioinformatics project, 10X Genomics, cell type annotation"
+      />
       {/* Header */}
       <div className="bg-white border-b">
         <div className="container mx-auto px-6 py-4">

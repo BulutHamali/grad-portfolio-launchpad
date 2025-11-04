@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { useStripePayment } from "@/hooks/useStripePayment";
 import { toast } from "sonner";
+import { SEO } from "@/components/SEO";
 
 const HireMe = () => {
   const [showEmailInput, setShowEmailInput] = useState(false);
@@ -55,6 +56,12 @@ const HireMe = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO 
+        title="Hire Bulut Hamali, PhD | Bioinformatics & Full-Stack Development Services"
+        description="Professional bioinformatics consulting services. RNA-seq analysis, single-cell analysis, spatial transcriptomics, custom pipelines, and interactive dashboards. 14+ years experience."
+        canonical="https://buluthamali.com/hire-me"
+        keywords="hire bioinformatician, RNA-seq analysis, single-cell analysis, spatial transcriptomics, bioinformatics consulting, computational biology services, Nextflow pipelines, R Shiny, React developer"
+      />
       {/* Header/Navigation */}
       <nav className="bg-white shadow-sm border-b">
         <div className="container mx-auto px-6 py-4">

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,10 +5,18 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ArrowLeft, Download, Github, Share2, Heart, MessageSquare, Eye } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { SEO } from '@/components/SEO';
 
 const SpatialTranscriptomics = () => {
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Spatial Transcriptomics Analysis | Visium Data Visualization - Bulut Hamali"
+        description="Interactive spatial analysis of gene expression patterns in tissue architecture using 10X Visium technology. Comprehensive bioinformatics visualization project."
+        canonical="https://buluthamali.com/projects/spatial-transcriptomics"
+        ogType="article"
+        keywords="spatial transcriptomics, Visium, 10X Genomics, tissue architecture, gene expression mapping, spatial analysis, bioinformatics visualization"
+      />
       {/* Header */}
       <div className="bg-white border-b">
         <div className="container mx-auto px-6 py-4">

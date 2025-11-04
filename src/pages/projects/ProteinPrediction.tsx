@@ -6,10 +6,18 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { SEO } from "@/components/SEO";
 
 const ProteinPrediction = () => {
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Protein Structure Prediction | ML Classification Project - Bulut Hamali"
+        description="Machine learning pipeline for protein structure and drug classification. Advanced ML techniques including Random Forest, XGBoost, and deep learning for bioinformatics applications."
+        canonical="https://buluthamali.com/projects/protein-prediction"
+        ogType="article"
+        keywords="protein structure prediction, machine learning, drug classification, Random Forest, XGBoost, bioinformatics ML, computational biology, protein analysis"
+      />
       {/* Header */}
       <div className="bg-white border-b">
         <div className="container mx-auto px-6 py-4">

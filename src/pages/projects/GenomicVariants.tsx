@@ -6,10 +6,18 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ArrowLeft, Download, Github, Share2, ExternalLink, Dna } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { SEO } from '@/components/SEO';
 
 const GenomicVariants = () => {
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Genomic Variant Analysis | GATK Pipeline Project - Bulut Hamali"
+        description="Advanced genomic variant calling and analysis using GATK4 pipeline. Comprehensive SNP/Indel detection, quality control, and variant annotation for chromosome 17."
+        canonical="https://buluthamali.com/projects/genomic-variants"
+        ogType="article"
+        keywords="genomic variant analysis, GATK pipeline, variant calling, SNP detection, indel analysis, bioinformatics, chromosome analysis, genomics project"
+      />
       {/* Header */}
       <div className="bg-white border-b">
         <div className="container mx-auto px-6 py-4">
