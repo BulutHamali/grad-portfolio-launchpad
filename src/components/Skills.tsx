@@ -92,7 +92,7 @@ const Skills = () => {
               </div>
               <div>
                 <a 
-                  href="https://linkedin.com/in/buluthamali" 
+                  href="https://www.linkedin.com/in/bulut-hamali/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="block hover:transform hover:scale-105 transition-transform"
