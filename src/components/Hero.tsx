@@ -52,7 +52,7 @@ const Hero = () => {
               <span className="text-cyan-300 font-medium text-sm">Nextflow Ambassador</span>
             </div>
             <div 
-              onClick={() => window.open('https://www.linkedin.com/in/buluthamali', '_blank', 'noopener,noreferrer')}
+              onClick={() => window.open('https://www.linkedin.com/in/bulut-hamali/', '_blank', 'noopener,noreferrer')}
               className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 flex items-center space-x-3 border border-white/20 hover:bg-white/20 transition-colors cursor-pointer"
             >
               <Linkedin className="w-5 h-5 text-blue-400" />
@@ -92,7 +92,7 @@ const Hero = () => {
             <a href="https://github.com/buluthamali" className="text-slate-400 hover:text-blue-400 transition-colors">
               <Github size={24} />
             </a>
-            <a href="https://linkedin.com/in/buluthamali" className="text-slate-400 hover:text-blue-400 transition-colors">
+            <a href="https://www.linkedin.com/in/bulut-hamali/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-400 transition-colors">
               <Linkedin size={24} />
             </a>
             <a 
