@@ -1,42 +1,30 @@
 
-import { Code, Database, Globe, Server, Brain, BarChart, Linkedin } from "lucide-react";
+import { Cloud, Brain, Code, Dna, Linkedin } from "lucide-react";
 
 const Skills = () => {
   const skillCategories = [
     {
-      title: "Bioinformatics & Data Science",
+      title: "Cloud & Infrastructure",
+      icon: <Cloud className="w-8 h-8" />,
+      skills: ["AWS", "Terraform", "Docker", "GitHub Actions CI/CD", "Vercel", "Nextflow on AWS", "Linux/Unix", "SLURM"],
+      color: "from-blue-500 to-indigo-500"
+    },
+    {
+      title: "AI & Machine Learning",
       icon: <Brain className="w-8 h-8" />,
-      skills: ["Python", "R", "Bioconductor", "Seurat", "Scanpy", "DESeq2", "GSEA", "Machine Learning", "Statistical Analysis"],
+      skills: ["Anthropic Claude API", "CrewAI", "Multi-agent systems", "Python ML ecosystem", "Scikit-learn", "Pandas", "NumPy"],
       color: "from-purple-500 to-pink-500"
     },
     {
-      title: "Frontend Development",
-      icon: <Globe className="w-8 h-8" />,
-      skills: ["React", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Responsive Design"],
-      color: "from-blue-500 to-cyan-500"
-    },
-    {
-      title: "Backend & Databases",
-      icon: <Server className="w-8 h-8" />,
-      skills: ["Node.js", "Express.js", "MongoDB", "SQL", "RESTful APIs", "Authentication"],
-      color: "from-green-500 to-emerald-500"
-    },
-    {
-      title: "Cloud & HPC Computing",
-      icon: <Database className="w-8 h-8" />,
-      skills: ["AWS", "Azure", "Google Cloud", "SLURM", "Linux/Unix", "Docker"],
-      color: "from-indigo-500 to-purple-500"
-    },
-    {
-      title: "Genomics & Analysis",
-      icon: <BarChart className="w-8 h-8" />,
-      skills: ["scRNA-seq", "Spatial Transcriptomics", "GWAS", "NGS", "CRISPR Design", "Phylogenetics"],
+      title: "Full-Stack Development",
+      icon: <Code className="w-8 h-8" />,
+      skills: ["Next.js", "React", "TypeScript", "Node.js", "FastAPI", "PostgreSQL", "Supabase", "Stripe"],
       color: "from-emerald-500 to-teal-500"
     },
     {
-      title: "Tools & Development",
-      icon: <Code className="w-8 h-8" />,
-      skills: ["Git/GitHub", "VS Code", "Benchling", "Galaxy", "GraphPad Prism", "Postman"],
+      title: "Bioinformatics",
+      icon: <Dna className="w-8 h-8" />,
+      skills: ["Scanpy", "Seurat", "Squidpy", "Nextflow", "Snakemake", "Single-cell RNA-seq", "Spatial transcriptomics", "R / Bioconductor"],
       color: "from-orange-500 to-red-500"
     }
   ];
@@ -46,19 +34,20 @@ const Skills = () => {
       <div className="container mx-auto px-6">
         <h2 className="text-4xl font-bold text-center mb-4 text-slate-800">Skills & Technologies</h2>
         <p className="text-center text-slate-600 mb-12 max-w-3xl mx-auto">
-          A unique combination of computational biology expertise and modern software development skills
+          Most cloud engineers don't understand scientific workloads. Most bioinformaticians can't
+          architect cloud-native systems. This is the intersection Bulut works in.
         </p>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <div className="grid md:grid-cols-2 gap-8">
           {skillCategories.map((category, index) => (
             <div key={index} className="group">
               <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-slate-100 hover:border-slate-200 h-full">
                 <div className={`inline-flex p-3 rounded-lg bg-gradient-to-r ${category.color} text-white mb-4`}>
                   {category.icon}
                 </div>
-                
+
                 <h3 className="text-xl font-semibold mb-4 text-slate-800">{category.title}</h3>
-                
+
                 <div className="space-y-2">
                   {category.skills.map((skill, skillIndex) => (
                     <span
@@ -91,9 +80,9 @@ const Skills = () => {
                 <div className="text-slate-600">Universities & Research Institutions</div>
               </div>
               <div>
-                <a 
-                  href="https://www.linkedin.com/in/bulut-hamali/" 
-                  target="_blank" 
+                <a
+                  href="https://www.linkedin.com/in/bulut-hamali/"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="block hover:transform hover:scale-105 transition-transform"
                 >

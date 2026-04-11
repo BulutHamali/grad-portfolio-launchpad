@@ -10,12 +10,12 @@ interface SEOProps {
 }
 
 export const SEO = ({
-  title = "Bulut Hamali, PhD | MERN Stack Developer & Computational Biologist",
-  description = "PhD Computational Biologist & Full-Stack MERN Developer. 14+ years in bioinformatics, now building modern web applications. Nextflow Ambassador.",
+  title = "Bulut Hamali — Cloud & AI Infrastructure Engineer",
+  description = "Cloud-native AI engineer with PhD in Biochemistry. Building infrastructure for AI/ML and bioinformatics workloads. AWS, Terraform, Next.js, Python.",
   canonical = "https://buluthamali.com",
   ogImage = "https://buluthamali.com/lovable-uploads/8c42eaae-f199-448f-a1f3-675e636cb3ed.png",
   ogType = "website",
-  keywords = "Bulut Hamali, computational biology, bioinformatics, MERN stack developer, React developer, MongoDB, Express, Node.js, Nextflow Ambassador, single-cell RNA-seq, genomics, PhD biologist, full-stack developer, web development, data science"
+  keywords = "Bulut Hamali, cloud engineer, AI ML engineer, AWS, Terraform, computational biology, bioinformatics, Nextflow Ambassador, single-cell RNA-seq, full-stack developer, Next.js, Python, multi-agent AI, PhD biochemistry"
 }: SEOProps) => {
   return (
     <Helmet>
