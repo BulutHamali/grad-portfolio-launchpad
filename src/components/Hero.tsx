@@ -57,7 +57,7 @@ const Hero = () => {
               className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 flex items-center space-x-3 border border-white/20 hover:bg-white/20 transition-colors cursor-pointer"
             >
               <Linkedin className="w-5 h-5 text-blue-400" />
-              <span className="text-cyan-300 font-medium text-sm">4,500+ LinkedIn Followers</span>
+              <span className="text-cyan-300 font-medium text-sm">5,000+ LinkedIn Followers</span>
             </div>
           </div>
 

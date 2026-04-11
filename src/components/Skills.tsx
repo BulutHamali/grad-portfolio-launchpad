@@ -88,7 +88,7 @@ const Skills = () => {
                 >
                   <div className="flex items-center justify-center gap-2 text-3xl font-bold text-blue-600 mb-2">
                     <Linkedin className="w-6 h-6" />
-                    <span>4,500+</span>
+                    <span>5,000+</span>
                   </div>
                   <div className="text-slate-600">LinkedIn Followers</div>
                 </a>
