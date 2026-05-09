@@ -11,6 +11,7 @@ interface Project {
   results?: string;
   tech: string[];
   image: string;
+  imagePosition?: string;
   github?: string;
   live?: string;
   category: string;
@@ -25,7 +26,7 @@ const Projects = () => {
       title: "BioSignal Radar",
       description: "Full-stack trend detection platform that surfaces emerging bioinformatics research from bioRxiv preprints using Claude API, PubMed, and GitHub signals.",
       tech: ["Next.js", "Claude API", "Python", "Vercel"],
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
+      image: "https://images.unsplash.com/photo-1538494604642-0cf477d128a2?w=600&h=400&fit=crop",
       live: "https://biosignal-radar.vercel.app",
       // TODO: verify — add GitHub link once repo is public
       category: "AI/ML & Cloud"
@@ -63,7 +64,8 @@ const Projects = () => {
       background: "Analyzed 2,700 peripheral blood mononuclear cells from 10X Genomics PBMC 3k dataset to identify distinct cell populations and their gene expression profiles, focusing on immune cell characterization.",
       results: "Identified 8 distinct cell clusters including T cells (35%), monocytes (22%), B cells (18%), and NK cells (12%). Discovered 156 differentially expressed genes with significant immune cell signatures.",
       tech: ["R", "Seurat", "Bioconductor", "scRNA-seq", "UMAP", "PCA"],
-      image: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=600&h=400&fit=crop",
+      image: "https://upload.wikimedia.org/wikipedia/commons/6/64/UMAP_of_somatic_cell_states_%28colour%29_in_the_human_scRNA-seq_%2C_human_scATAC-seq_and_mouse_scRNA-seq_datasets.jpg",
+      imagePosition: "left",
       category: "Bioinformatics",
       isDetailed: true,
       projectPath: "/projects/single-cell-analysis"
@@ -134,6 +136,7 @@ const Projects = () => {
                     src={project.image}
                     alt={project.title}
                     className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    style={{ objectPosition: project.imagePosition ?? "center" }}
                   />
                   <div className="absolute top-4 right-4">
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${
