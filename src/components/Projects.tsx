@@ -25,7 +25,7 @@ const Projects = () => {
       title: "BioSignal Radar",
       description: "Full-stack trend detection platform that surfaces emerging bioinformatics research from bioRxiv preprints using Claude API, PubMed, and GitHub signals.",
       tech: ["Next.js", "Claude API", "Python", "Vercel"],
-      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
       live: "https://biosignal-radar.vercel.app",
       // TODO: verify — add GitHub link once repo is public
       category: "AI/ML & Cloud"
@@ -63,7 +63,7 @@ const Projects = () => {
       background: "Analyzed 2,700 peripheral blood mononuclear cells from 10X Genomics PBMC 3k dataset to identify distinct cell populations and their gene expression profiles, focusing on immune cell characterization.",
       results: "Identified 8 distinct cell clusters including T cells (35%), monocytes (22%), B cells (18%), and NK cells (12%). Discovered 156 differentially expressed genes with significant immune cell signatures.",
       tech: ["R", "Seurat", "Bioconductor", "scRNA-seq", "UMAP", "PCA"],
-      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop",
+      image: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=600&h=400&fit=crop",
       category: "Bioinformatics",
       isDetailed: true,
       projectPath: "/projects/single-cell-analysis"
