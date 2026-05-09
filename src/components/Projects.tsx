@@ -35,8 +35,7 @@ const Projects = () => {
       description: "Multi-agent clinical trial analysis platform using CrewAI and Anthropic's Claude API with cost-optimized orchestration and email notifications.",
       tech: ["CrewAI", "Anthropic API", "Python", "Streamlit"],
       image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop",
-      github: "https://github.com/BulutHamali/ClinPilot",
-      live: "https://clinpilot-ai.streamlit.app/",
+      live: "https://clinpilot.buluthamali.com",
       category: "AI/ML & Cloud"
     },
     {
@@ -53,7 +52,7 @@ const Projects = () => {
       description: "AI pipeline for detecting scientific knowledge gaps from biomedical literature with a model-agnostic LLM interface supporting Groq, Anthropic, and Ollama.",
       tech: ["Python", "Groq", "Anthropic", "Ollama"],
       image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=400&fit=crop",
-      github: "https://github.com/BulutHamali/ResearchGapFinder",
+      live: "https://researchgapfinder.buluthamali.com",
       category: "AI/ML & Cloud"
     },
 
