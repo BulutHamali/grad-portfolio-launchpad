@@ -12,6 +12,7 @@ interface Project {
   tech: string[];
   image: string;
   imagePosition?: string;
+  highlight?: string;
   github?: string;
   live?: string;
   category: string;
@@ -21,10 +22,11 @@ interface Project {
 
 const Projects = () => {
   const projects: Project[] = [
-    // ── AI/ML & Cloud projects ──────────────────────────────────────────────
+    // ── Featured / Recent projects ──────────────────────────────────────────
     {
       title: "Reproducell",
       description: "Reproducibility-first single-cell RNA-seq analysis platform for QC, clustering, UMAP, marker discovery, and manifest-backed exports.",
+      highlight: "A full workflow from matrix upload to reproducible export, with every parameter and software version captured in a run manifest.",
       tech: ["Python", "Scanpy", "React", "AWS", "Nextflow"],
       image: "https://upload.wikimedia.org/wikipedia/commons/6/64/UMAP_of_somatic_cell_states_%28colour%29_in_the_human_scRNA-seq_%2C_human_scATAC-seq_and_mouse_scRNA-seq_datasets.jpg",
       live: "https://scrna-reproducell.buluthamali.com/",
@@ -33,12 +35,14 @@ const Projects = () => {
     {
       title: "Drug Discovery Target Prioritization",
       description: "Leakage-safe ML pipeline that combines population genetics, functional genomics, and clinical-phase labels to rank druggable targets.",
+      highlight: "Prospective evaluation produced 5.59× enrichment in the top 1% of ranked genes against a later clinical-phase release.",
       tech: ["Python", "AWS Batch", "Nextflow", "XGBoost", "Terraform"],
       image: "https://raw.githubusercontent.com/BulutHamali/drug-discovery-target-prioritization/main/docs/figures/enrichment_curve.png",
       live: "https://drugtargets.buluthamali.com/",
       category: "Bioinformatics"
     },
 
+    // ── AI/ML & Cloud projects ──────────────────────────────────────────────
     {
       title: "BioSignal Radar",
       description: "Full-stack trend detection platform that surfaces emerging bioinformatics research from bioRxiv preprints using Claude API, PubMed, and GitHub signals.",
@@ -154,6 +158,7 @@ const Projects = () => {
                   <img
                     src={project.image}
                     alt={project.title}
+                    loading="lazy"
                     className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     style={{ objectPosition: project.imagePosition ?? "center" }}
                   />
@@ -170,6 +175,13 @@ const Projects = () => {
 
                 <div className="p-6 flex-grow flex flex-col">
                   <h3 className="text-xl font-semibold mb-3 text-slate-800">{project.title}</h3>
+
+                  {project.highlight && (
+                    <div className="mb-4 rounded-lg border border-blue-100 bg-blue-50 px-4 py-3">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-blue-700 mb-1">Why it matters</p>
+                      <p className="text-sm leading-relaxed text-slate-700">{project.highlight}</p>
+                    </div>
+                  )}
 
                   {project.isDetailed ? (
                     <div className="space-y-3 flex-grow">
