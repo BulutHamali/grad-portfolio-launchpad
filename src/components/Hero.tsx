@@ -9,6 +9,18 @@ const Hero = () => {
   };
 
   return (
+    <nav className="absolute top-0 inset-x-0 z-20 border-b border-white/10 bg-slate-950/20 backdrop-blur-sm">
+      <div className="container mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="#top" className="font-semibold tracking-tight text-white">Bulut Hamali</a>
+        <div className="hidden sm:flex items-center gap-6 text-sm text-slate-300">
+          <a href="#projects" className="hover:text-white transition-colors">Projects</a>
+          <a href="#about" className="hover:text-white transition-colors">About</a>
+          <a href="#skills" className="hover:text-white transition-colors">Skills</a>
+          <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+        </div>
+      </div>
+    </nav>
+
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22%3E%3Cpath%20d%3D%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
@@ -113,7 +125,7 @@ const Hero = () => {
           <ArrowDown
             size={32}
             className="mx-auto text-slate-400 cursor-pointer hover:text-blue-400 transition-colors"
-            onClick={() => scrollToSection('about')}
+            onClick={() => scrollToSection('projects')}
           />
         </div>
       </div>
