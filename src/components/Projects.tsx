@@ -24,7 +24,7 @@ const Projects = () => {
   const projects: Project[] = [
     // ── Featured / Recent projects ──────────────────────────────────────────
     {
-      title: "Reproducell",
+      title: "scRNA-Reproducell",
       description: "Reproducibility-first single-cell RNA-seq analysis platform for QC, clustering, UMAP, marker discovery, and manifest-backed exports.",
       highlight: "A full workflow from matrix upload to reproducible export, with every parameter and software version captured in a run manifest.",
       tech: ["Python", "Scanpy", "React", "AWS", "Nextflow"],
