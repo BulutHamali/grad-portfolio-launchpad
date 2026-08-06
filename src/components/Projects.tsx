@@ -59,6 +59,24 @@ const Projects = () => {
 
     // ── Bioinformatics & Research projects ─────────────────────────────────
     {
+      title: "Reproducell",
+      description: "Reproducibility-first single-cell RNA-seq analysis platform for QC, clustering, UMAP, marker discovery, and manifest-backed exports.",
+      tech: ["Python", "Scanpy", "React", "AWS", "Nextflow"],
+      image: "https://images.unsplash.com/photo-1530213786676-41ad9f7736f6?w=600&h=400&fit=crop",
+      github: "https://github.com/BulutHamali/scRNA-Reproducell",
+      live: "https://scrna-reproducell.buluthamali.com",
+      category: "Bioinformatics"
+    },
+    {
+      title: "Drug Discovery Target Prioritization",
+      description: "Leakage-safe ML pipeline that combines population genetics, functional genomics, and clinical-phase labels to rank druggable targets.",
+      tech: ["Python", "AWS Batch", "Nextflow", "XGBoost", "Terraform"],
+      image: "https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=400&fit=crop",
+      github: "https://github.com/BulutHamali/drug-discovery-target-prioritization",
+      category: "Bioinformatics"
+    },
+
+    {
       title: "Single-Cell RNA-seq Analysis Pipeline",
       summary: "Comprehensive scRNA-seq analysis of PBMC dataset identifying cell types and biomarkers using R/Seurat pipeline.",
       background: "Analyzed 2,700 peripheral blood mononuclear cells from 10X Genomics PBMC 3k dataset to identify distinct cell populations and their gene expression profiles, focusing on immune cell characterization.",
