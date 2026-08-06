@@ -23,6 +23,24 @@ const Projects = () => {
   const projects: Project[] = [
     // ── AI/ML & Cloud projects ──────────────────────────────────────────────
     {
+      title: "Reproducell",
+      description: "Reproducibility-first single-cell RNA-seq analysis platform for QC, clustering, UMAP, marker discovery, and manifest-backed exports.",
+      tech: ["Python", "Scanpy", "React", "AWS", "Nextflow"],
+      image: "https://upload.wikimedia.org/wikipedia/commons/6/64/UMAP_of_somatic_cell_states_%28colour%29_in_the_human_scRNA-seq_%2C_human_scATAC-seq_and_mouse_scRNA-seq_datasets.jpg",
+      github: "https://github.com/BulutHamali/scRNA-Reproducell",
+      live: "https://scrna-reproducell.buluthamali.com",
+      category: "Bioinformatics"
+    },
+    {
+      title: "Drug Discovery Target Prioritization",
+      description: "Leakage-safe ML pipeline that combines population genetics, functional genomics, and clinical-phase labels to rank druggable targets.",
+      tech: ["Python", "AWS Batch", "Nextflow", "XGBoost", "Terraform"],
+      image: "https://raw.githubusercontent.com/BulutHamali/drug-discovery-target-prioritization/main/docs/figures/enrichment_curve.png",
+      github: "https://github.com/BulutHamali/drug-discovery-target-prioritization",
+      category: "Bioinformatics"
+    },
+
+    {
       title: "BioSignal Radar",
       description: "Full-stack trend detection platform that surfaces emerging bioinformatics research from bioRxiv preprints using Claude API, PubMed, and GitHub signals.",
       tech: ["Next.js", "Claude API", "Python", "Vercel"],
@@ -58,23 +76,7 @@ const Projects = () => {
     },
 
     // ── Bioinformatics & Research projects ─────────────────────────────────
-    {
-      title: "Reproducell",
-      description: "Reproducibility-first single-cell RNA-seq analysis platform for QC, clustering, UMAP, marker discovery, and manifest-backed exports.",
-      tech: ["Python", "Scanpy", "React", "AWS", "Nextflow"],
-      image: "https://images.unsplash.com/photo-1530213786676-41ad9f7736f6?w=600&h=400&fit=crop",
-      github: "https://github.com/BulutHamali/scRNA-Reproducell",
-      live: "https://scrna-reproducell.buluthamali.com",
-      category: "Bioinformatics"
-    },
-    {
-      title: "Drug Discovery Target Prioritization",
-      description: "Leakage-safe ML pipeline that combines population genetics, functional genomics, and clinical-phase labels to rank druggable targets.",
-      tech: ["Python", "AWS Batch", "Nextflow", "XGBoost", "Terraform"],
-      image: "https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=400&fit=crop",
-      github: "https://github.com/BulutHamali/drug-discovery-target-prioritization",
-      category: "Bioinformatics"
-    },
+
 
     {
       title: "Single-Cell RNA-seq Analysis Pipeline",
