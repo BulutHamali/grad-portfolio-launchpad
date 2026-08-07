@@ -93,18 +93,6 @@ const Projects = () => {
 
     // ── Bioinformatics & Research projects ─────────────────────────────────
     {
-      title: "Single-Cell RNA-seq Analysis Pipeline",
-      summary: "Comprehensive scRNA-seq analysis of PBMC dataset identifying cell types and biomarkers using R/Seurat pipeline.",
-      background: "Analyzed 2,700 peripheral blood mononuclear cells from 10X Genomics PBMC 3k dataset to identify distinct cell populations and their gene expression profiles, focusing on immune cell characterization.",
-      results: "Identified 8 distinct cell clusters including T cells (35%), monocytes (22%), B cells (18%), and NK cells (12%). Discovered 156 differentially expressed genes with significant immune cell signatures.",
-      tech: ["R", "Seurat", "Bioconductor", "scRNA-seq", "UMAP", "PCA"],
-      image: "https://upload.wikimedia.org/wikipedia/commons/6/64/UMAP_of_somatic_cell_states_%28colour%29_in_the_human_scRNA-seq_%2C_human_scATAC-seq_and_mouse_scRNA-seq_datasets.jpg",
-      imagePosition: "left",
-      category: "Bioinformatics",
-      isDetailed: true,
-      projectPath: "/projects/single-cell-analysis"
-    },
-    {
       title: "MLAnalyzer: Drug Classification Workflow",
       summary: "Complete machine learning pipeline for drug classification using patient characteristics with 99.5% accuracy.",
       background: "Developed a comprehensive ML workflow analyzing synthetic patient records to predict optimal drug treatment based on age, sex, blood pressure, cholesterol, and Na/K ratio.",
