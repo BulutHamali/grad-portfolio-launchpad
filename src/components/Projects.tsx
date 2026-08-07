@@ -57,6 +57,40 @@ const Projects = () => {
       category: "AI/ML & Cloud"
     },
 
+    // ── Reproducell platforms in progress ──────────────────────────────────
+    {
+      title: "Perturb-seq",
+      description: "Interactive Reproducell platform for analyzing perturbation-based single-cell experiments and exploring gene-expression responses.",
+      tech: ["Perturb-seq", "scRNA-seq", "AWS", "React"],
+      image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=400&fit=crop",
+      live: "https://perturb-reproducell.vercel.app",
+      category: "In Progress"
+    },
+    {
+      title: "Spatial Transcriptomics",
+      description: "Interactive Reproducell platform for mapping gene expression to tissue location and exploring spatial biology workflows.",
+      tech: ["Spatial Transcriptomics", "Visium", "AWS", "React"],
+      image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&h=400&fit=crop",
+      live: "https://spatial-reproducell.vercel.app",
+      category: "In Progress"
+    },
+    {
+      title: "Multi-omics",
+      description: "Interactive Reproducell platform for connecting multiple omics modalities and building reproducible analysis workflows.",
+      tech: ["Multi-omics", "Data Integration", "AWS", "React"],
+      image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=600&h=400&fit=crop",
+      live: "https://multiomics-reproducell.vercel.app",
+      category: "In Progress"
+    },
+    {
+      title: "Genomics",
+      description: "Interactive Reproducell platform for reproducible genomic analysis, from sequencing inputs through variant and cohort exploration.",
+      tech: ["Genomics", "Variant Analysis", "AWS", "React"],
+      image: "https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=600&h=400&fit=crop",
+      live: "https://genomics-reproducell.vercel.app",
+      category: "In Progress"
+    },
+
     // ── Bioinformatics & Research projects ─────────────────────────────────
     {
       title: "Single-Cell RNA-seq Analysis Pipeline",
@@ -94,7 +128,7 @@ const Projects = () => {
     }
   ];
 
-  const categories = ["All", "AI/ML & Cloud", "Bioinformatics"];
+  const categories = ["All", "AI/ML & Cloud", "Bioinformatics", "In Progress"];
   const [selectedCategory, setSelectedCategory] = React.useState("All");
 
   const filteredProjects = selectedCategory === "All"
@@ -142,7 +176,9 @@ const Projects = () => {
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                       project.category === 'AI/ML & Cloud'
                         ? 'bg-blue-100 text-blue-800'
-                        : 'bg-purple-100 text-purple-800'
+                        : project.category === 'In Progress'
+                          ? 'bg-amber-100 text-amber-800'
+                          : 'bg-purple-100 text-purple-800'
                     }`}>
                       {project.category}
                     </span>
