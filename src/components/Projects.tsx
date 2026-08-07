@@ -16,7 +16,7 @@ interface Project {
   github?: string;
   live?: string;
   category: string;
-  status?: "upcoming";
+  status?: "in-development";
   isDetailed?: boolean;
   projectPath?: string;
 }
@@ -86,8 +86,8 @@ const Projects = () => {
       tech: ["Perturb-seq", "scRNA-seq", "AWS", "React"],
       image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=400&fit=crop",
       live: "https://perturb-reproducell.vercel.app",
-      category: "Coming Soon",
-      status: "upcoming"
+      category: "In Development",
+      status: "in-development"
     },
     {
       title: "Spatial Transcriptomics",
@@ -95,8 +95,8 @@ const Projects = () => {
       tech: ["Spatial Transcriptomics", "Visium", "AWS", "React"],
       image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&h=400&fit=crop",
       live: "https://spatial-reproducell.vercel.app",
-      category: "Coming Soon",
-      status: "upcoming"
+      category: "In Development",
+      status: "in-development"
     },
     {
       title: "Multi-omics",
@@ -104,8 +104,8 @@ const Projects = () => {
       tech: ["Multi-omics", "Data Integration", "AWS", "React"],
       image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=600&h=400&fit=crop",
       live: "https://multiomics-reproducell.vercel.app",
-      category: "Coming Soon",
-      status: "upcoming"
+      category: "In Development",
+      status: "in-development"
     },
     {
       title: "Genomics",
@@ -113,8 +113,8 @@ const Projects = () => {
       tech: ["Genomics", "Variant Analysis", "AWS", "React"],
       image: "https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=600&h=400&fit=crop",
       live: "https://genomics-reproducell.vercel.app",
-      category: "Coming Soon",
-      status: "upcoming"
+      category: "In Development",
+      status: "in-development"
     },
 
     // ── Bioinformatics & Research projects ─────────────────────────────────
@@ -144,32 +144,32 @@ const Projects = () => {
     }
   ];
 
-  const categories = ["All", "AI/ML & Cloud", "Bioinformatics", "Coming Soon"];
+  const categories = ["All", "AI/ML & Cloud", "Bioinformatics", "In Development"];
   const [selectedCategory, setSelectedCategory] = React.useState("All");
 
   const filteredProjects = selectedCategory === "All"
     ? projects
     : projects.filter(project => project.category === selectedCategory);
   const activeProjects = filteredProjects.filter(project => !project.status);
-  const upcomingProjects = filteredProjects.filter(project => project.status === "upcoming");
+  const upcomingProjects = filteredProjects.filter(project => project.status === "in-development");
 
   const renderProjectCard = (project: Project, index: number) => (
-    <div key={`${project.title}-${index}`} className={`group ${project.status === "upcoming" ? "opacity-75" : ""}`}>
-      <div className={`bg-white rounded-xl shadow-lg transition-all duration-300 overflow-hidden h-full flex flex-col ${project.status === "upcoming" ? "border border-dashed border-slate-300 shadow-sm" : "hover:shadow-xl"}`}>
+    <div key={`${project.title}-${index}`} className="group">
+      <div className={`bg-white rounded-xl shadow-lg transition-all duration-300 overflow-hidden h-full flex flex-col ${project.status === "in-development" ? "border border-amber-200 hover:shadow-xl" : "hover:shadow-xl"}`}>
         <div className="relative overflow-hidden">
           <img
             src={project.image}
             alt={project.title}
             loading="lazy"
-            className={`w-full h-48 object-cover transition-transform duration-300 ${project.status === "upcoming" ? "grayscale" : "group-hover:scale-105"}`}
+            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
             style={{ objectPosition: project.imagePosition ?? "center" }}
           />
           <div className="absolute top-4 right-4">
             <span className={`px-3 py-1 rounded-full text-xs font-medium ${
               project.category === 'AI/ML & Cloud'
                 ? 'bg-blue-100 text-blue-800'
-                : project.status === 'upcoming'
-                  ? 'bg-slate-200 text-slate-700'
+                : project.status === 'in-development'
+                  ? 'bg-amber-100 text-amber-800'
                   : 'bg-purple-100 text-purple-800'
             }`}>
               {project.category}
@@ -203,8 +203,8 @@ const Projects = () => {
             </p>
           )}
 
-          {project.status === "upcoming" && (
-            <p className="text-xs font-medium text-slate-500 mb-2">Planned project — not available yet</p>
+          {project.status === "in-development" && (
+            <p className="text-xs font-medium text-amber-700 mb-2">Concept preview — not available yet</p>
           )}
 
           <div className="flex flex-wrap gap-2 my-4">
@@ -233,7 +233,7 @@ const Projects = () => {
                 </a>
               </Button>
             )}
-            {project.live && project.status !== "upcoming" && (
+            {project.live && project.status !== "in-development" && (
               <Button size="sm" className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700" asChild>
                 <a href={project.live} target="_blank" rel="noopener noreferrer">
                   <ExternalLink size={16} />
@@ -280,10 +280,10 @@ const Projects = () => {
         {upcomingProjects.length > 0 && (
           <div className="mt-16">
             <div className="max-w-3xl mx-auto text-center mb-8">
-              <p className="text-sm font-semibold uppercase tracking-widest text-slate-500 mb-2">On the roadmap</p>
-              <h3 className="text-2xl font-bold text-slate-700 mb-2">Upcoming projects</h3>
+              <p className="text-sm font-semibold uppercase tracking-widest text-amber-700 mb-2">Building next</p>
+              <h3 className="text-2xl font-bold text-slate-700 mb-2">Projects in development</h3>
               <p className="text-slate-500">
-                These concepts are planned for future development and are not available to use yet.
+                These Reproducell platforms are actively being developed. They are concept previews and are not live yet.
               </p>
             </div>
             <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
