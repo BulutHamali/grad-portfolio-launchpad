@@ -16,6 +16,7 @@ interface Project {
   github?: string;
   live?: string;
   category: string;
+  status?: "upcoming";
   isDetailed?: boolean;
   projectPath?: string;
 }
@@ -85,7 +86,8 @@ const Projects = () => {
       tech: ["Perturb-seq", "scRNA-seq", "AWS", "React"],
       image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=400&fit=crop",
       live: "https://perturb-reproducell.vercel.app",
-      category: "In Progress"
+      category: "Coming Soon",
+      status: "upcoming"
     },
     {
       title: "Spatial Transcriptomics",
@@ -93,7 +95,8 @@ const Projects = () => {
       tech: ["Spatial Transcriptomics", "Visium", "AWS", "React"],
       image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&h=400&fit=crop",
       live: "https://spatial-reproducell.vercel.app",
-      category: "In Progress"
+      category: "Coming Soon",
+      status: "upcoming"
     },
     {
       title: "Multi-omics",
@@ -101,7 +104,8 @@ const Projects = () => {
       tech: ["Multi-omics", "Data Integration", "AWS", "React"],
       image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=600&h=400&fit=crop",
       live: "https://multiomics-reproducell.vercel.app",
-      category: "In Progress"
+      category: "Coming Soon",
+      status: "upcoming"
     },
     {
       title: "Genomics",
@@ -109,7 +113,8 @@ const Projects = () => {
       tech: ["Genomics", "Variant Analysis", "AWS", "React"],
       image: "https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=600&h=400&fit=crop",
       live: "https://genomics-reproducell.vercel.app",
-      category: "In Progress"
+      category: "Coming Soon",
+      status: "upcoming"
     },
 
     // ── Bioinformatics & Research projects ─────────────────────────────────
@@ -139,12 +144,108 @@ const Projects = () => {
     }
   ];
 
-  const categories = ["All", "AI/ML & Cloud", "Bioinformatics", "In Progress"];
+  const categories = ["All", "AI/ML & Cloud", "Bioinformatics", "Coming Soon"];
   const [selectedCategory, setSelectedCategory] = React.useState("All");
 
   const filteredProjects = selectedCategory === "All"
     ? projects
     : projects.filter(project => project.category === selectedCategory);
+  const activeProjects = filteredProjects.filter(project => !project.status);
+  const upcomingProjects = filteredProjects.filter(project => project.status === "upcoming");
+
+  const renderProjectCard = (project: Project, index: number) => (
+    <div key={`${project.title}-${index}`} className={`group ${project.status === "upcoming" ? "opacity-75" : ""}`}>
+      <div className={`bg-white rounded-xl shadow-lg transition-all duration-300 overflow-hidden h-full flex flex-col ${project.status === "upcoming" ? "border border-dashed border-slate-300 shadow-sm" : "hover:shadow-xl"}`}>
+        <div className="relative overflow-hidden">
+          <img
+            src={project.image}
+            alt={project.title}
+            loading="lazy"
+            className={`w-full h-48 object-cover transition-transform duration-300 ${project.status === "upcoming" ? "grayscale" : "group-hover:scale-105"}`}
+            style={{ objectPosition: project.imagePosition ?? "center" }}
+          />
+          <div className="absolute top-4 right-4">
+            <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+              project.category === 'AI/ML & Cloud'
+                ? 'bg-blue-100 text-blue-800'
+                : project.status === 'upcoming'
+                  ? 'bg-slate-200 text-slate-700'
+                  : 'bg-purple-100 text-purple-800'
+            }`}>
+              {project.category}
+            </span>
+          </div>
+        </div>
+
+        <div className="p-6 flex-grow flex flex-col">
+          <h3 className="text-xl font-semibold mb-3 text-slate-800">{project.title}</h3>
+
+          {project.highlight && (
+            <div className="mb-4 rounded-lg border border-blue-100 bg-blue-50 px-4 py-3">
+              <p className="text-xs font-semibold uppercase tracking-wide text-blue-700 mb-1">Why it matters</p>
+              <p className="text-sm leading-relaxed text-slate-700">{project.highlight}</p>
+            </div>
+          )}
+
+          {project.isDetailed ? (
+            <div className="space-y-3 flex-grow">
+              <p className="text-sm text-blue-600 font-medium">{project.summary}</p>
+              <p className="text-sm text-slate-600">{project.background}</p>
+              {project.results && (
+                <div className="bg-green-50 p-3 rounded-lg">
+                  <p className="text-xs text-green-700 font-medium">Key Results: {project.results}</p>
+                </div>
+              )}
+            </div>
+          ) : (
+            <p className="text-slate-600 mb-4 text-sm leading-relaxed flex-grow">
+              {project.description}
+            </p>
+          )}
+
+          {project.status === "upcoming" && (
+            <p className="text-xs font-medium text-slate-500 mb-2">Planned project — not available yet</p>
+          )}
+
+          <div className="flex flex-wrap gap-2 my-4">
+            {project.tech.map((tech, techIndex) => (
+              <span key={techIndex} className="px-2 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-700">
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <div className="flex space-x-3 mt-auto">
+            {project.isDetailed && project.projectPath ? (
+              <Button size="sm" className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700" asChild>
+                <Link to={project.projectPath}>
+                  <Code2 size={16} />
+                  <span>View Project</span>
+                  <ArrowRight size={16} />
+                </Link>
+              </Button>
+            ) : null}
+            {project.github && (
+              <Button size="sm" variant="outline" className="flex items-center space-x-2" asChild>
+                <a href={project.github} target="_blank" rel="noopener noreferrer">
+                  <Github size={16} />
+                  <span>Code</span>
+                </a>
+              </Button>
+            )}
+            {project.live && project.status !== "upcoming" && (
+              <Button size="sm" className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700" asChild>
+                <a href={project.live} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink size={16} />
+                  <span>Live Demo</span>
+                </a>
+              </Button>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <section id="projects" className="py-20 bg-slate-50">
@@ -173,99 +274,23 @@ const Projects = () => {
         </div>
 
         <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
-          {filteredProjects.map((project, index) => (
-            <div key={index} className="group">
-              <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden h-full flex flex-col">
-                <div className="relative overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    loading="lazy"
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    style={{ objectPosition: project.imagePosition ?? "center" }}
-                  />
-                  <div className="absolute top-4 right-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      project.category === 'AI/ML & Cloud'
-                        ? 'bg-blue-100 text-blue-800'
-                        : project.category === 'In Progress'
-                          ? 'bg-amber-100 text-amber-800'
-                          : 'bg-purple-100 text-purple-800'
-                    }`}>
-                      {project.category}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-6 flex-grow flex flex-col">
-                  <h3 className="text-xl font-semibold mb-3 text-slate-800">{project.title}</h3>
-
-                  {project.highlight && (
-                    <div className="mb-4 rounded-lg border border-blue-100 bg-blue-50 px-4 py-3">
-                      <p className="text-xs font-semibold uppercase tracking-wide text-blue-700 mb-1">Why it matters</p>
-                      <p className="text-sm leading-relaxed text-slate-700">{project.highlight}</p>
-                    </div>
-                  )}
-
-                  {project.isDetailed ? (
-                    <div className="space-y-3 flex-grow">
-                      <p className="text-sm text-blue-600 font-medium">{project.summary}</p>
-                      <p className="text-sm text-slate-600">{project.background}</p>
-                      {project.results && (
-                        <div className="bg-green-50 p-3 rounded-lg">
-                          <p className="text-xs text-green-700 font-medium">Key Results: {project.results}</p>
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <p className="text-slate-600 mb-4 text-sm leading-relaxed flex-grow">
-                      {project.description}
-                    </p>
-                  )}
-
-                  <div className="flex flex-wrap gap-2 my-4">
-                    {project.tech.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-2 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-700"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex space-x-3 mt-auto">
-                    {project.isDetailed && project.projectPath ? (
-                      <Button size="sm" className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700" asChild>
-                        <Link to={project.projectPath}>
-                          <Code2 size={16} />
-                          <span>View Project</span>
-                          <ArrowRight size={16} />
-                        </Link>
-                      </Button>
-                    ) : null}
-                    {project.github && (
-                      <Button size="sm" variant="outline" className="flex items-center space-x-2" asChild>
-                        <a href={project.github} target="_blank" rel="noopener noreferrer">
-                          <Github size={16} />
-                          <span>Code</span>
-                        </a>
-                      </Button>
-                    )}
-                    {project.live && (
-                      <Button size="sm" className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700" asChild>
-                        <a href={project.live} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink size={16} />
-                          <span>Live Demo</span>
-                        </a>
-                      </Button>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+          {activeProjects.map(renderProjectCard)}
         </div>
+
+        {upcomingProjects.length > 0 && (
+          <div className="mt-16">
+            <div className="max-w-3xl mx-auto text-center mb-8">
+              <p className="text-sm font-semibold uppercase tracking-widest text-slate-500 mb-2">On the roadmap</p>
+              <h3 className="text-2xl font-bold text-slate-700 mb-2">Upcoming projects</h3>
+              <p className="text-slate-500">
+                These concepts are planned for future development and are not available to use yet.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+              {upcomingProjects.map(renderProjectCard)}
+            </div>
+          </div>
+        )}
 
         <div className="text-center mt-12">
           <div className="bg-white rounded-xl p-8 shadow-lg max-w-2xl mx-auto">
