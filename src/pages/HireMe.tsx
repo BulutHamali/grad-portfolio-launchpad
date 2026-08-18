@@ -1,10 +1,9 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { 
+import {
   ArrowRight, 
   Calendar, 
   ExternalLink, 
@@ -23,32 +22,10 @@ import {
   Code,
   Microscope
 } from "lucide-react";
-import { useStripePayment } from "@/hooks/useStripePayment";
-import { toast } from "sonner";
 import { SEO } from "@/components/SEO";
+import { AppointmentRequestForm } from "@/components/AppointmentRequestForm";
 
 const HireMe = () => {
-  const [showEmailInput, setShowEmailInput] = useState(false);
-  const [email, setEmail] = useState("");
-  const { processPayment, isLoading } = useStripePayment();
-
-  const handleBookingClick = () => {
-    setShowEmailInput(true);
-  };
-
-  const handlePaymentAndBooking = async () => {
-    if (!email) {
-      toast.error("Please enter your email address");
-      return;
-    }
-
-    const paymentSuccess = await processPayment(email);
-    if (paymentSuccess) {
-      // Reset form
-      setShowEmailInput(false);
-      setEmail("");
-    }
-  };
   const scrollToContact = () => {
     const element = document.getElementById('contact-form');
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -288,43 +265,9 @@ const HireMe = () => {
                   <span className="text-xl font-medium">Book a 30-Minute Call</span>
                 </div>
                 <p className="text-slate-300 mb-6 text-lg leading-relaxed">
-                  I'd love to learn about your project and explore how we can work together! Let's have a friendly 30-minute conversation to discuss your goals and see how I can help bring your vision to life. Investment: $35
+                  Tell me about your goals and preferred availability. I’ll review your request before any meeting is confirmed—no payment is required.
                 </p>
-                {!showEmailInput ? (
-                  <Button 
-                    onClick={handleBookingClick}
-                    className="bg-blue-600 hover:bg-blue-700 text-white w-full text-lg py-3"
-                  >
-                    Let's Chat on Calendly <Calendar className="ml-2 w-5 h-5" />
-                  </Button>
-                ) : (
-                  <div className="space-y-3">
-                    <Input 
-                      type="email"
-                      placeholder="Enter your email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="bg-white/10 border-white/20 text-white placeholder:text-slate-400"
-                      required
-                    />
-                    <div className="flex space-x-2">
-                      <Button 
-                        onClick={handlePaymentAndBooking}
-                        disabled={isLoading}
-                        className="bg-blue-600 hover:bg-blue-700 text-white flex-1 text-lg py-3"
-                      >
-                        {isLoading ? "Processing..." : "Reserve Your Consultation"}
-                      </Button>
-                      <Button 
-                        onClick={() => setShowEmailInput(false)}
-                        variant="outline"
-                        className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-                      >
-                        Cancel
-                      </Button>
-                    </div>
-                  </div>
-                )}
+                <AppointmentRequestForm dark />
               </div>
             </div>
             
