@@ -72,7 +72,7 @@ const Projects = () => {
       category: "AI/ML & Cloud"
     },
     {
-      title: "Phrased",
+      title: "UsePhrased",
       description: "Micro-SaaS writing improvement tool with paywalled writing tools and free viral translators for growth.",
       tech: ["Next.js", "Claude Haiku", "Stripe", "Supabase", "Vercel"],
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
