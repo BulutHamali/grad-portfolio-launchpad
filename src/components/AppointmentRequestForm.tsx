@@ -86,6 +86,9 @@ export const AppointmentRequestForm = ({ dark = false }: AppointmentRequestFormP
       <p className={dark ? "text-xs text-slate-400" : "text-xs text-slate-500"}>
         No payment is required. A meeting is not confirmed until it is reviewed.
       </p>
+      <p className={dark ? "text-xs text-slate-400" : "text-xs text-slate-500"}>
+        After your request is approved, you’ll receive a Calendly link to choose an available time.
+      </p>
     </form>
   );
 };
