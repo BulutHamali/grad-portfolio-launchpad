@@ -27,6 +27,7 @@ const Projects = () => {
     {
       title: "Spatial Transcriptomics",
       description: "Live Spatial Reproducell platform for reproducible spatial-transcriptomics analysis, guiding researchers from spatial expression and image metadata through quality control, neighborhood structure, cell populations, and a reproducible export bundle.",
+      highlight: "A reproducible path from spatial expression and image metadata to quality control, neighborhood analysis, cell populations, and exportable results, with workflow provenance captured for every run.",
       tech: ["Spatial Transcriptomics", "Seurat", "Scanpy", "AWS", "React"],
       image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&h=400&fit=crop",
       live: "https://spatial-reproducell.vercel.app",
