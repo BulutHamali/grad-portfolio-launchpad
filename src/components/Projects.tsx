@@ -91,8 +91,8 @@ const Projects = () => {
     },
     {
       title: "Spatial Transcriptomics",
-      description: "Interactive Reproducell platform for mapping gene expression to tissue location and exploring spatial biology workflows.",
-      tech: ["Spatial Transcriptomics", "Visium", "AWS", "React"],
+      description: "Live Spatial Reproducell platform for reproducible spatial-transcriptomics analysis, guiding researchers from spatial expression and image metadata through quality control, neighborhood structure, cell populations, and a reproducible export bundle.",
+      tech: ["Spatial Transcriptomics", "Seurat", "Scanpy", "AWS", "React"],
       image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&h=400&fit=crop",
       live: "https://spatial-reproducell.vercel.app",
       category: "In Development",
