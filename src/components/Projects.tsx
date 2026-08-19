@@ -95,8 +95,7 @@ const Projects = () => {
       tech: ["Spatial Transcriptomics", "Seurat", "Scanpy", "AWS", "React"],
       image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&h=400&fit=crop",
       live: "https://spatial-reproducell.vercel.app",
-      category: "In Development",
-      status: "in-development"
+      category: "Bioinformatics"
     },
     {
       title: "Multi-omics",
