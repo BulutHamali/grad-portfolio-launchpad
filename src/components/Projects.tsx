@@ -25,6 +25,30 @@ const Projects = () => {
   const projects: Project[] = [
 
     {
+      title: "Genomics",
+      description: "Live Genomics Reproducell platform guiding researchers from aligned reads and a reference genome to variant calling, quality checks, reviewable reports, and a reproducible workflow record.",
+      tech: ["Genomics", "Variant Calling", "GATK", "AWS", "React"],
+      image: "/reproducell/genomics.svg",
+      live: "https://genomics-reproducell.vercel.app",
+      category: "Bioinformatics"
+    },
+    {
+      title: "Multi-omics",
+      description: "Live Multiomics Reproducell platform guiding researchers from scRNA-seq, scATAC-seq, and spatial inputs to integrated states, regulatory programs, and reproducible biological insights.",
+      tech: ["Multi-omics", "scRNA-seq", "scATAC-seq", "AWS", "React"],
+      image: "/reproducell/multiomics.svg",
+      live: "https://multiomics-reproducell.vercel.app",
+      category: "Bioinformatics"
+    },
+    {
+      title: "Perturb-seq",
+      description: "Live Perturb Reproducell platform guiding researchers from guide-level metadata and single-cell counts to perturbation effects, responder states, and reproducible reports for the next experiment.",
+      tech: ["Perturb-seq", "scRNA-seq", "AWS", "React"],
+      image: "/reproducell/perturb.svg",
+      live: "https://perturb-reproducell.vercel.app",
+      category: "Bioinformatics"
+    },
+    {
       title: "Spatial Transcriptomics",
       description: "Live Spatial Reproducell platform for reproducible spatial-transcriptomics analysis, guiding researchers from spatial expression and image metadata through quality control, neighborhood structure, cell populations, and a reproducible export bundle.",
       highlight: "A reproducible path from spatial expression and image metadata to quality control, neighborhood analysis, cell populations, and exportable results, with workflow provenance captured for every run.",
@@ -33,6 +57,8 @@ const Projects = () => {
       live: "https://spatial-reproducell.vercel.app",
       category: "Bioinformatics"
     },
+
+
     // ── Featured / Recent projects ──────────────────────────────────────────
     {
       title: "scRNA-Reproducell",
@@ -90,30 +116,9 @@ const Projects = () => {
     },
 
     // ── Reproducell platforms in progress ──────────────────────────────────
-    {
-      title: "Perturb-seq",
-      description: "Live Perturb Reproducell platform guiding researchers from guide-level metadata and single-cell counts to perturbation effects, responder states, and reproducible reports for the next experiment.",
-      tech: ["Perturb-seq", "scRNA-seq", "AWS", "React"],
-      image: "/reproducell/perturb.svg",
-      live: "https://perturb-reproducell.vercel.app",
-      category: "Bioinformatics"
-    },
-    {
-      title: "Multi-omics",
-      description: "Live Multiomics Reproducell platform guiding researchers from scRNA-seq, scATAC-seq, and spatial inputs to integrated states, regulatory programs, and reproducible biological insights.",
-      tech: ["Multi-omics", "scRNA-seq", "scATAC-seq", "AWS", "React"],
-      image: "/reproducell/multiomics.svg",
-      live: "https://multiomics-reproducell.vercel.app",
-      category: "Bioinformatics"
-    },
-    {
-      title: "Genomics",
-      description: "Live Genomics Reproducell platform guiding researchers from aligned reads and a reference genome to variant calling, quality checks, reviewable reports, and a reproducible workflow record.",
-      tech: ["Genomics", "Variant Calling", "GATK", "AWS", "React"],
-      image: "/reproducell/genomics.svg",
-      live: "https://genomics-reproducell.vercel.app",
-      category: "Bioinformatics"
-    },
+
+
+
 
     // ── Bioinformatics & Research projects ─────────────────────────────────
 
