@@ -27,6 +27,7 @@ const Projects = () => {
     {
       title: "Genomics",
       description: "Live Genomics Reproducell platform guiding researchers from aligned reads and a reference genome to variant calling, quality checks, reviewable reports, and a reproducible workflow record.",
+      highlight: "A reviewable path from aligned reads and a reference genome to variants, quality checks, scientific validation, and exportable provenance—so every call can be defended and reproduced.",
       tech: ["Genomics", "Variant Calling", "GATK", "AWS", "React"],
       image: "/reproducell/genomics.svg",
       live: "https://genomics-reproducell.vercel.app",
@@ -35,6 +36,7 @@ const Projects = () => {
     {
       title: "Multi-omics",
       description: "Live Multiomics Reproducell platform guiding researchers from scRNA-seq, scATAC-seq, and spatial inputs to integrated states, regulatory programs, and reproducible biological insights.",
+      highlight: "A reproducible way to compare RNA, ATAC, and spatial signals in one workflow, with frozen inputs, AWS evaluation, and provenance that makes integrated states easier to audit.",
       tech: ["Multi-omics", "scRNA-seq", "scATAC-seq", "AWS", "React"],
       image: "/reproducell/multiomics.svg",
       live: "https://multiomics-reproducell.vercel.app",
@@ -43,6 +45,7 @@ const Projects = () => {
     {
       title: "Perturb-seq",
       description: "Live Perturb Reproducell platform guiding researchers from guide-level metadata and single-cell counts to perturbation effects, responder states, and reproducible reports for the next experiment.",
+      highlight: "A structured path from guide-level metadata and single-cell counts to perturbation signatures, responder states, and effect sizes, with a frozen benchmark and reproducible report.",
       tech: ["Perturb-seq", "scRNA-seq", "AWS", "React"],
       image: "/reproducell/perturb.svg",
       live: "https://perturb-reproducell.vercel.app",
