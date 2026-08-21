@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" rx="32" fill="#27183b"/>
+  <g stroke="#f0abfc" stroke-width="5" fill="none" opacity=".85"><path d="M120 470h960"/><path d="M150 470 250 390 350 420 450 250 550 330 650 190 750 280 850 220 950 360 1050 180"/></g>
+  <g fill="#f0abfc"><circle cx="250" cy="390" r="11"/><circle cx="450" cy="250" r="11"/><circle cx="650" cy="190" r="11"/><circle cx="1050" cy="180" r="11"/></g>
+  <g fill="#fef3ff" font-family="Arial,sans-serif" font-size="26"><text x="170" y="535">control</text><text x="430" y="535">guide A</text><text x="690" y="535">guide B</text><text x="930" y="535">responder</text></g>
+  <rect x="90" y="70" width="300" height="54" rx="27" fill="#613d79"/><text x="120" y="106" fill="#ffe4ff" font-family="Arial,sans-serif" font-size="25" font-weight="700">PERTURB REPRODUCELL</text>
+  <text x="90" y="600" fill="#fff" font-family="Arial,sans-serif" font-size="42" font-weight="700">Perturbation effects • responder states</text>
+  <text x="90" y="642" fill="#d9b9e1" font-family="Arial,sans-serif" font-size="25">Norman pilot · signatures · reproducible reports</text>
+</svg>
