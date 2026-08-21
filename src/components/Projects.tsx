@@ -29,7 +29,7 @@ const Projects = () => {
       description: "Live Spatial Reproducell platform for reproducible spatial-transcriptomics analysis, guiding researchers from spatial expression and image metadata through quality control, neighborhood structure, cell populations, and a reproducible export bundle.",
       highlight: "A reproducible path from spatial expression and image metadata to quality control, neighborhood analysis, cell populations, and exportable results, with workflow provenance captured for every run.",
       tech: ["Spatial Transcriptomics", "Seurat", "Scanpy", "AWS", "React"],
-      image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&h=400&fit=crop",
+      image: "/reproducell/spatial.svg",
       live: "https://spatial-reproducell.vercel.app",
       category: "Bioinformatics"
     },
@@ -92,30 +92,27 @@ const Projects = () => {
     // ── Reproducell platforms in progress ──────────────────────────────────
     {
       title: "Perturb-seq",
-      description: "Interactive Reproducell platform for analyzing perturbation-based single-cell experiments and exploring gene-expression responses.",
+      description: "Live Perturb Reproducell platform guiding researchers from guide-level metadata and single-cell counts to perturbation effects, responder states, and reproducible reports for the next experiment.",
       tech: ["Perturb-seq", "scRNA-seq", "AWS", "React"],
-      image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=400&fit=crop",
+      image: "/reproducell/perturb.svg",
       live: "https://perturb-reproducell.vercel.app",
-      category: "In Development",
-      status: "in-development"
+      category: "Bioinformatics"
     },
     {
       title: "Multi-omics",
-      description: "Interactive Reproducell platform for connecting multiple omics modalities and building reproducible analysis workflows.",
-      tech: ["Multi-omics", "Data Integration", "AWS", "React"],
-      image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=600&h=400&fit=crop",
+      description: "Live Multiomics Reproducell platform guiding researchers from scRNA-seq, scATAC-seq, and spatial inputs to integrated states, regulatory programs, and reproducible biological insights.",
+      tech: ["Multi-omics", "scRNA-seq", "scATAC-seq", "AWS", "React"],
+      image: "/reproducell/multiomics.svg",
       live: "https://multiomics-reproducell.vercel.app",
-      category: "In Development",
-      status: "in-development"
+      category: "Bioinformatics"
     },
     {
       title: "Genomics",
-      description: "Interactive Reproducell platform for reproducible genomic analysis, from sequencing inputs through variant and cohort exploration.",
-      tech: ["Genomics", "Variant Analysis", "AWS", "React"],
-      image: "https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=600&h=400&fit=crop",
+      description: "Live Genomics Reproducell platform guiding researchers from aligned reads and a reference genome to variant calling, quality checks, reviewable reports, and a reproducible workflow record.",
+      tech: ["Genomics", "Variant Calling", "GATK", "AWS", "React"],
+      image: "/reproducell/genomics.svg",
       live: "https://genomics-reproducell.vercel.app",
-      category: "In Development",
-      status: "in-development"
+      category: "Bioinformatics"
     },
 
     // ── Bioinformatics & Research projects ─────────────────────────────────
