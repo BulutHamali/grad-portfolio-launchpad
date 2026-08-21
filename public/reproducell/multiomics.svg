@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" rx="32" fill="#102d35"/>
+  <g opacity=".9"><circle cx="330" cy="315" r="150" fill="#22d3ee" opacity=".2"/><circle cx="870" cy="315" r="150" fill="#a78bfa" opacity=".22"/><circle cx="600" cy="420" r="145" fill="#34d399" opacity=".2"/></g>
+  <g fill="none" stroke-width="6"><circle cx="330" cy="315" r="150" stroke="#22d3ee"/><circle cx="870" cy="315" r="150" stroke="#a78bfa"/><circle cx="600" cy="420" r="145" stroke="#34d399"/></g>
+  <g fill="#d8fbff" font-family="Arial,sans-serif" font-size="28" font-weight="700" text-anchor="middle"><text x="330" y="320">scRNA-seq</text><text x="870" y="320">scATAC-seq</text><text x="600" y="426">Spatial</text></g>
+  <rect x="90" y="70" width="280" height="54" rx="27" fill="#1e5960"/><text x="120" y="106" fill="#c9ffff" font-family="Arial,sans-serif" font-size="25" font-weight="700">MULTIOMICS REPRODUCELL</text>
+  <text x="90" y="600" fill="#fff" font-family="Arial,sans-serif" font-size="42" font-weight="700">Integrate modalities • compare states</text>
+  <text x="90" y="642" fill="#a5d6d9" font-family="Arial,sans-serif" font-size="25">RNA + ATAC pilot · AWS evaluation · reproducible export</text>
+</svg>
