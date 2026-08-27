@@ -68,7 +68,7 @@ const Projects = () => {
       description: "Reproducibility-first single-cell RNA-seq analysis platform for QC, clustering, UMAP, marker discovery, and manifest-backed exports.",
       highlight: "A full workflow from matrix upload to reproducible export, with every parameter and software version captured in a run manifest.",
       tech: ["Python", "Scanpy", "React", "AWS", "Nextflow"],
-      image: "https://upload.wikimedia.org/wikipedia/commons/6/64/UMAP_of_somatic_cell_states_%28colour%29_in_the_human_scRNA-seq_%2C_human_scATAC-seq_and_mouse_scRNA-seq_datasets.jpg",
+      image: "/project-screenshots/scrna-reproducell.jpg",
       live: "https://scrna-reproducell.buluthamali.com/",
       category: "Bioinformatics"
     },
