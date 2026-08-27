@@ -163,12 +163,12 @@ const Projects = () => {
   const renderProjectCard = (project: Project, index: number) => (
     <div key={`${project.title}-${index}`} className="group">
       <div className={`bg-white rounded-xl shadow-lg transition-all duration-300 overflow-hidden h-full flex flex-col ${project.status === "in-development" ? "border border-amber-200 hover:shadow-xl" : "hover:shadow-xl"}`}>
-        <div className="relative overflow-hidden">
+        <div className="relative aspect-video overflow-hidden bg-slate-100">
           <img
             src={project.image}
             alt={project.title}
             loading="lazy"
-            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
             style={{ objectPosition: project.imagePosition ?? "center" }}
           />
           <div className="absolute top-4 right-4">
