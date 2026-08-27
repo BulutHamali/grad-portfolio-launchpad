@@ -29,7 +29,7 @@ const Projects = () => {
       description: "Live Genomics Reproducell platform guiding researchers from aligned reads and a reference genome to variant calling, quality checks, reviewable reports, and a reproducible workflow record.",
       highlight: "A reviewable path from aligned reads and a reference genome to variants, quality checks, scientific validation, and exportable provenance—so every call can be defended and reproduced.",
       tech: ["Genomics", "Variant Calling", "GATK", "AWS", "React"],
-      image: "/reproducell/genomics.svg",
+      image: "/project-screenshots/genomics.jpg",
       live: "https://genomics-reproducell.vercel.app",
       category: "Bioinformatics"
     },
@@ -38,7 +38,7 @@ const Projects = () => {
       description: "Live Multiomics Reproducell platform guiding researchers from scRNA-seq, scATAC-seq, and spatial inputs to integrated states, regulatory programs, and reproducible biological insights.",
       highlight: "A reproducible way to compare RNA, ATAC, and spatial signals in one workflow, with frozen inputs, AWS evaluation, and provenance that makes integrated states easier to audit.",
       tech: ["Multi-omics", "scRNA-seq", "scATAC-seq", "AWS", "React"],
-      image: "/reproducell/multiomics.svg",
+      image: "/project-screenshots/multiomics.jpg",
       live: "https://multiomics-reproducell.vercel.app",
       category: "Bioinformatics"
     },
@@ -47,7 +47,7 @@ const Projects = () => {
       description: "Live Perturb Reproducell platform guiding researchers from guide-level metadata and single-cell counts to perturbation effects, responder states, and reproducible reports for the next experiment.",
       highlight: "A structured path from guide-level metadata and single-cell counts to perturbation signatures, responder states, and effect sizes, with a frozen benchmark and reproducible report.",
       tech: ["Perturb-seq", "scRNA-seq", "AWS", "React"],
-      image: "/reproducell/perturb.svg",
+      image: "/project-screenshots/perturb-seq.jpg",
       live: "https://perturb-reproducell.vercel.app",
       category: "Bioinformatics"
     },
@@ -56,7 +56,7 @@ const Projects = () => {
       description: "Live Spatial Reproducell platform for reproducible spatial-transcriptomics analysis, guiding researchers from spatial expression and image metadata through quality control, neighborhood structure, cell populations, and a reproducible export bundle.",
       highlight: "A reproducible path from spatial expression and image metadata to quality control, neighborhood analysis, cell populations, and exportable results, with workflow provenance captured for every run.",
       tech: ["Spatial Transcriptomics", "Seurat", "Scanpy", "AWS", "React"],
-      image: "/reproducell/spatial.svg",
+      image: "/project-screenshots/spatial-transcriptomics.jpg",
       live: "https://spatial-reproducell.vercel.app",
       category: "Bioinformatics"
     },
@@ -87,7 +87,7 @@ const Projects = () => {
       title: "BioSignal Radar",
       description: "Full-stack trend detection platform that surfaces emerging bioinformatics research from bioRxiv preprints using Claude API, PubMed, and GitHub signals.",
       tech: ["Next.js", "Claude API", "Python", "Vercel"],
-      image: "https://images.unsplash.com/photo-1538494604642-0cf477d128a2?w=600&h=400&fit=crop",
+      image: "/project-screenshots/biosignal-radar.jpg",
       live: "https://biosignal-radar.vercel.app",
       // TODO: verify — add GitHub link once repo is public
       category: "AI/ML & Cloud"
@@ -96,7 +96,7 @@ const Projects = () => {
       title: "ClinPilot",
       description: "Multi-agent clinical trial analysis platform using CrewAI and Anthropic's Claude API with cost-optimized orchestration and email notifications.",
       tech: ["CrewAI", "Anthropic API", "Python", "Streamlit"],
-      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop",
+      image: "/project-screenshots/clinpilot.jpg",
       live: "https://clinpilot.buluthamali.com",
       category: "AI/ML & Cloud"
     },
@@ -104,7 +104,7 @@ const Projects = () => {
       title: "UsePhrased",
       description: "Micro-SaaS writing improvement tool with paywalled writing tools and free viral translators for growth.",
       tech: ["Next.js", "Claude Haiku", "Stripe", "Supabase", "Vercel"],
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
+      image: "/project-screenshots/phrased.jpg",
       live: "https://usephrased.com",
       // TODO: verify — add GitHub link if repo becomes public
       category: "AI/ML & Cloud"
@@ -113,7 +113,7 @@ const Projects = () => {
       title: "ResearchGapFinder",
       description: "AI pipeline for detecting scientific knowledge gaps from biomedical literature with a model-agnostic LLM interface supporting Groq, Anthropic, and Ollama.",
       tech: ["Python", "Groq", "Anthropic", "Ollama"],
-      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=400&fit=crop",
+      image: "/project-screenshots/research-gap-finder.jpg",
       live: "https://researchgapfinder.buluthamali.com",
       category: "AI/ML & Cloud"
     },
@@ -132,7 +132,7 @@ const Projects = () => {
       background: "Developed a comprehensive ML workflow analyzing synthetic patient records to predict optimal drug treatment based on age, sex, blood pressure, cholesterol, and Na/K ratio.",
       results: "Achieved 99.5% test accuracy using Random Forest. Comprehensive comparison of 5 ML algorithms with cross-validation, hyperparameter tuning, and detailed performance analysis.",
       tech: ["Python", "Scikit-learn", "XGBoost", "Pandas", "Matplotlib", "Seaborn"],
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop",
+      image: "/project-screenshots/ml-analyzer.png",
       category: "Bioinformatics",
       isDetailed: true,
       projectPath: "/projects/protein-prediction"
@@ -143,7 +143,8 @@ const Projects = () => {
       background: "Developed a complete clinical programming workflow using CDISC Pilot Study data to demonstrate industry-standard clinical data processing. Created analysis-ready datasets (ADaM) and generated tables, listings, and figures (TLFs) following regulatory guidelines.",
       results: "Successfully created ADSL and ADAE datasets with treatment-emergent flags, age groups, and automated pipeline. Generated regulatory-style summary tables and visualizations for adverse event and demographic analysis.",
       tech: ["R", "CDISC Standards", "SDTM", "ADaM", "Clinical Programming", "Regulatory Affairs"],
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop",
+      image: "/project-screenshots/sdtm-adam.png",
+      imagePosition: "center 28%",
       github: "https://github.com/BulutHamali/sdtm-adam-pipeline",
       category: "Bioinformatics",
       isDetailed: true
