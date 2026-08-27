@@ -17,6 +17,7 @@ interface Project {
   live?: string;
   category: string;
   status?: "in-development";
+  developmentNote?: string;
   isDetailed?: boolean;
   projectPath?: string;
 }
@@ -119,8 +120,17 @@ const Projects = () => {
     },
 
     // ── Reproducell platforms in progress ──────────────────────────────────
-
-
+    {
+      title: "OncoAtlas — Breast Cancer Multi-Omics Explorer",
+      description: "A reproducible computational oncology atlas connecting independent public breast cancer cohorts across transcriptomics, single-cell states, spatial context, tumor methylation, and plasma cfDNA.",
+      highlight: "Designed to trace candidate signals across independent cohorts without implying patient matching, with release gates that keep unavailable evidence visibly unavailable.",
+      tech: ["Multi-omics", "Oncology", "Nextflow", "AWS", "React"],
+      image: "/project-screenshots/oncology-multiomics-atlas.jpg",
+      live: "https://oncology-multiomics-atlas.vercel.app",
+      category: "In Development",
+      status: "in-development",
+      developmentNote: "Currently building — the public read-only demo is live while validated scientific artifacts are released."
+    },
 
 
     // ── Bioinformatics & Research projects ─────────────────────────────────
@@ -211,7 +221,9 @@ const Projects = () => {
           )}
 
           {project.status === "in-development" && (
-            <p className="text-xs font-medium text-amber-700 mb-2">Concept preview — not available yet</p>
+            <p className="text-xs font-medium text-amber-700 mb-2">
+              {project.developmentNote ?? "Currently building — features and validated outputs are still being released."}
+            </p>
           )}
 
           <div className="flex flex-wrap gap-2 my-4">
@@ -240,7 +252,7 @@ const Projects = () => {
                 </a>
               </Button>
             )}
-            {project.live && project.status !== "in-development" && (
+            {project.live && (
               <Button size="sm" className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700" asChild>
                 <a href={project.live} target="_blank" rel="noopener noreferrer">
                   <ExternalLink size={16} />
@@ -280,20 +292,22 @@ const Projects = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
-          {activeProjects.map(renderProjectCard)}
-        </div>
+        {activeProjects.length > 0 && (
+          <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+            {activeProjects.map(renderProjectCard)}
+          </div>
+        )}
 
         {upcomingProjects.length > 0 && (
-          <div className="mt-16">
+          <div className={activeProjects.length > 0 ? "mt-16" : "mt-6"}>
             <div className="max-w-3xl mx-auto text-center mb-8">
-              <p className="text-sm font-semibold uppercase tracking-widest text-amber-700 mb-2">Building next</p>
+              <p className="text-sm font-semibold uppercase tracking-widest text-amber-700 mb-2">Currently building</p>
               <h3 className="text-2xl font-bold text-slate-700 mb-2">Projects in development</h3>
               <p className="text-slate-500">
-                These Reproducell platforms are actively being developed. They are concept previews and are not live yet.
+                Active builds with public previews. Interfaces are live while validated scientific artifacts and features continue through release gates.
               </p>
             </div>
-            <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className={`grid gap-8 ${upcomingProjects.length === 1 ? "max-w-3xl mx-auto" : "md:grid-cols-1 lg:grid-cols-2"}`}>
               {upcomingProjects.map(renderProjectCard)}
             </div>
           </div>
