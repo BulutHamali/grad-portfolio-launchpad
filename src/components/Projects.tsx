@@ -121,6 +121,17 @@ const Projects = () => {
 
     // ── Reproducell platforms in progress ──────────────────────────────────
     {
+      title: "BioFlow MLOps",
+      description: "A validated hybrid Kubernetes and HPC MLOps platform for reproducible bioinformatics inference, connecting durable orchestration, portable scientific workflows, and real HPC scheduling.",
+      highlight: "Every result is tied back to its model, data, code, execution environment, and verified artifacts so long-running scientific workflows remain reproducible and auditable.",
+      tech: ["Temporal", "Nextflow", "SLURM", "Kubernetes", "FastAPI"],
+      image: "https://bioflow-mlops.vercel.app/og.png",
+      live: "https://bioflow-mlops.vercel.app/",
+      category: "In Development",
+      status: "in-development",
+      developmentNote: "Currently building — the public technical overview and validated local execution evidence are live."
+    },
+    {
       title: "OncoAtlas — Breast Cancer Multi-Omics Explorer",
       description: "A reproducible computational oncology atlas connecting independent public breast cancer cohorts across transcriptomics, single-cell states, spatial context, tumor methylation, and plasma cfDNA.",
       highlight: "Designed to trace candidate signals across independent cohorts without implying patient matching, with release gates that keep unavailable evidence visibly unavailable.",
