@@ -15,7 +15,7 @@ export const SEO = ({
   canonical = "https://buluthamali.com",
   ogImage = "https://buluthamali.com/lovable-uploads/8c42eaae-f199-448f-a1f3-675e636cb3ed.png",
   ogType = "website",
-  keywords = "Bulut Hamali, AWS Certified Solutions Architect Associate, AWS Certified Cloud Practitioner, cloud engineer, AI ML engineer, AWS, Terraform, computational biology, bioinformatics, Nextflow Ambassador, single-cell RNA-seq, full-stack developer, Next.js, Python, multi-agent AI, PhD biochemistry"
+  keywords = "Bulut Hamali, AWS Certified Solutions Architect Associate, AWS Certified Cloud Practitioner, cloud engineer, AI ML engineer, AWS, Terraform, computational biology, bioinformatics, former Nextflow Ambassador, single-cell RNA-seq, full-stack developer, Next.js, Python, multi-agent AI, PhD biochemistry"
 }: SEOProps) => {
   return (
     <Helmet>

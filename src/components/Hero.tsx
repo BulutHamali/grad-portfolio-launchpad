@@ -53,7 +53,7 @@ const Hero = () => {
           </p>
           <p className="text-lg mb-6 text-slate-400 max-w-3xl mx-auto">
             I architect cloud infrastructure for AI/ML and bioinformatics workloads.
-            AWS Certified Solutions Architect, PhD in Biochemistry, and Nextflow Ambassador,
+            AWS Certified Solutions Architect, PhD in Biochemistry, and former Nextflow Ambassador,
             based in Cincinnati, OH.
           </p>
 
@@ -76,7 +76,7 @@ const Hero = () => {
               <div className="w-6 h-6 bg-emerald-500 rounded flex items-center justify-center">
                 <span className="text-white text-xs font-bold">nf</span>
               </div>
-              <span className="text-cyan-300 font-medium text-sm">Nextflow Ambassador</span>
+              <span className="text-cyan-300 font-medium text-sm">Former Nextflow Ambassador</span>
             </div>
             <div
               onClick={() => window.open('https://www.linkedin.com/in/bulut-hamali/', '_blank', 'noopener,noreferrer')}

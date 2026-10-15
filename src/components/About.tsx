@@ -45,7 +45,7 @@ const About = () => {
                 spatial transcriptomics, genomic variant calling — need serious compute, and managing that compute
                 well requires real engineering. I earned the AWS Certified Solutions Architect – Associate and
                 AWS Certified Cloud Practitioner credentials while building expertise in AWS, Terraform, and Docker
-                to scale these kinds of workflows. I'm also a Nextflow Ambassador, which puts me at the center of
+                to scale these kinds of workflows. I previously served as a Nextflow Ambassador, connecting me with
                 the workflow orchestration community in bioinformatics.
               </p>
               <p>
