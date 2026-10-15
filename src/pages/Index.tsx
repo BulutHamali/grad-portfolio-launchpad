@@ -1,27 +1,45 @@
-import Hero from "@/components/Hero";
-import VideoIntro from "@/components/VideoIntro";
-import About from "@/components/About";
-import Certifications from "@/components/Certifications";
-import Skills from "@/components/Skills";
-import Projects from "@/components/Projects";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import { useState } from "react";
+import { ArrowUpRight, ArrowRight, Menu, X } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import "@/styles/portfolio.css";
 
-const Index = () => {
-  return (
-    <div className="min-h-screen font-inter">
-      <SEO />
-      <Hero />
-      <Projects />
-      <VideoIntro />
-      <About />
-      <Certifications />
-      <Skills />
-      <Contact />
-      <Footer />
-    </div>
-  );
-};
+const projects = [
+  ["BioSignal Radar", "AI applications", "Research trends, surfaced from biomedical literature.", "https://biosignal-radar.vercel.app"],
+  ["ClinPilot", "AI applications", "Multi-agent analysis for clinical trial research.", "https://clinpilot.buluthamali.com"],
+  ["UsePhrased", "AI applications", "A writing product with paid tools and free translators.", "https://usephrased.com"],
+  ["MLAnalyzer", "Scientific computing", "A drug-classification workflow using synthetic patient data.", "/projects/protein-prediction"],
+  ["SDTM & ADaM", "Scientific computing", "Clinical data preparation and reporting using CDISC standards.", "https://github.com/BulutHamali/sdtm-adam-pipeline"],
+  ["BioFlow MLOps", "In development", "Connecting Kubernetes, HPC, and reproducible scientific inference.", "https://bioflow-mlops.vercel.app/"],
+  ["OncoAtlas", "In development", "Exploring breast cancer signals across independent public cohorts.", "https://oncology-multiomics-atlas.vercel.app"],
+];
+const platforms = [["Single-cell", "https://scrna-reproducell.buluthamali.com/"], ["Genomics", "https://genomics-reproducell.vercel.app"], ["Multi-omics", "https://multiomics-reproducell.vercel.app"], ["Perturb-seq", "https://perturb-reproducell.vercel.app"], ["Spatial", "https://spatial-reproducell.vercel.app"]];
+const credentials = [
+  ["Solutions Architect – Associate", "aws-solutions-architect-associate.png", "39436f04-6e17-4ae4-a5ab-1d3857e395bc", "October 2026"],
+  ["Cloud Practitioner", "aws-cloud-practitioner.png", "d3824c24-1683-45fc-84f1-ffde614283db", "May 2026"],
+];
+const External = ({href, children}: {href: string; children: React.ReactNode}) => <a className="text-link" href={href} target="_blank" rel="noopener noreferrer">{children}<ArrowUpRight size={16}/></a>;
 
-export default Index;
+export default function Index() {
+  const [menu, setMenu] = useState(false);
+  const [filter, setFilter] = useState("All");
+  return <div className="portfolio">
+    <SEO/>
+    <a className="skip-link" href="#main">Skip to content</a>
+    <header className="site-header"><nav className="shell nav-inner" aria-label="Main navigation"><a className="wordmark" href="#top">Bulut Hamali<span>, PhD</span></a><button className="menu-toggle" aria-label={menu ? "Close navigation" : "Open navigation"} aria-expanded={menu} aria-controls="navigation" onClick={() => setMenu(!menu)}>{menu ? <X/> : <Menu/>}</button><div id="navigation" className={`nav-links ${menu ? "is-open" : ""}`}>{[["Work","projects"],["Expertise","skills"],["About","about"],["Let’s talk","contact"]].map(([title,id]) => <a key={id} href={`#${id}`} onClick={() => setMenu(false)}>{title}{id === "contact" && <ArrowUpRight size={14}/>}</a>)}</div></nav></header>
+    <main id="main">
+      <section id="top" className="hero shell"><p className="eyebrow">Cloud & AI engineer · Computational biologist</p><h1>Cloud engineering.<br/><span>Grounded in science.</span></h1><p className="hero-description">I’m Bulut, an AWS-certified engineer with a PhD in Biochemistry. I build AI applications and scientific platforms that make complex work easier to trust.</p><div className="hero-actions"><a className="primary-link" href="#projects">Explore my work <ArrowRight size={17}/></a><a className="text-link" href="#contact">Get in touch <ArrowUpRight size={17}/></a></div><div className="hero-signature"><img src="/lovable-uploads/82761cb4-70b4-4bb4-a6a3-7e5bc399331c.png" alt="Bulut Hamali" width="44" height="44"/><div><strong>Science to software.</strong><span>Based in Cincinnati, Ohio.</span></div><a href="#certifications">2× AWS Certified <ArrowUpRight size={14}/></a></div></section>
+      <section id="projects" className="work-section section-pad"><div className="shell"><div className="section-heading"><div><p className="eyebrow">Selected work / 01—03</p><h2>Built for real questions.</h2></div><p>From scientific data to usable tools.<br/>A closer look at what I build.</p></div>
+        <article className="feature feature-main"><div className="feature-copy"><p className="eyebrow">01 / Scientific platforms</p><h3>Reproducell</h3><p className="feature-lead">Complex biology.<br/><span>A clearer path to reproducible results.</span></p><p className="feature-detail">A family of analysis platforms connecting quality control, biological interpretation, and exportable workflow records.</p><External href={platforms[0][1]}>Explore the single-cell platform</External></div><div className="feature-visual"><div className="browser-bar"><i/><i/><i/><small>Reproducell / single-cell analysis</small></div><img src="/project-screenshots/scrna-reproducell.jpg" alt="Reproducell single-cell analysis interface" width="1440" height="900" loading="lazy"/></div><div className="platform-links"><span>Explore the family</span>{platforms.map(([name,url]) => <External key={name} href={url}>{name}</External>)}</div></article>
+        <div className="feature-pair"><article className="feature"><div className="feature-copy"><p className="eyebrow">02 / Machine learning + genomics</p><h3>Better evidence.<br/>Better target selection.</h3><p className="feature-detail">Drug Discovery Target Prioritization combines population genetics and functional genomics in a leakage-safe ML workflow.</p><div className="result"><strong>5.59×</strong><span>enrichment in the top 1% of ranked genes<br/>against a later clinical-phase release</span></div><External href="https://drugtargets.buluthamali.com/">Explore the project</External></div><div className="project-note">Python · AWS Batch · Nextflow · Terraform</div></article><article className="feature research-feature"><div className="feature-copy"><p className="eyebrow">03 / Applied AI</p><h3>Find the questions<br/>worth asking.</h3><p className="feature-detail">ResearchGapFinder surfaces under-explored areas in biomedical literature, with interchangeable LLM backends.</p><External href="https://researchgapfinder.buluthamali.com">Explore ResearchGapFinder</External></div><img src="/project-screenshots/research-gap-finder.jpg" alt="ResearchGapFinder application interface" width="1200" height="750" loading="lazy"/></article></div>
+      </div></section>
+      <section id="skills" className="shell section-pad"><p className="eyebrow">How I work</p><h2>Three disciplines.<br/>One connected approach.</h2><div className="expertise-grid">{[
+        ["Cloud infrastructure","Designing the systems behind demanding workloads, from infrastructure as code to portable scientific workflows.","AWS · Terraform · Docker · Nextflow","Drug Discovery Target Prioritization"],
+        ["AI applications","Turning models into useful products with thoughtful interfaces, reliable APIs, and practical orchestration.","Python · React · Next.js · LLM APIs","ResearchGapFinder & ClinPilot"],
+        ["Scientific computing","Bringing biological context to data analysis, with reproducibility and reviewable results built into the workflow.","Scanpy · Seurat · R · Multi-omics","The Reproducell platform family"],
+      ].map(([title,description,tools,evidence],i) => <article key={title}><span className="discipline-number">0{i+1}</span><h3>{title}</h3><p>{description}</p><small>{tools}</small><span className="evidence">In practice: {evidence}</span></article>)}</div></section>
+      <section id="about" className="about-section section-pad"><div className="shell"><div className="about-grid"><div><p className="eyebrow">The person behind the work</p><h2>From the lab bench<br/>to the cloud.</h2><img className="portrait" src="/lovable-uploads/82761cb4-70b4-4bb4-a6a3-7e5bc399331c.png" alt="Portrait of Bulut Hamali" width="230" height="230" loading="lazy"/></div><div className="about-copy"><p>I started with pipettes, cell cultures, and a PhD in Biochemistry at the Medical University of Vienna. Working with sequencing data led me into computational biology—and then into the infrastructure that makes it possible.</p><p>Today, I bring that scientific perspective to cloud engineering and AI development. I care about tools that are useful to the people using them, and results that can be understood and reproduced.</p><p>I previously served as a <strong>Nextflow Ambassador</strong> and share research and technical work through publications and my blog.</p><div className="about-links"><External href="https://scholar.google.com.sg/citations?user=aQ0Ml_wAAAAJ&hl=en">Publications</External><External href="https://bioinformaticsuniverse.com">Technical writing</External></div><div className="education"><span>PhD · Biochemistry</span><small>Medical University of Vienna</small><span>MS · Genetics & Developmental Biology</span><small>University of Vienna</small><span>BS · Molecular Biology & Genetics</span><small>Halic University</small></div></div></div><div id="certifications" className="credentials"><div><p className="eyebrow">AWS certifications</p><h3>Knowledge.<br/>Independently verified.</h3></div>{credentials.map(([name,image,id,issued]) => <a className="credential" key={id} href={`https://www.credly.com/badges/${id}`} target="_blank" rel="noopener noreferrer"><img src={`/certifications/${image}`} alt={`AWS Certified ${name} badge`} width="90" height="90" loading="lazy"/><div><small>AWS Certified</small><h4>{name}</h4><span>Issued {issued}<br/>Valid through October 2029</span><strong>Verify credential <ArrowUpRight size={13}/></strong></div></a>)}</div></div></section>
+      <section className="shell section-pad" aria-labelledby="more-work"><p className="eyebrow">Further exploration</p><h2 id="more-work">More things I’m building.</h2><div className="work-filters" role="group" aria-label="Filter projects">{["All","AI applications","Scientific computing","In development"].map(item => <button key={item} aria-pressed={filter === item} onClick={() => setFilter(item)}>{item}</button>)}</div><div className="project-list" aria-live="polite">{projects.filter(item => filter === "All" || item[1] === filter).map(([name,category,description,url]) => <a className="project-row" key={name} href={url} {...(url.startsWith("https") ? {target:"_blank",rel:"noopener noreferrer"} : {})}><div><h3>{name}</h3><span className={category === "In development" ? "development-label" : ""}>{category}</span></div><p>{description}</p><ArrowUpRight size={20}/></a>)}</div><p className="development-caption">Projects marked “In development” have public previews; features and scientific validation are still progressing.</p></section>
+      <section id="contact" className="contact-section section-pad"><div className="shell contact-grid"><div><p className="eyebrow">Let’s connect</p><h2>Have something<br/>in mind?</h2><p>I’m open to engineering roles, research collaborations, and thoughtful technical projects.</p><a className="text-link" href="/hire-me">Services & meeting requests <ArrowUpRight size={17}/></a><div className="about-links"><External href="https://github.com/BulutHamali">GitHub</External><External href="https://www.linkedin.com/in/bulut-hamali/">LinkedIn</External></div></div><form action="https://formspree.io/f/xeokdkaq" method="POST"><div className="form-pair"><label htmlFor="contact-name">Name<input id="contact-name" name="name" autoComplete="name" required/></label><label htmlFor="contact-email">Email<input id="contact-email" name="email" type="email" autoComplete="email" required/></label></div><label htmlFor="contact-subject">Subject<input id="contact-subject" name="subject" required/></label><label htmlFor="contact-message">What would you like to work on?<textarea id="contact-message" name="message" rows={4} required/></label><button className="primary-link" type="submit">Send message <ArrowUpRight size={17}/></button></form></div></section>
+    </main><footer className="shell site-footer"><span>© {new Date().getFullYear()} Bulut Hamali</span><span>Science. Software. A little curiosity.</span><a href="#top">Back to top ↑</a></footer>
+  </div>;
+}
