@@ -1,4 +1,7 @@
 {
+  "redirects": [
+    { "source": "/hire-me", "destination": "/#contact", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
   ]

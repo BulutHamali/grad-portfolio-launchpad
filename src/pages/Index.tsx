@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { ArrowUpRight, ArrowRight, Menu, X } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import "@/styles/portfolio.css";
@@ -87,6 +88,12 @@ const External = ({
 );
 
 export default function Index() {
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (hash === "#contact") {
+      document.getElementById("contact")?.scrollIntoView();
+    }
+  }, [hash]);
   const [menu, setMenu] = useState(false);
   const [filter, setFilter] = useState("All");
   return (
@@ -485,17 +492,15 @@ export default function Index() {
             <div>
               <p className="eyebrow">Let’s connect</p>
               <h2>
-                Have something
+                Let’s build
                 <br />
-                in mind?
+                something useful.
               </h2>
               <p>
-                I’m open to engineering roles, research collaborations, and
-                thoughtful technical projects.
+                I’m open to cloud and AI engineering roles, research
+                collaborations, and projects involving data, software, and
+                scientific workflows.
               </p>
-              <a className="text-link" href="/hire-me">
-                Services & meeting requests <ArrowUpRight size={17} />
-              </a>
               <div className="about-links">
                 <External href="https://github.com/BulutHamali">
                   GitHub

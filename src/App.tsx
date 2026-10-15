@@ -3,10 +3,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
 import Index from "./pages/Index";
-import HireMe from "./pages/HireMe";
 import NotFound from "./pages/NotFound";
 import SingleCellAnalysis from "./pages/projects/SingleCellAnalysis";
 import SpatialTranscriptomics from "./pages/projects/SpatialTranscriptomics";
@@ -24,7 +23,7 @@ const App = () => (
         <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/hire-me" element={<HireMe />} />
+          <Route path="/hire-me" element={<Navigate to="/#contact" replace />} />
           <Route path="/projects/single-cell-analysis" element={<SingleCellAnalysis />} />
           <Route path="/projects/spatial-transcriptomics" element={<SpatialTranscriptomics />} />
           <Route path="/projects/genomic-variants" element={<GenomicVariants />} />
