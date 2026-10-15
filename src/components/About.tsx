@@ -43,8 +43,9 @@ const About = () => {
               <p>
                 That transition from bench to code led me to cloud infrastructure. Scientific workloads — scRNA-seq,
                 spatial transcriptomics, genomic variant calling — need serious compute, and managing that compute
-                well requires real engineering. I built expertise in AWS, Terraform, and Docker specifically to
-                scale these kinds of workflows. I'm also a Nextflow Ambassador, which puts me at the center of
+                well requires real engineering. I earned the AWS Certified Solutions Architect – Associate and
+                AWS Certified Cloud Practitioner credentials while building expertise in AWS, Terraform, and Docker
+                to scale these kinds of workflows. I'm also a Nextflow Ambassador, which puts me at the center of
                 the workflow orchestration community in bioinformatics.
               </p>
               <p>

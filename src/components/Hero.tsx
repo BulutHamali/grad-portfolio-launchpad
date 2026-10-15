@@ -53,12 +53,25 @@ const Hero = () => {
           </p>
           <p className="text-lg mb-6 text-slate-400 max-w-3xl mx-auto">
             I architect cloud infrastructure for AI/ML and bioinformatics workloads.
-            PhD in Biochemistry, Nextflow Ambassador, based in Cincinnati, OH.
-            {/* TODO: verify — add "AWS-certified" once SAA exam is passed */}
+            AWS Certified Solutions Architect, PhD in Biochemistry, and Nextflow Ambassador,
+            based in Cincinnati, OH.
           </p>
 
           {/* Professional Badges */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
+            <a
+              href="#certifications"
+              className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 flex items-center space-x-3 border border-orange-400/30 hover:bg-white/20 transition-colors"
+            >
+              <img
+                src="/certifications/aws-solutions-architect-associate.png"
+                alt=""
+                width="28"
+                height="28"
+                className="h-7 w-7 object-contain"
+              />
+              <span className="text-orange-300 font-medium text-sm">2× AWS Certified</span>
+            </a>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 flex items-center space-x-3 border border-white/20">
               <div className="w-6 h-6 bg-emerald-500 rounded flex items-center justify-center">
                 <span className="text-white text-xs font-bold">nf</span>
