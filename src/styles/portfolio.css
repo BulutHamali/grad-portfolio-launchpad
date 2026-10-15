@@ -152,7 +152,21 @@
   padding-top: 26px;
   border-top: 1px solid #e0e0df;
 }
-.portfolio .hero-signature img {
+.portfolio .profile-frame {
+  display: block;
+  overflow: hidden;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.portfolio .profile-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 43% 50%;
+  transform: scale(1.12);
+}
+.portfolio .hero-signature .profile-frame {
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -688,7 +702,7 @@
     font-size: 10px;
     gap: 4px;
   }
-  .portfolio .hero-signature img {
+  .portfolio .hero-signature .profile-frame {
     width: 35px;
     height: 35px;
   }

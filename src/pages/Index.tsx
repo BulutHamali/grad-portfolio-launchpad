@@ -148,12 +148,14 @@ export default function Index() {
             </a>
           </div>
           <div className="hero-signature">
-            <img
-              src="/bulut-hamali-profile.jpeg"
-              alt="Bulut Hamali"
-              width="44"
-              height="44"
-            />
+            <span className="profile-frame">
+              <img
+                src="/bulut-hamali-profile.jpeg"
+                alt="Bulut Hamali"
+                width="44"
+                height="44"
+              />
+            </span>
             <div>
               <strong>Science to software.</strong>
               <span>Based in Cincinnati, Ohio.</span>
@@ -321,14 +323,15 @@ export default function Index() {
                   <br />
                   to the cloud.
                 </h2>
-                <img
-                  className="portrait"
-                  src="/bulut-hamali-profile.jpeg"
-                  alt="Portrait of Bulut Hamali"
-                  width="230"
-                  height="230"
-                  loading="lazy"
-                />
+                <span className="profile-frame portrait">
+                  <img
+                    src="/bulut-hamali-profile.jpeg"
+                    alt="Portrait of Bulut Hamali"
+                    width="230"
+                    height="230"
+                    loading="lazy"
+                  />
+                </span>
               </div>
               <div className="about-copy">
                 <p>
@@ -344,16 +347,25 @@ export default function Index() {
                   understood and reproduced.
                 </p>
                 <p>
-                  I share research and technical work through publications
-                  and a community of 6,000+ followers on LinkedIn.
+                  I share research and technical work through publications and a
+                  community of 6,000+ followers on LinkedIn.
                 </p>
-                <div className="community-credentials" aria-label="Professional community">
+                <div
+                  className="community-credentials"
+                  aria-label="Professional community"
+                >
                   <div>
                     <strong>Former Nextflow Ambassador</strong>
                     <span>Scientific workflow community</span>
                   </div>
-                  <a href="https://www.linkedin.com/in/bulut-hamali/" target="_blank" rel="noopener noreferrer">
-                    <strong>6,000+ LinkedIn followers <ArrowUpRight size={14} /></strong>
+                  <a
+                    href="https://www.linkedin.com/in/bulut-hamali/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <strong>
+                      6,000+ LinkedIn followers <ArrowUpRight size={14} />
+                    </strong>
                     <span>Connect and follow my work</span>
                   </a>
                 </div>
