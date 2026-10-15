@@ -404,6 +404,29 @@
   gap: 26px;
   margin-top: 26px;
 }
+.portfolio .community-credentials {
+  display: grid;
+  gap: 18px;
+  margin: 26px 0;
+  padding-left: 18px;
+  border-left: 2px solid #cbd0d6;
+}
+.portfolio .community-credentials strong {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 550;
+}
+.portfolio .community-credentials span {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.portfolio .community-credentials a:hover strong {
+  color: var(--blue);
+}
 .portfolio .education {
   display: grid;
   gap: 5px;

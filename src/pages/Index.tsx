@@ -344,10 +344,19 @@ export default function Index() {
                   understood and reproduced.
                 </p>
                 <p>
-                  I previously served as a <strong>Nextflow Ambassador</strong>{" "}
-                  and share research and technical work through publications and
-                  my blog.
+                  I share research and technical work through publications,
+                  my blog, and a community of 6,000+ followers on LinkedIn.
                 </p>
+                <div className="community-credentials" aria-label="Professional community">
+                  <div>
+                    <strong>Former Nextflow Ambassador</strong>
+                    <span>Scientific workflow community</span>
+                  </div>
+                  <a href="https://www.linkedin.com/in/bulut-hamali/" target="_blank" rel="noopener noreferrer">
+                    <strong>6,000+ LinkedIn followers <ArrowUpRight size={14} /></strong>
+                    <span>Connect and follow my work</span>
+                  </a>
+                </div>
                 <div className="about-links">
                   <External href="https://scholar.google.com.sg/citations?user=aQ0Ml_wAAAAJ&hl=en">
                     Publications
