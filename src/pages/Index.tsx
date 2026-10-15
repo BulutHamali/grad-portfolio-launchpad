@@ -441,18 +441,30 @@ export default function Index() {
               <div className="training-item">
                 <h4>AI Solutions Developer</h4>
                 <p>Per Scholas · Career Accelerator</p>
+                <p>Valedictorian · May 20, 2026</p>
                 <a
                   className="training-distinction"
-                  href="https://www.linkedin.com/posts/karales_three-months-ago-this-was-a-half-formed-idea-activity-7473029616480198656-UnZv"
+                  href="/certifications/per-scholas-ai-valedictorian.png"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="View AI Solutions Developer Valedictorian Award (opens in a new tab)"
                 >
-                  Valedictorian Award <ArrowUpRight size={13} />
+                  View award <ArrowUpRight size={13} />
                 </a>
               </div>
               <div className="training-item">
-                <h4>Software Engineering</h4>
+                <h4>Software Engineering Training Course</h4>
                 <p>Per Scholas</p>
+                <p>Completed August 5, 2025</p>
+                <a
+                  className="training-distinction"
+                  href="/certifications/per-scholas-software-engineering.png"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View Software Engineering certificate of completion (opens in a new tab)"
+                >
+                  View certificate <ArrowUpRight size={13} />
+                </a>
               </div>
             </section>
           </div>
