@@ -32,7 +32,7 @@ const Hero = () => {
           <div className="mb-8 flex justify-center">
             <div className="relative">
               <img
-                src="/lovable-uploads/82761cb4-70b4-4bb4-a6a3-7e5bc399331c.png"
+                src="/bulut-hamali-profile.jpeg"
                 alt="Bulut Hamali, PhD"
                 className="w-48 h-48 rounded-full object-cover border-4 border-blue-400 shadow-2xl"
               />

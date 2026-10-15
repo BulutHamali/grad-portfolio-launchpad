@@ -149,7 +149,7 @@ export default function Index() {
           </div>
           <div className="hero-signature">
             <img
-              src="/lovable-uploads/82761cb4-70b4-4bb4-a6a3-7e5bc399331c.png"
+              src="/bulut-hamali-profile.jpeg"
               alt="Bulut Hamali"
               width="44"
               height="44"
@@ -323,7 +323,7 @@ export default function Index() {
                 </h2>
                 <img
                   className="portrait"
-                  src="/lovable-uploads/82761cb4-70b4-4bb4-a6a3-7e5bc399331c.png"
+                  src="/bulut-hamali-profile.jpeg"
                   alt="Portrait of Bulut Hamali"
                   width="230"
                   height="230"
