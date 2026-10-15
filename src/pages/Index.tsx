@@ -135,9 +135,9 @@ export default function Index() {
             <span>Grounded in science.</span>
           </h1>
           <p className="hero-description">
-            I’m Bulut, an AWS-certified engineer with a PhD in Biochemistry. I
-            build AI applications and scientific platforms that make complex
-            work easier to trust.
+            I’m Bulut, an AWS Certified Solutions Architect – Associate with a
+            PhD in Biochemistry. I build cloud-based AI applications and
+            scientific platforms that make complex work easier to trust.
           </p>
           <div className="hero-actions">
             <a className="primary-link" href="#projects">
