@@ -344,8 +344,8 @@ export default function Index() {
                   understood and reproduced.
                 </p>
                 <p>
-                  I share research and technical work through publications,
-                  my blog, and a community of 6,000+ followers on LinkedIn.
+                  I share research and technical work through publications
+                  and a community of 6,000+ followers on LinkedIn.
                 </p>
                 <div className="community-credentials" aria-label="Professional community">
                   <div>
@@ -360,9 +360,6 @@ export default function Index() {
                 <div className="about-links">
                   <External href="https://scholar.google.com.sg/citations?user=aQ0Ml_wAAAAJ&hl=en">
                     Publications
-                  </External>
-                  <External href="https://bioinformaticsuniverse.com">
-                    Technical writing
                   </External>
                 </div>
                 <div className="education">

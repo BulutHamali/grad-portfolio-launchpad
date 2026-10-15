@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Globe } from "lucide-react";
 
 const About = () => {
   return (
@@ -74,15 +73,6 @@ const About = () => {
                     onClick={() => window.open("https://scholar.google.com.sg/citations?user=aQ0Ml_wAAAAJ&hl=en", "_blank")}
                   >
                     View Publications
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white"
-                    onClick={() => window.open("https://bioinformaticsuniverse.com", "_blank")}
-                  >
-                    <Globe size={14} className="mr-1" />
-                    Visit My Blog
                   </Button>
                 </div>
               </div>
