@@ -430,6 +430,31 @@ export default function Index() {
                 </a>
               ))}
             </div>
+            <section
+              className="additional-training"
+              aria-labelledby="training-title"
+            >
+              <div>
+                <p className="eyebrow">Additional training</p>
+                <h3 id="training-title">Software & applied AI.</h3>
+              </div>
+              <div className="training-item">
+                <h4>AI Solutions Developer</h4>
+                <p>Per Scholas · Career Accelerator</p>
+                <a
+                  className="training-distinction"
+                  href="https://www.linkedin.com/posts/karales_three-months-ago-this-was-a-half-formed-idea-activity-7473029616480198656-UnZv"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Valedictorian Award <ArrowUpRight size={13} />
+                </a>
+              </div>
+              <div className="training-item">
+                <h4>Software Engineering</h4>
+                <p>Per Scholas</p>
+              </div>
+            </section>
           </div>
         </section>
         <section className="shell section-pad" aria-labelledby="more-work">

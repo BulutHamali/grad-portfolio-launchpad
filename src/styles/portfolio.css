@@ -473,6 +473,52 @@
 .portfolio .credentials .eyebrow {
   margin-bottom: 12px;
 }
+.portfolio .additional-training {
+  display: grid;
+  grid-template-columns: 0.85fr 1fr 1fr;
+  gap: 25px;
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid #e0e0df;
+  align-items: start;
+}
+.portfolio .additional-training .eyebrow {
+  margin-bottom: 8px;
+}
+.portfolio .additional-training h3 {
+  font-size: 17px;
+  font-weight: 550;
+  letter-spacing: -0.3px;
+}
+.portfolio .training-item h4 {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+.portfolio .training-item p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.portfolio .training-distinction {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 500;
+}
+.portfolio .training-distinction:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (max-width: 760px) {
+  .portfolio .additional-training {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+}
 .portfolio .credential {
   display: flex;
   align-items: center;
