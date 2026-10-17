@@ -121,7 +121,7 @@ export default function Index() {
               ["Work", "projects"],
               ["Expertise", "skills"],
               ["About", "about"],
-              ["Let’s talk", "contact"],
+              ["Contact", "contact"],
             ].map(([title, id]) => (
               <a key={id} href={`#${id}`} onClick={() => setMenu(false)}>
                 {title}
@@ -143,12 +143,12 @@ export default function Index() {
           </h1>
           <p className="hero-description">
             I’m Bulut, an AWS Certified Solutions Architect – Associate with a
-            PhD in Biochemistry. I build cloud-based AI applications and
-            scientific platforms that make complex work easier to trust.
+            PhD in Biochemistry. I develop cloud-based applications, AI tools,
+            and reproducible workflows for scientific data.
           </p>
           <div className="hero-actions">
             <a className="primary-link" href="#projects">
-              Explore my work <ArrowRight size={17} />
+              View projects <ArrowRight size={17} />
             </a>
             <a className="text-link" href="#contact">
               Get in touch <ArrowUpRight size={17} />
@@ -164,7 +164,7 @@ export default function Index() {
               />
             </span>
             <div>
-              <strong>Science to software.</strong>
+              <strong>Bulut Hamali, PhD</strong>
               <span>Based in Cincinnati, Ohio.</span>
             </div>
             <a href="#certifications">
@@ -176,12 +176,12 @@ export default function Index() {
           <div className="shell">
             <div className="section-heading">
               <div>
-                <p className="eyebrow">Selected work / 01—03</p>
-                <h2>Built for real questions.</h2>
+                <p className="eyebrow">Portfolio / 01—03</p>
+                <h2>Selected projects</h2>
               </div>
               <p>
-                From scientific data to usable tools.
-                <br />A closer look at what I build.
+                Scientific analysis platforms, machine learning workflows, and
+                AI applications.
               </p>
             </div>
             <article className="feature feature-main">
@@ -189,16 +189,16 @@ export default function Index() {
                 <p className="eyebrow">01 / Scientific platforms</p>
                 <h3>Reproducell</h3>
                 <p className="feature-lead">
-                  Complex biology.
+                  Reproducible workflows
                   <br />
-                  <span>A clearer path to reproducible results.</span>
+                  <span>for biological data.</span>
                 </p>
                 <p className="feature-detail">
                   A family of analysis platforms connecting quality control,
                   biological interpretation, and exportable workflow records.
                 </p>
                 <External href={platforms[0][1]}>
-                  Explore the single-cell platform
+                  View the single-cell platform
                 </External>
               </div>
               <div className="feature-visual">
@@ -217,7 +217,7 @@ export default function Index() {
                 />
               </div>
               <div className="platform-links">
-                <span>Explore the family</span>
+                <span>Analysis platforms</span>
                 {platforms.map(([name, url]) => (
                   <External key={name} href={url}>
                     {name}
@@ -230,14 +230,13 @@ export default function Index() {
                 <div className="feature-copy">
                   <p className="eyebrow">02 / Machine learning + genomics</p>
                   <h3>
-                    Better evidence.
+                    Drug discovery
                     <br />
-                    Better target selection.
+                    target prioritization
                   </h3>
                   <p className="feature-detail">
-                    Drug Discovery Target Prioritization combines population
-                    genetics and functional genomics in a leakage-safe ML
-                    workflow.
+                    A leakage-safe ML workflow that combines population genetics
+                    and functional genomics to rank candidate drug targets.
                   </p>
                   <div className="result">
                     <strong>5.59×</strong>
@@ -248,7 +247,7 @@ export default function Index() {
                     </span>
                   </div>
                   <External href="https://drugtargets.buluthamali.com/">
-                    Explore the project
+                    View project
                   </External>
                 </div>
                 <div className="project-note">
@@ -258,17 +257,14 @@ export default function Index() {
               <article className="feature research-feature">
                 <div className="feature-copy">
                   <p className="eyebrow">03 / Applied AI</p>
-                  <h3>
-                    Find the questions
-                    <br />
-                    worth asking.
-                  </h3>
+                  <h3>ResearchGapFinder</h3>
                   <p className="feature-detail">
-                    ResearchGapFinder surfaces under-explored areas in
-                    biomedical literature, with interchangeable LLM backends.
+                    An AI pipeline that analyzes biomedical literature to
+                    identify potential research gaps, with interchangeable LLM
+                    backends.
                   </p>
                   <External href="https://researchgapfinder.buluthamali.com">
-                    Explore ResearchGapFinder
+                    View ResearchGapFinder
                   </External>
                 </div>
                 <img
@@ -283,29 +279,25 @@ export default function Index() {
           </div>
         </section>
         <section id="skills" className="shell section-pad">
-          <p className="eyebrow">How I work</p>
-          <h2>
-            Three disciplines.
-            <br />
-            One connected approach.
-          </h2>
+          <p className="eyebrow">Technical background</p>
+          <h2>Areas of work</h2>
           <div className="expertise-grid">
             {[
               [
                 "Cloud infrastructure",
-                "Designing the systems behind demanding workloads, from infrastructure as code to portable scientific workflows.",
+                "Configuring cloud resources and infrastructure as code for applications and scientific workflows.",
                 "AWS · Terraform · Docker · Nextflow",
                 "Drug Discovery Target Prioritization",
               ],
               [
                 "AI applications",
-                "Turning models into useful products with thoughtful interfaces, reliable APIs, and practical orchestration.",
+                "Building applications that connect language models, APIs, and web interfaces, including multi-agent workflows.",
                 "Python · React · Next.js · LLM APIs",
                 "ResearchGapFinder & ClinPilot",
               ],
               [
                 "Scientific computing",
-                "Bringing biological context to data analysis, with reproducibility and reviewable results built into the workflow.",
+                "Analyzing biological data and developing workflows that record parameters, software versions, and results.",
                 "Scanpy · Seurat · R · Multi-omics",
                 "The Reproducell platform family",
               ],
@@ -324,7 +316,7 @@ export default function Index() {
           <div className="shell">
             <div className="about-grid">
               <div>
-                <p className="eyebrow">The person behind the work</p>
+                <p className="eyebrow">About</p>
                 <h2>
                   From the lab bench
                   <br />
@@ -342,16 +334,16 @@ export default function Index() {
               </div>
               <div className="about-copy">
                 <p>
-                  I started with pipettes, cell cultures, and a PhD in
-                  Biochemistry at the Medical University of Vienna. Working with
-                  sequencing data led me into computational biology—and then
-                  into the infrastructure that makes it possible.
+                  I earned my PhD in Biochemistry at the Medical University of
+                  Vienna. My work with sequencing data led me from laboratory
+                  research into computational biology, software development, and
+                  cloud infrastructure.
                 </p>
                 <p>
-                  Today, I bring that scientific perspective to cloud
-                  engineering and AI development. I care about tools that are
-                  useful to the people using them, and results that can be
-                  understood and reproduced.
+                  I now develop scientific analysis platforms and AI
+                  applications. My projects combine data processing, web
+                  interfaces, and cloud services, with an emphasis on recording
+                  how results were produced.
                 </p>
                 <p>
                   I share research and technical work through publications and a
@@ -393,12 +385,8 @@ export default function Index() {
             </div>
             <div id="certifications" className="credentials">
               <div>
-                <p className="eyebrow">AWS certifications</p>
-                <h3>
-                  Knowledge.
-                  <br />
-                  Independently verified.
-                </h3>
+                <p className="eyebrow">Credentials</p>
+                <h3>AWS certifications</h3>
               </div>
               {credentials.map(([name, image, id, issued]) => (
                 <a
@@ -436,7 +424,7 @@ export default function Index() {
             >
               <div>
                 <p className="eyebrow">Additional training</p>
-                <h3 id="training-title">Software & applied AI.</h3>
+                <h3 id="training-title">Software & applied AI</h3>
               </div>
               <div className="training-item">
                 <h4>AI Solutions Developer</h4>
@@ -470,8 +458,8 @@ export default function Index() {
           </div>
         </section>
         <section className="shell section-pad" aria-labelledby="more-work">
-          <p className="eyebrow">Further exploration</p>
-          <h2 id="more-work">More things I’m building.</h2>
+          <p className="eyebrow">Additional work</p>
+          <h2 id="more-work">More projects</h2>
           <div
             className="work-filters"
             role="group"
@@ -527,12 +515,8 @@ export default function Index() {
         <section id="contact" className="contact-section section-pad">
           <div className="shell contact-grid">
             <div>
-              <p className="eyebrow">Let’s connect</p>
-              <h2>
-                Let’s build
-                <br />
-                something useful.
-              </h2>
+              <p className="eyebrow">Contact</p>
+              <h2>Get in touch</h2>
               <p>
                 I’m open to cloud and AI engineering roles, research
                 collaborations, and projects involving data, software, and
@@ -574,7 +558,7 @@ export default function Index() {
                 <input id="contact-subject" name="subject" required />
               </label>
               <label htmlFor="contact-message">
-                What would you like to work on?
+                Message
                 <textarea
                   id="contact-message"
                   name="message"
@@ -591,7 +575,7 @@ export default function Index() {
       </main>
       <footer className="shell site-footer">
         <span>© {new Date().getFullYear()} Bulut Hamali</span>
-        <span>Science. Software. A little curiosity.</span>
+        <span>Cloud engineering · Scientific computing</span>
         <a href="#top">Back to top ↑</a>
       </footer>
     </div>

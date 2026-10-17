@@ -11,7 +11,7 @@ interface SEOProps {
 
 export const SEO = ({
   title = "Bulut Hamali — Cloud & AI Infrastructure Engineer",
-  description = "AWS Certified Solutions Architect and cloud-native AI engineer with a PhD in Biochemistry, building infrastructure for AI/ML and bioinformatics workloads.",
+  description = "Bulut Hamali, PhD in Biochemistry and AWS Certified Solutions Architect – Associate. Cloud-based applications, AI tools, and workflows for scientific data.",
   canonical = "https://buluthamali.com",
   ogImage = "https://buluthamali.com/lovable-uploads/8c42eaae-f199-448f-a1f3-675e636cb3ed.png",
   ogType = "website",
