@@ -57,16 +57,25 @@ const platforms = [
 ];
 const credentials = [
   [
+    "Data Engineer – Associate",
+    "aws-data-engineer-associate.png",
+    "6688ffec-b8a3-4595-9309-7e7ef7eca933",
+    "November 2026",
+    "November 2029",
+  ],
+  [
     "Solutions Architect – Associate",
     "aws-solutions-architect-associate.png",
     "39436f04-6e17-4ae4-a5ab-1d3857e395bc",
     "October 2026",
+    "October 2029",
   ],
   [
     "Cloud Practitioner",
     "aws-cloud-practitioner.png",
-    "d3824c24-1683-45fc-84f1-ffde614283db",
+    "abb08c99-5fb7-4239-85d6-f8f9519c801a",
     "May 2026",
+    "November 2029",
   ],
 ];
 const External = ({
@@ -142,9 +151,9 @@ export default function Index() {
             <span>Grounded in science.</span>
           </h1>
           <p className="hero-description">
-            I’m Bulut, an AWS Certified Solutions Architect – Associate with a
-            PhD in Biochemistry. I develop cloud-based applications, AI tools,
-            and reproducible workflows for scientific data.
+            I’m Bulut, an AWS Certified Solutions Architect and Data Engineer
+            with a PhD in Biochemistry. I develop cloud-based applications, AI
+            tools, and reproducible workflows for scientific data.
           </p>
           <div className="hero-actions">
             <a className="primary-link" href="#projects">
@@ -168,7 +177,7 @@ export default function Index() {
               <span>Based in Cincinnati, Ohio.</span>
             </div>
             <a href="#certifications">
-              2× AWS Certified <ArrowUpRight size={14} />
+              3× AWS Certified <ArrowUpRight size={14} />
             </a>
           </div>
         </section>
@@ -388,7 +397,7 @@ export default function Index() {
                 <p className="eyebrow">Credentials</p>
                 <h3>AWS certifications</h3>
               </div>
-              {credentials.map(([name, image, id, issued]) => (
+              {credentials.map(([name, image, id, issued, validThrough]) => (
                 <a
                   className="credential"
                   key={id}
@@ -409,7 +418,7 @@ export default function Index() {
                     <span>
                       Issued {issued}
                       <br />
-                      Valid through October 2029
+                      Valid through {validThrough}
                     </span>
                     <strong>
                       Verify credential <ArrowUpRight size={13} />
